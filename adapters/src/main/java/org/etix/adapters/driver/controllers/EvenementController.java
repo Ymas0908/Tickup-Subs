@@ -5,7 +5,7 @@ import org.etix.adapters.driver.api.ResponseApi;
 import org.etix.adapters.driver.facades.CreerUnEvenementFacade;
 import org.etix.adapters.entities.EvenementEntity;
 import org.etix.domain.models.Evenement;
-import org.etix.domain.models.enumerations.TypeEvenement;
+//import org.etix.domain.models.enumerations.TypeEvenement;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -54,16 +54,16 @@ public class EvenementController {
     }
 
 
-    @Operation(summary = "Collecter les évènements par type ",
-            description = "Cette.visitMethod permet de collecter les evènements par type",
-            parameters = {
-                    @Parameter(name = "typeEvenement", description = "typeEvenement", required = true),
-            }
-    )
-    @GetMapping("/getLesEvenementsByTypeEvenement")
-    public ResponseEntity<ResponseApi> getLesEvenementsByTypeEvenement(@RequestParam("typeEvenement") TypeEvenement typeEvenement) {
-        return new ResponseEntity<>(new ResponseApi("Succès", 200, creerUnEvenementFacade.getLesEvenementsByTypeEvenement(typeEvenement)), HttpStatus.OK);
-    }
+//    @Operation(summary = "Collecter les évènements par type ",
+//            description = "Cette.visitMethod permet de collecter les evènements par type",
+//            parameters = {
+//                    @Parameter(name = "typeEvenement", description = "typeEvenement", required = true),
+//            }
+//    )
+//    @GetMapping("/getLesEvenementsByTypeEvenement")
+//    public ResponseEntity<ResponseApi> getLesEvenementsByTypeEvenement(@RequestParam("typeEvenement") TypeEvenement typeEvenement) {
+//        return new ResponseEntity<>(new ResponseApi("Succès", 200, creerUnEvenementFacade.getLesEvenementsByTypeEvenement(typeEvenement)), HttpStatus.OK);
+//    }
 
 
     @Operation(summary = "Collecter les évènements ",

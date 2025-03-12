@@ -21,7 +21,7 @@ public class TicketEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private double prix;
+    private String prix;
     private int quantite;
     @Enumerated(EnumType.STRING)
     private TypeTicket typeTicket;

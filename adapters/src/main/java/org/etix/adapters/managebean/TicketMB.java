@@ -38,16 +38,22 @@ public class TicketMB implements Serializable {
         ticket = new TicketEntity();
         typeTicketList = TypeTicket.getTypes(); // Obtient les types de tickets disponibles (GP, VIP, VVIP)
         evenementList = new ArrayList<>();
+        this.collecterLesTickets();
     }
 
     public void creerUnTicket() {
         try {
             ticket = creerUnTicketFacade.creerUnTicket(ticket);  // Appel à la méthode de création du tick
+            ticket = new TicketEntity();
             FlashMessage.flash(FlashMessage.INFO, "Succès", "Le ticket a bien été créé.");
 
         } catch (Exception e) {
             e.printStackTrace();
             FlashMessage.flash(FlashMessage.ERROR, "Erreur", "Une erreur s'est produite lors de la création du ticket.");
         }
+    }
+
+    public void collecterLesTickets() {
+        ticketList = creerUnTicketFacade.getAllTickets();
     }
 }

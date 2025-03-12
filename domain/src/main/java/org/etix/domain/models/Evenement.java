@@ -10,9 +10,9 @@ public class Evenement {
     private String nom;
     private String description;
     private String lieu;
-    private Double prixTicketGP;
-    private Double prixTicketVIP;
-    private Double prixTicketVVIP;
+    private String prixTicketGP;
+    private String prixTicketVIP;
+    private String prixTicketVVIP;
     private LocalDateTime dateEvenement;
     private LocalDateTime dateHeureCreation;
     private TypeEvenement typeEvenement;
@@ -20,7 +20,7 @@ public class Evenement {
     public Evenement() {
     }
 
-    public Evenement(Integer id, String nom, String description, String lieu, Double prixTicketGP, Double prixTicketVIP, Double prixTicketVVIP, LocalDateTime dateEvenement, LocalDateTime dateHeureCreation, TypeEvenement typeEvenement) {
+    public Evenement(Integer id, String nom, String description, String lieu, String prixTicketGP, String prixTicketVIP, String prixTicketVVIP, LocalDateTime dateEvenement, LocalDateTime dateHeureCreation, TypeEvenement typeEvenement) {
         this.id = id;
         this.nom = nom;
         this.description = description;
@@ -65,27 +65,27 @@ public class Evenement {
         this.lieu = lieu;
     }
 
-    public Double getPrixTicketGP() {
+    public String getPrixTicketGP() {
         return prixTicketGP;
     }
 
-    public void setPrixTicketGP(Double prixTicketGP) {
+    public void setPrixTicketGP(String prixTicketGP) {
         this.prixTicketGP = prixTicketGP;
     }
 
-    public Double getPrixTicketVIP() {
+    public String getPrixTicketVIP() {
         return prixTicketVIP;
     }
 
-    public void setPrixTicketVIP(Double prixTicketVIP) {
+    public void setPrixTicketVIP(String prixTicketVIP) {
         this.prixTicketVIP = prixTicketVIP;
     }
 
-    public Double getPrixTicketVVIP() {
+    public String getPrixTicketVVIP() {
         return prixTicketVVIP;
     }
 
-    public void setPrixTicketVVIP(Double prixTicketVVIP) {
+    public void setPrixTicketVVIP(String prixTicketVVIP) {
         this.prixTicketVVIP = prixTicketVVIP;
     }
 
@@ -131,9 +131,9 @@ public class Evenement {
         private String nom;
         private String description;
         private String lieu;
-        private Double prixTicketGP;
-        private Double prixTicketVIP;
-        private Double prixTicketVVIP;
+        private String prixTicketGP;
+        private String prixTicketVIP;
+        private String prixTicketVVIP;
         private LocalDateTime dateEvenement;
         private LocalDateTime dateHeureCreation;
         private TypeEvenement typeEvenement;
@@ -161,17 +161,17 @@ public class Evenement {
             return this;
         }
 
-        public Builder prixTicketGP(Double prixTicketGP) {
+        public Builder prixTicketGP(String prixTicketGP) {
             this.prixTicketGP = prixTicketGP;
             return this;
         }
 
-        public Builder prixTicketVIP(Double prixTicketVIP) {
+        public Builder prixTicketVIP(String prixTicketVIP) {
             this.prixTicketVIP = prixTicketVIP;
             return this;
         }
 
-        public Builder prixTicketVVIP(Double prixTicketVVIP) {
+        public Builder prixTicketVVIP(String prixTicketVVIP) {
             this.prixTicketVVIP = prixTicketVVIP;
             return this;
         }

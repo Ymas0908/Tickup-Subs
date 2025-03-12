@@ -11,6 +11,8 @@ public interface TicketPort {
 
     List<Ticket> getTicketByEvenement(Integer idEvenement);
 
+    List<Ticket> getAllTicket();
+
 
 
 

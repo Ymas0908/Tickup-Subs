@@ -2,7 +2,7 @@ package org.etix.adapters.driver.facades;
 
 import lombok.AllArgsConstructor;
 import org.etix.adapters.entities.EvenementEntity;
-import org.etix.domain.models.enumerations.TypeEvenement;
+//import org.etix.domain.models.enumerations.TypeEvenement;
 import org.etix.domain.ports.driver.EvenementPort;
 import org.springframework.stereotype.Component;
 
@@ -28,12 +28,12 @@ public class CreerUnEvenementFacade {
         evenementPort.deleteEvenement(evenement.toDomain());
     }
 
-    public List<EvenementEntity> getLesEvenementsByTypeEvenement(TypeEvenement typeEvenement) {
-        return evenementPort.getLesEvenementsByTypeEvenement(typeEvenement)
-                .stream()
-                    .map(EvenementEntity::toEntity)
-                        .toList();
-    }
+//    public List<EvenementEntity> getLesEvenementsByTypeEvenement(TypeEvenement typeEvenement) {
+//        return evenementPort.getLesEvenementsByTypeEvenement(typeEvenement)
+//                .stream()
+//                    .map(EvenementEntity::toEntity)
+//                        .toList();
+//    }
 
     public List<EvenementEntity> getAllEvenements() {
         return evenementPort.getAllEvenements()

@@ -8,6 +8,7 @@ import lombok.Setter;
 import org.etix.adapters.driver.facades.CreerUnEvenementFacade;
 import org.etix.adapters.entities.EvenementEntity;
 import org.etix.adapters.notification.FlashMessage;
+//import org.etix.domain.models.enumerations.TypeEvenement;
 import org.etix.domain.models.enumerations.TypeEvenement;
 import org.etix.domain.models.enumerations.TypeTicket;
 import org.primefaces.PrimeFaces;

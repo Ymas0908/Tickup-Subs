@@ -56,4 +56,9 @@ public class TicketService implements TicketPort {
     public List<Ticket> getTicketByEvenement(Integer idEvenement) {
         return ticketRepo.getTicketByEvenement(idEvenement);
     }
+
+    @Override
+    public List<Ticket> getAllTicket() {
+        return ticketRepo.getAllTicket();
+    }
 }

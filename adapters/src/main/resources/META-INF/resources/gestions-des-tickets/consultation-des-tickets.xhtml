@@ -1,0 +1,149 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui" xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="/WEB-INF/template.xhtml">
+    <ui:define name="title"> Gestion des évènements | Créer un évènement</ui:define>
+
+    <ui:define name="viewname">
+        <li>GESTION DES EVENEMENTS</li>
+        <li><i class="pi pi-chevron-right"></i></li>
+        <li><p:link outcome="/gestions-des-tickets/consultation-des-tickets.xhtml">CONSULTATION DES TICKETS</p:link>
+        </li>
+    </ui:define>
+    <ui:define name="content">
+        <div class="card">
+            <h4 class="font-bold my-3">Consultation des tickets générés</h4>
+        </div>
+            <div class="grid">
+                <div class="col-12">
+                    <div class="card">
+                        <h:form id="formTicket">
+                            <div class="flex my-4">
+                                <div class="flex-1 flex flex-column">
+                                    <h5>Liste des tickets (#{ticketMB.ticketList.size()}) </h5>
+                                </div>
+                            </div>
+                            <div class="grid">
+                                <div class="col-12">
+                                    <p:dataTable widgetVar="dtTickets"
+                                                 id="dtTickets"
+                                                 var="ticket"
+                                                 value="#{ticketMB.ticketList}"
+                                                 reflow="true"
+                                                 emptyMessage="Pas de données"
+                                                 rowKey="#{ticket.id}"
+                                                 scrollable="true"
+                                                 scrollHeight="500">
+                                        <!-- Colonnes pour afficher les informations -->
+                                        <p:column headerText="Date de création">
+                                            <h:outputText value="#{ticket.dateHeureCreation}">
+                                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm" type="localDateTime"/>
+                                            </h:outputText>
+                                        </p:column>
+
+                                        <p:column headerText="Nom de l'événement">
+                                            <h:outputText value="#{ticket.evenement.nom}"/>
+                                        </p:column>
+
+                                        <p:column headerText="Type de ticket">
+                                            <h:outputText value="#{ticket.typeTicket}"/>
+                                        </p:column>
+
+                                        <p:column headerText="Prix">
+                                            <h:outputText value="#{ticket.prix}"/>
+                                        </p:column>
+
+                                        <p:column headerText="Quantité">
+                                            <h:outputText value="#{ticket.quantite}"/>
+                                        </p:column>
+
+                                        <p:column headerText="Actions" width="7em">
+                                            <p:row>
+                                                <p:column>
+                                                    <p:commandButton
+                                                            icon="pi pi-pencil"
+                                                            title="Modifier"
+                                                            styleClass="rounded-button mr-2"
+                                                            style="margin-right: .25em"
+                                                            process="@this"
+                                                            update="detailEvenementForm"
+                                                            oncomplete="PF('detailTicketSideBar').show()">
+                                                        <f:setPropertyActionListener value="#{ticket}" target="#{ticketMB.ticket}"/>
+                                                    </p:commandButton>
+                                                </p:column>
+                                            </p:row>
+                                        </p:column>
+                                    </p:dataTable>
+                                </div>
+                                <div class="col-12">
+                                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade"
+                                                     responsive="true" styleClass="col-12">
+                                        <div class="flex flex-column align-items-start ">
+                                            <div class="flex gap-2 my-2">
+                                                <p:commandButton value="Oui" type="button"
+                                                                 styleClass="ui-confirmdialog-yes "/>
+                                                <p:commandButton value="Non" type="button"
+                                                                 styleClass="ui-confirmdialog-yes "/>
+                                            </div>
+                                        </div>
+                                    </p:confirmDialog>
+                                </div>
+
+                            </div>
+                        </h:form>
+
+
+                    </div>
+                </div>
+            </div>
+
+        <p:sidebar widgetVar="detailTicketSideBar" styleClass="w-full lg:w-6 h-full overflow-y-auto" position="right">
+            <h:form id="detailEvenementForm">
+                <div class="grid">
+                    <div class="col-12">
+                        <h4 class="font-bold">Détails du ticket</h4>
+                        <p:divider styleClass="mb-3"/>
+                        <span><i class="pi pi-info-circle my-3"></i> Veuillez vérifier les détails suivants :</span>
+                        <div class="ui-fluid formgrid grid ">
+                            <div class="field col-12 md:col-6">
+                                <p:outputLabel for="@next" value="Nom de l'évènement"/>
+                                <p:inputText
+                                        value="#{ticketMB.ticket.evenement.nom}"/>
+                            </div>
+                            <div class="field col-12 md:col-6">
+                                <p:outputLabel value="Lieu"/>
+                                <p:inputText
+                                        value="#{ticketMB.ticket.evenement.lieu}"/>
+                            </div>
+                            <div class="field col-12 md:col-6">
+                                <p:outputLabel for="@next" value="Date de l'évènement"/>
+                                <p:inputText readonly="true"
+                                             value="#{ticketMB.ticket.evenement.dateEvenement}">
+                                    <f:convertDateTime pattern="dd/MM/yyyy HH:mm"
+                                                       type="localDateTime"/>
+                                </p:inputText>
+
+                            </div>
+                            <div class="field col-12 md:col-6">
+                                <p:outputLabel for="@next" value="Type du ticket"/>
+                                <p:inputText readonly="true"
+                                             value="#{ticketMB.ticket.typeTicket}">
+                                </p:inputText>
+
+                            </div>
+                            <div class="field col-12 md:col-6">
+                                <p:outputLabel for="@next" value="Quantité"/>
+                                <p:inputText readonly="true"
+                                             value="#{ticketMB.ticket.quantite}">
+                                </p:inputText>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </h:form>
+        </p:sidebar>
+
+    </ui:define>
+
+</ui:composition>

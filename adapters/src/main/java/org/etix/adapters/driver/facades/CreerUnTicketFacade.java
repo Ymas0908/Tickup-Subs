@@ -22,6 +22,12 @@ public class CreerUnTicketFacade {
         return ticketPort.getTicketByEvenement(idEvenement).stream().map(TicketEntity::toEntity).toList();
     }
 
+    public List<TicketEntity> getAllTickets() {
+        return ticketPort.getAllTicket().stream().map(TicketEntity::toEntity).toList();
+    }
+
+
+
 
 
 }

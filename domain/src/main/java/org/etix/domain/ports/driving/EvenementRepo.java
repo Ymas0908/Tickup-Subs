@@ -1,7 +1,7 @@
 package org.etix.domain.ports.driving;
 
 import org.etix.domain.models.Evenement;
-import org.etix.domain.models.enumerations.TypeEvenement;
+//import org.etix.domain.models.enumerations.TypeEvenement;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ public interface EvenementRepo {
 
     List<Evenement> getLesEvenementsByNom(String nom);
 
-    List<Evenement> getLesEvenementsByTypeEvenement(TypeEvenement typeEvenement);
+//    List<Evenement> getLesEvenementsByTypeEvenement(TypeEvenement typeEvenement);
 
     List<Evenement> getAllEvenements();
 }

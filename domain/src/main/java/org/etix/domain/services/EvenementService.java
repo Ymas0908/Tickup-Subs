@@ -2,7 +2,7 @@ package org.etix.domain.services;
 
 import org.etix.domain.ddd.DomaineService;
 import org.etix.domain.models.Evenement;
-import org.etix.domain.models.enumerations.TypeEvenement;
+//import org.etix.domain.models.enumerations.TypeEvenement;
 import org.etix.domain.ports.driver.EvenementPort;
 import org.etix.domain.ports.driving.EvenementRepo;
 
@@ -20,9 +20,9 @@ public class EvenementService  implements EvenementPort {
 
     @Override
     public Evenement saveEvenement(Evenement evenement) {
-        if (evenement.getTypeEvenement() == null) {
-            throw new IllegalArgumentException("L'evenement doit avoir un type");
-        }
+//        if (evenement.getTypeEvenement() == null) {
+//            throw new IllegalArgumentException("L'evenement doit avoir un type");
+//        }
         if (evenement.getNom() == null) {
             throw new IllegalArgumentException("L'evenement doit avoir un nom");
         }
@@ -42,10 +42,10 @@ public class EvenementService  implements EvenementPort {
         return evenementRepo.saveEvenement(idEvenement);
     }
 
-    @Override
-    public List<Evenement> getLesEvenementsByTypeEvenement(TypeEvenement typeEvenement) {
-        return evenementRepo.getLesEvenementsByTypeEvenement(typeEvenement);
-    }
+//    @Override
+//    public List<Evenement> getLesEvenementsByTypeEvenement(TypeEvenement typeEvenement) {
+//        return evenementRepo.getLesEvenementsByTypeEvenement(typeEvenement);
+//    }
 
     @Override
     public List<Evenement> getLesEvenementsByNom(String nom) {

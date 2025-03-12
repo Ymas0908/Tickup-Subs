@@ -9,4 +9,6 @@ public interface TicketRepo {
     Ticket saveTicket(Ticket ticket);
 
      List<Ticket> getTicketByEvenement(Integer idEvenement);
+
+     List<Ticket> getAllTicket();
 }

@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.etix.domain.models.Evenement;
 import org.etix.domain.models.enumerations.TypeEvenement;
+//import org.etix.domain.models.enumerations.TypeEvenement;
 
 import java.sql.Blob;
 import java.time.LocalDateTime;
@@ -24,9 +25,9 @@ public class EvenementEntity {
     private String nom;
     private String description;
     private String lieu;
-    private Double prixTicketGP;
-    private Double prixTicketVIP;
-    private Double prixTicketVVIP;
+    private String prixTicketGP;
+    private String prixTicketVIP;
+    private String prixTicketVVIP;
     private LocalDateTime dateEvenement;
     private LocalDateTime dateHeureCreation;
     @Enumerated(EnumType.STRING)

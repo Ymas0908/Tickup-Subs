@@ -9,14 +9,16 @@
 
     <ui:define name="content">
         <h:form id="ticketsForm">
-            <div class="card">
+            <div class="card col-12 mt-12 md:col-">
                 <h4 class="font-bold my-3">Création de tickets </h4>
 
                 <div class="ui-fluid formgrid grid">
                     <!-- Sélection de l'événement -->
                     <div class="field col-6">
                         <p:outputLabel for="concert">Sélectionner un événement</p:outputLabel>
-                        <p:selectOneMenu id="concert" value="#{creerEvenementMB.evenement}" required="true"
+                        <p:selectOneMenu id="concert"
+                                         converter="#{entityConverter}"
+                                         value="#{ticketMB.ticket.evenement}" required="true"
                                          requiredMessage="Veuillez sélectionner un événement">
                             <f:selectItem itemLabel="Sélectionnez un événement" itemValue="#{null}" />
                             <f:selectItems value="#{creerEvenementMB.evenementsList}" var="concert" itemLabel="#{concert.nom}"
@@ -27,7 +29,8 @@
                     <!-- Sélection du type de ticket -->
                     <div class="field col-6">
                         <p:outputLabel for="typeTicket">Sélectionner un type de ticket</p:outputLabel>
-                        <p:selectOneMenu id="typeTicket" value="#{ticketMB.typeTicket}" required="true"
+                        <p:selectOneMenu id="typeTicket"
+                                         value="#{ticketMB.ticket.typeTicket}" required="true"
                                          requiredMessage="Veuillez sélectionner un type de ticket">
                             <f:selectItem itemLabel="Sélectionnez un type de ticket" itemValue="#{null}" />
                             <f:selectItems value="#{ticketMB.typeTicketList}" var="ticket" itemLabel="#{ticket}"
@@ -35,8 +38,12 @@
                         </p:selectOneMenu>
                     </div>
 
-                    <!-- Champs pour les prix des tickets -->
-
+                    <!-- Choix du nombre de tickets -->
+                    <div class="field col-6">
+                        <p:outputLabel for="quantite">Nombre de tickets</p:outputLabel>
+                        <p:spinner id="quantite" value="#{ticketMB.ticket.quantite}" min="1" required="true"
+                                   requiredMessage="Veuillez spécifier le nombre de tickets"/>
+                    </div>
                 </div>
 
                 <!-- Bouton pour générer les tickets -->
@@ -49,44 +56,7 @@
                 </div>
             </div>
 
-            <!-- Table des Tickets générés -->
-            <div class="grid">
-                <div class="col-12">
-                    <p:dataTable widgetVar="dtTickets"
-                                 id="dtTickets"
-                                 var="ticket"
-                                 value="#{ticketMB.ticketList}"
-                                 reflow="true"
-                                 emptyMessage="Pas de données"
-                                 rowKey="#{ticket.id}"
-                                 scrollable="true"
-                                 scrollHeight="500">
-                        <!-- Colonnes pour afficher les informations -->
-                        <p:column headerText="Date de création">
-                            <h:outputText value="#{ticket.dateHeureCreation}">
-                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm" type="localDateTime"/>
-                            </h:outputText>
-                        </p:column>
 
-                        <p:column headerText="Nom de l'événement">
-                            <h:outputText value="#{ticket.evenement.nom}"/>
-                        </p:column>
-
-                        <p:column headerText="Type de ticket">
-                            <h:outputText value="#{ticket.typeTicket}"/>
-                        </p:column>
-
-                        <p:column headerText="Prix">
-                            <h:outputText value="#{ticket.prix}"/>
-                        </p:column>
-
-                        <p:column headerText="Quantité">
-                            <h:outputText value="#{ticket.quantite}"/>
-                        </p:column>
-                    </p:dataTable>
-                </div>
-            </div>
         </h:form>
     </ui:define>
-
 </ui:composition>
