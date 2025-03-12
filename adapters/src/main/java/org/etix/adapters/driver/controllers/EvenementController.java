@@ -66,6 +66,7 @@ public class EvenementController {
 //    }
 
 
+
     @Operation(summary = "Collecter les évènements ",
             description = "Cette.visitMethod permet de collecter les evènements",
             parameters = {
