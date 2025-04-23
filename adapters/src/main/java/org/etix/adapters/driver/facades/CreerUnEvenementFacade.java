@@ -5,6 +5,7 @@ import org.etix.adapters.entities.EvenementEntity;
 //import org.etix.domain.models.enumerations.TypeEvenement;
 import org.etix.domain.ports.driver.EvenementPort;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -18,6 +19,9 @@ public class CreerUnEvenementFacade {
     public EvenementEntity creerUnEvenement(EvenementEntity evenement) {
         return EvenementEntity.toEntity(evenementPort.saveEvenement(evenement.toDomain()));
 
+    }
+    public void uploadFile(MultipartFile file, Integer idEvenement) {
+        evenementPort.uploadFile(file,idEvenement);
     }
 
     public EvenementEntity modifierUnEvenement(EvenementEntity evenement) {
@@ -48,6 +52,14 @@ public class CreerUnEvenementFacade {
                          .toList();
     }
 
+    public List<EvenementEntity> getLesEvenementsByLibelle(String libelle) {
+        return evenementPort.getLesEvenementsByLibelle(libelle)
+                .stream().map(EvenementEntity::toEntity)
+                .toList();
+    }
 
 
+    public Object getUrlImageEvenement(Integer idEvenement) {
+        return evenementPort.getUrlImageEvenement(idEvenement);
+    }
 }

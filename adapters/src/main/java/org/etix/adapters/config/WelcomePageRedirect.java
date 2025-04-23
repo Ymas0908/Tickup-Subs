@@ -10,7 +10,7 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
- * @author Luc
+ * @author samuel
  */
 @Configuration
 public class WelcomePageRedirect implements WebMvcConfigurer {

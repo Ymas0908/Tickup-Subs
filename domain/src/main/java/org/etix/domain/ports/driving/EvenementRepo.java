@@ -10,9 +10,15 @@ public interface EvenementRepo {
     void deleteEvenement(Evenement evenement);
     Evenement updateEvenement(Evenement idEvenement);
 
+    Evenement getEvenementById(Integer idEvenement);
+
     List<Evenement> getLesEvenementsByNom(String nom);
 
 //    List<Evenement> getLesEvenementsByTypeEvenement(TypeEvenement typeEvenement);
 
     List<Evenement> getAllEvenements();
+
+    List<Evenement> getLesEvenementsByLibelle(String libelle);
+
+    Object getUrlImageEvenement(Integer idEvenement);
 }

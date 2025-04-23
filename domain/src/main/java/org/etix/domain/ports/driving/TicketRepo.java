@@ -11,4 +11,6 @@ public interface TicketRepo {
      List<Ticket> getTicketByEvenement(Integer idEvenement);
 
      List<Ticket> getAllTicket();
+
+    Ticket getTicketByReference(String reference);
 }

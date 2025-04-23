@@ -27,4 +27,9 @@ public class TicketImpl implements TicketRepo {
     public List<Ticket> getAllTicket() {
         return ticketRepository.findAll().stream().map(TicketEntity::toDomain).toList();
     }
+
+    @Override
+    public Ticket getTicketByReference(String reference) {
+        return ticketRepository.findByReference(reference).toDomain();
+    }
 }

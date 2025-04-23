@@ -52,6 +52,15 @@
                                         </div>
 
                                         <div class="field col-6">
+                                            <p:outputLabel for="libelle">libellé de l'événement</p:outputLabel>
+                                            <p:inputText id="libelle"
+                                                         placeholder="Saisir le libellé de l'événement"
+                                                         required="true"
+                                                         requiredMessage="Le libellé de l'événement est obligatoire"
+                                                         value="#{creerEvenementMB.evenement.libelle}"/>
+                                        </div>
+
+                                        <div class="field col-6">
                                             <p:outputLabel for="dateEvenement">Date et heure de l'événement</p:outputLabel>
                                             <p:calendar id="dateEvenement"
                                                         value="#{creerEvenementMB.evenement.dateEvenement}"
@@ -61,7 +70,7 @@
                                                         requiredMessage="La date de l'événement est obligatoire"/>
                                         </div>
 
-                                        <div class="field col-6">
+                                        <div class="field col-12">
                                             <p:outputLabel for="typeEvenement">Type d'événement</p:outputLabel>
                                             <p:selectOneMenu id="typeEvenement"
                                                              value="#{creerEvenementMB.evenement.typeEvenement}"

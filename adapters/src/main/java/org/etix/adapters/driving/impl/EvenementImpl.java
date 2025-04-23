@@ -30,6 +30,12 @@ public class EvenementImpl implements EvenementRepo {
     }
 
     @Override
+    public Evenement getEvenementById(Integer idEvenement) {
+        return evenementRepository.findById(idEvenement)
+                .orElseThrow(() -> new RuntimeException("Evenement introuvable")).toDomain();
+    }
+
+    @Override
     public List<Evenement> getLesEvenementsByNom(String nom) {
         return evenementRepository.findByNom(nom).stream().map(EvenementEntity::toDomain).toList();
     }
@@ -48,5 +54,15 @@ public class EvenementImpl implements EvenementRepo {
                 .stream()
                     .map(EvenementEntity::toDomain)
                         .toList();
+    }
+
+    @Override
+    public List<Evenement> getLesEvenementsByLibelle(String libelle) {
+        return evenementRepository.findByLibelle(libelle).stream().map(EvenementEntity::toDomain).toList();
+    }
+
+    @Override
+    public Object getUrlImageEvenement(Integer idEvenement) {
+        return evenementRepository.getUrlImageEvenement(idEvenement);
     }
 }

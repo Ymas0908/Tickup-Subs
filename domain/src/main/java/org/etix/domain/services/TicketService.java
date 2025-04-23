@@ -7,6 +7,7 @@ import org.etix.domain.ports.driving.TicketRepo;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 @DomaineService
 public class TicketService implements TicketPort {
@@ -47,6 +48,10 @@ public class TicketService implements TicketPort {
 
         // Assigner la date de création
         ticket.setDateHeureCreation(LocalDateTime.now());
+        ticket.setQuantite(ticket.getQuantite());
+
+        // Assigner la reference
+        ticket.setReference( ticket.getEvenement().getLibelle() +UUID.randomUUID().toString());
 
         // Persister le ticket
         return ticketRepo.saveTicket(ticket);  // ticketRepo.save(ticket) persiste le ticket dans la base de données
@@ -60,5 +65,10 @@ public class TicketService implements TicketPort {
     @Override
     public List<Ticket> getAllTicket() {
         return ticketRepo.getAllTicket();
+    }
+
+    @Override
+    public Ticket getTicketByReference(String reference) {
+        return ticketRepo.getTicketByReference(reference);
     }
 }

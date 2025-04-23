@@ -18,6 +18,10 @@ public class CreerUnTicketFacade {
     }
 
 
+
+    public TicketEntity getTicketByReference(String reference) {
+        return TicketEntity.toEntity(ticketPort.getTicketByReference(reference));
+    }
     public List<TicketEntity> getTicketByEvenement(Integer idEvenement) {
         return ticketPort.getTicketByEvenement(idEvenement).stream().map(TicketEntity::toEntity).toList();
     }

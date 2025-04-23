@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 public class Ticket {
     private Integer id;
 
+    private String reference;
     private String prix;
     private int quantite;
     private TypeTicket typeTicket;
@@ -15,8 +16,9 @@ public class Ticket {
     public Ticket() {
     }
 
-    public Ticket(Integer id, String prix, int quantite, TypeTicket typeTicket, LocalDateTime dateHeureCreation,Evenement evenement) {
+    public Ticket(Integer id,String reference, String prix, int quantite, TypeTicket typeTicket, LocalDateTime dateHeureCreation,Evenement evenement) {
         this.id = id;
+        this.reference = reference;
         this.prix = prix;
         this.quantite = quantite;
         this.typeTicket = typeTicket;
@@ -26,6 +28,7 @@ public class Ticket {
 
     private Ticket(Builder builder) {
         setId(builder.id);
+        setReference(builder.reference);
         setPrix(builder.prix);
         setQuantite(builder.quantite);
         setTypeTicket(builder.typeTicket);
@@ -39,6 +42,14 @@ public class Ticket {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getReference() {
+        return reference;
+    }
+
+    public void setReference(String reference) {
+        this.reference = reference;
     }
 
     public String getPrix() {
@@ -84,6 +95,7 @@ public class Ticket {
 
     public static final class Builder {
         private Integer id;
+        private String reference;
         private String prix;
         private int quantite;
         private TypeTicket typeTicket;
@@ -95,6 +107,11 @@ public class Ticket {
 
         public Builder id(Integer id) {
             this.id = id;
+            return this;
+        }
+
+        public Builder reference(String reference) {
+            this.reference = reference;
             return this;
         }
 

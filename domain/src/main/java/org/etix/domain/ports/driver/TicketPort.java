@@ -14,6 +14,5 @@ public interface TicketPort {
     List<Ticket> getAllTicket();
 
 
-
-
+    Ticket getTicketByReference(String reference);
 }

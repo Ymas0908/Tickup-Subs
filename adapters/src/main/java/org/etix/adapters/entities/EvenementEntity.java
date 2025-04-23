@@ -23,6 +23,8 @@ public class EvenementEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String nom;
+    private String urlImage;
+    private String libelle;
     private String description;
     private String lieu;
     private String prixTicketGP;
@@ -37,6 +39,8 @@ public class EvenementEntity {
         return EvenementEntity.builder()
                 .id(evenement.getId())
                 .nom(evenement.getNom())
+                .urlImage(evenement.getUrlImage())
+                .libelle(evenement.getLibelle())
                 .lieu(evenement.getLieu())
                 .prixTicketGP(evenement.getPrixTicketGP())
                 .prixTicketVIP(evenement.getPrixTicketVIP())
@@ -52,6 +56,8 @@ public class EvenementEntity {
         return new Evenement.Builder()
                 .id(this.id)
                 .nom(this.nom)
+                .urlImage(this.urlImage)
+                .libelle(this.libelle)
                 .lieu(this.lieu)
                 .prixTicketGP(this.prixTicketGP)
                 .prixTicketVIP(this.prixTicketVIP)

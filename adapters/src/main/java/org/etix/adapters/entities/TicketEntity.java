@@ -21,6 +21,7 @@ public class TicketEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    private String reference;
     private String prix;
     private int quantite;
     @Enumerated(EnumType.STRING)
@@ -34,6 +35,7 @@ public class TicketEntity {
 
         return TicketEntity.builder()
                 .id(ticket.getId())
+                .reference(ticket.getReference())
                 .prix(ticket.getPrix())
                 .quantite(ticket.getQuantite())
                 .typeTicket(ticket.getTypeTicket())
@@ -44,6 +46,7 @@ public class TicketEntity {
     public Ticket toDomain() {
         return new Ticket.Builder()
                 .id(this.id)
+                .reference(this.reference)
                 .prix(this.prix)
                 .quantite(this.quantite)
                 .typeTicket(this.typeTicket)

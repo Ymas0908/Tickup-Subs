@@ -8,6 +8,8 @@ import java.time.LocalDateTime;
 public class Evenement {
     private Integer id;
     private String nom;
+    private String urlImage;
+    private String libelle;
     private String description;
     private String lieu;
     private String prixTicketGP;
@@ -20,9 +22,11 @@ public class Evenement {
     public Evenement() {
     }
 
-    public Evenement(Integer id, String nom, String description, String lieu, String prixTicketGP, String prixTicketVIP, String prixTicketVVIP, LocalDateTime dateEvenement, LocalDateTime dateHeureCreation, TypeEvenement typeEvenement) {
+    public Evenement(Integer id, String nom,String urlImage,String libelle, String description, String lieu, String prixTicketGP, String prixTicketVIP, String prixTicketVVIP, LocalDateTime dateEvenement, LocalDateTime dateHeureCreation, TypeEvenement typeEvenement) {
         this.id = id;
         this.nom = nom;
+        this.urlImage = urlImage;
+        this.libelle = libelle;
         this.description = description;
         this.lieu = lieu;
         this.prixTicketGP = prixTicketGP;
@@ -47,6 +51,22 @@ public class Evenement {
 
     public void setNom(String nom) {
         this.nom = nom;
+    }
+
+    public String getUrlImage() {
+        return urlImage;
+    }
+
+    public void setUrlImage(String urlImage) {
+        this.urlImage = urlImage;
+    }
+
+    public String getLibelle() {
+        return libelle;
+    }
+
+    public void setLibelle(String libelle) {
+        this.libelle = libelle;
     }
 
     public String getDescription() {
@@ -116,6 +136,8 @@ public class Evenement {
     private Evenement(Builder builder) {
         id = builder.id;
         nom = builder.nom;
+        urlImage = builder.urlImage;
+        libelle = builder.libelle;
         description = builder.description;
         lieu = builder.lieu;
         prixTicketGP = builder.prixTicketGP;
@@ -129,6 +151,8 @@ public class Evenement {
     public static final class Builder {
         private Integer id;
         private String nom;
+        private String urlImage;
+        private String libelle;
         private String description;
         private String lieu;
         private String prixTicketGP;
@@ -148,6 +172,16 @@ public class Evenement {
 
         public Builder nom(String nom) {
             this.nom = nom;
+            return this;
+        }
+
+        public Builder urlImage(String urlImage) {
+            this.urlImage = urlImage;
+            return this;
+        }
+
+        public Builder libelle(String libelle) {
+            this.libelle = libelle;
             return this;
         }
 
