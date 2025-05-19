@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("etix/ticket/v1")
+@RequestMapping("/api/v1")
 public class TicketController {
 
     private final CreerUnTicketFacade creerUnTicketFacade;
@@ -37,6 +37,8 @@ public class TicketController {
         }
 
     }
+
+
 
 
     @GetMapping("/getTicketById/{id}")

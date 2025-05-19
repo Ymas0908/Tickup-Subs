@@ -19,7 +19,7 @@ import java.util.List;
 @AllArgsConstructor
 
 @RestController
-@RequestMapping("etix/evenement/v1")
+@RequestMapping("/api/v1")
 public class EvenementController {
 
     private final CreerUnEvenementFacade creerUnEvenementFacade;
@@ -130,7 +130,7 @@ public class EvenementController {
                     @Parameter(name = "typeEvenement", description = "typeEvenement", required = true),
             }
     )
-    @GetMapping("/getAllEvenements/")
+    @GetMapping("/getAllEvenements")
     public ResponseEntity<ResponseApi> getAllEvenements() {
         try {
             return new ResponseEntity<>(new ResponseApi("Succès, tous les évènements ont été collectés", 200, creerUnEvenementFacade.getAllEvenements()), HttpStatus.OK);

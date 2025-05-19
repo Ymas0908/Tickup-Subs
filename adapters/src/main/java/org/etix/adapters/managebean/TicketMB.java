@@ -6,10 +6,12 @@ import jakarta.inject.Named;
 import lombok.Getter;
 import lombok.Setter;
 import org.etix.adapters.driver.facades.CreerUnTicketFacade;
+import org.etix.adapters.driver.facades.PaytechPaymentFacade;
 import org.etix.adapters.entities.EvenementEntity;
 import org.etix.adapters.entities.TicketEntity;
 import org.etix.adapters.notification.FlashMessage;
 import org.etix.domain.models.enumerations.TypeTicket;
+import org.etix.domain.request.PaytechPaymentRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.Serializable;
@@ -31,6 +33,7 @@ public class TicketMB implements Serializable {
 
     @Autowired
     private CreerUnTicketFacade creerUnTicketFacade;
+    private PaytechPaymentFacade paytechPaymentFacade;
 
     @PostConstruct
     public void init() {
@@ -55,5 +58,15 @@ public class TicketMB implements Serializable {
 
     public void collecterLesTickets() {
         ticketList = creerUnTicketFacade.getAllTickets();
+    }
+
+    public void initierPaiement(PaytechPaymentRequest paytechPaymentRequest) {
+        try {
+            paytechPaymentFacade.initierPaiement(paytechPaymentRequest);
+            FlashMessage.flash(FlashMessage.INFO, "Succès", "Le ticket a bien été initié.");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            FlashMessage.flash(FlashMessage.ERROR, "Erreur", "Une erreur s'est produite.");        }
     }
 }
