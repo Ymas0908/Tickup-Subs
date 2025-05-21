@@ -21,9 +21,9 @@ import java.util.Map;
 @Component
 @AllArgsConstructor
 
-@RestController
 public class PaytechPayement implements PaytechPayementRepo {
-    private final static String GIM_GAR_SUB_URL = "https://paytech.sn/api";
+    private final static String BASE_URL = "https://paytech.sn/api";
+    private final static String API_KEY = "0915c8c6b5edddd5566715152a85925d8eb320fab43482ef4a311c6119013cb2";
 
     private final RestTemplate restClient = new RestTemplate();
 
@@ -31,34 +31,36 @@ public class PaytechPayement implements PaytechPayementRepo {
     @Override
     public void initierPaiement(PaytechPaymentRequest paytechPaymentRequest) {
         try {
-            String url = UriComponentsBuilder
-                    .fromUriString(GIM_GAR_SUB_URL + "/payment/request-payment")
-                    .toUriString();
+            String url = BASE_URL + "/payment/request-payment";
 
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
+            headers.add("Authorization", "Bearer " + API_KEY);
 
             Map<String, Object> payload = new HashMap<>();
-            payload.put("nomProduit", paytechPaymentRequest.getNomProduit());
-            payload.put("prixProduit", paytechPaymentRequest.getPrixProduit());
-            payload.put("devise", paytechPaymentRequest.getDevise());
-            payload.put("descriptionProduit", paytechPaymentRequest.getDescriptionProduit());
-            payload.put("refCommande", paytechPaymentRequest.getRefCommande());
-            payload.put("callback_url", paytechPaymentRequest.getCallbackUrl());
+            payload.put("item_name", paytechPaymentRequest.getItem_name());
+            payload.put("item_price", paytechPaymentRequest.getItem_price());
+            payload.put("command_name", paytechPaymentRequest.getCommand_name());
+            payload.put("ref_command", paytechPaymentRequest.getRef_command());
+
+            // URLs obligatoires (à remplacer par tes URLs réelles)
+            payload.put("success_url", "https://tonsite.com/success");
+            payload.put("cancel_url", "https://tonsite.com/cancel");
 
             HttpEntity<Map<String, Object>> request = new HttpEntity<>(payload, headers);
-            ResponseEntity<String> response = restClient.postForEntity(url, request, String.class);
+
+            ResponseEntity<String> response = new RestTemplate().postForEntity(url, request, String.class);
 
             System.out.println("Réponse PayTech: " + response.getBody());
 
-        } catch (HttpServerErrorException | HttpClientErrorException e) {
-            System.out.println("Erreur API PayTech: " + e.getMessage());
-            e.printStackTrace();
+        } catch (HttpClientErrorException e) {
+            System.out.println("Erreur API PayTech: " + e.getStatusCode() + " - " + e.getResponseBodyAsString());
             throw e;
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException("Une erreur s'est produite lors de l'appel à PayTech.");
         }
     }
+
 }
 

@@ -8,16 +8,16 @@ import org.etix.domain.request.PaytechPaymentRequest;
 @DomaineService
 public class PaytechPayementService implements PaytechPayementPort {
 
-    private final PaytechPayementRepo paytechDriving;
+    private final PaytechPayementRepo paytechPayementRepo;
 
-    public PaytechPayementService(PaytechPayementRepo paytechDriving) {
-        this.paytechDriving = paytechDriving;
+    public PaytechPayementService(PaytechPayementRepo paytechPayementRepo) {
+        this.paytechPayementRepo = paytechPayementRepo;
     }
 
 
     @Override
     public void initierPaiement(PaytechPaymentRequest paytechPaymentRequest) {
-        paytechDriving.initierPaiement(paytechPaymentRequest);
+        paytechPayementRepo.initierPaiement(paytechPaymentRequest);
 
     }
 

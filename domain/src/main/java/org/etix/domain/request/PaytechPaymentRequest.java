@@ -1,53 +1,48 @@
 package org.etix.domain.request;
 
 public class PaytechPaymentRequest {
-    private String nomProduit;
-    private int prixProduit;
-    private String devise;
-    private String descriptionProduit;
+    private String item_name;
+    private double item_price;
+    private String command_name;
 
-    private String refCommande;
+    private String ref_command;
 
     private String callbackUrl;
 
-    public String getNomProduit() {
-        return nomProduit;
+
+    public PaytechPaymentRequest() {
     }
 
-    public void setNomProduit(String nomProduit) {
-        this.nomProduit = nomProduit;
+    public String getItem_name() {
+        return item_name;
     }
 
-    public int getPrixProduit() {
-        return prixProduit;
+    public void setItem_name(String item_name) {
+        this.item_name = item_name;
     }
 
-    public void setPrixProduit(int prixProduit) {
-        this.prixProduit = prixProduit;
+    public double getItem_price() {
+        return item_price;
     }
 
-    public String getDevise() {
-        return devise;
+    public void setItem_price(double item_price) {
+        this.item_price = item_price;
     }
 
-    public void setDevise(String devise) {
-        this.devise = devise;
+    public String getCommand_name() {
+        return command_name;
     }
 
-    public String getDescriptionProduit() {
-        return descriptionProduit;
+    public void setCommand_name(String command_name) {
+        this.command_name = command_name;
     }
 
-    public void setDescriptionProduit(String descriptionProduit) {
-        this.descriptionProduit = descriptionProduit;
+    public String getRef_command() {
+        return ref_command;
     }
 
-    public String getRefCommande() {
-        return refCommande;
-    }
-
-    public void setRefCommande(String refCommande) {
-        this.refCommande = refCommande;
+    public void setRef_command(String ref_command) {
+        this.ref_command = ref_command;
     }
 
     public String getCallbackUrl() {
@@ -57,8 +52,4 @@ public class PaytechPaymentRequest {
     public void setCallbackUrl(String callbackUrl) {
         this.callbackUrl = callbackUrl;
     }
-
-    public PaytechPaymentRequest() {
-    }
-
 }
