@@ -3,6 +3,7 @@ package org.etix.adapters.driving.impl;
 import lombok.AllArgsConstructor;
 import org.etix.adapters.driving.repositories.EvenementRepository;
 import org.etix.adapters.entities.EvenementEntity;
+import org.etix.domain.exceptions.EntityNotExistsException;
 import org.etix.domain.models.Evenement;
 //import org.etix.domain.models.enumerations.TypeEvenement;
 import org.etix.domain.ports.driving.EvenementRepo;
@@ -20,9 +21,16 @@ public class EvenementImpl implements EvenementRepo {
     }
 
     @Override
-    public void deleteEvenement(Evenement evenement) {
-        evenementRepository.delete(EvenementEntity.toEntity(evenement));
+    public void deleteEvenement(String reference) {
+        evenementRepository.findByReference(reference)
+                .ifPresentOrElse(
+                        evenementRepository::delete,
+                        () -> {
+                            throw new EntityNotExistsException("L'évènement de reference " + reference + " est introuvable");
+                        } // Sinon, exception levée
+                );
     }
+
 
     @Override
     public Evenement updateEvenement(Evenement idEvenement) {
@@ -34,6 +42,13 @@ public class EvenementImpl implements EvenementRepo {
         return evenementRepository.findById(idEvenement)
                 .orElseThrow(() -> new RuntimeException("Evenement introuvable")).toDomain();
     }
+
+    @Override
+    public Evenement getEvenementByReference(String reference) {
+        return evenementRepository.findByReference(reference)
+                .orElseThrow(() -> new RuntimeException("Evenement introuvable")).toDomain();}
+
+
 
     @Override
     public List<Evenement> getLesEvenementsByNom(String nom) {
@@ -62,7 +77,7 @@ public class EvenementImpl implements EvenementRepo {
     }
 
     @Override
-    public Object getUrlImageEvenement(Integer idEvenement) {
-        return evenementRepository.getUrlImageEvenement(idEvenement);
+    public Object getUrlImageEvenement(String refEvenement) {
+        return evenementRepository.getUrlImageEvenement(refEvenement);
     }
 }

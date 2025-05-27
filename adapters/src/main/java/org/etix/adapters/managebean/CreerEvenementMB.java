@@ -76,7 +76,7 @@ public class CreerEvenementMB implements Serializable {
 
     public void supprimerUnEvenement() {
       try {
-          creerUnEvenementFacade.supprimerUnEvenement(evenement);
+          creerUnEvenementFacade.supprimerUnEvenement(evenement.getReference());
           this.collecterLesEvenements();
           PrimeFaces.current().ajax().update("formEvenement");
           System.out.println("Evenement supprimé" + evenement.getNom());

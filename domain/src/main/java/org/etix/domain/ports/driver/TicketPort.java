@@ -9,7 +9,7 @@ public interface TicketPort {
 
    Ticket creerTicket(Ticket ticket);
 
-    List<Ticket> getTicketByEvenement(Integer idEvenement);
+    List<Ticket> collecterLesTicketsParEvenement(String ReferenceEvenement);
 
     List<Ticket> getAllTicket();
 

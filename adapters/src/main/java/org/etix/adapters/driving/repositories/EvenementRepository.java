@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface EvenementRepository extends JpaRepository<EvenementEntity, Integer> {
@@ -18,10 +19,12 @@ public interface EvenementRepository extends JpaRepository<EvenementEntity, Inte
     @Query("SELECT e FROM EvenementEntity e WHERE e.nom = :nom")
     List<EvenementEntity> findByNom(String nom);
 
+    @Query("SELECT e FROM EvenementEntity e WHERE e.reference = :reference")
+    Optional<EvenementEntity> findByReference(String reference);
 
     @Query("SELECT e FROM EvenementEntity e WHERE e.libelle = :libelle")
     List<EvenementEntity> findByLibelle(String libelle);
 
-    @Query("SELECT e FROM EvenementEntity e WHERE e.urlImage = :idEvenement")
-    Object getUrlImageEvenement(Integer idEvenement);
+    @Query("SELECT e FROM EvenementEntity e WHERE e.urlImage = :refEvenement")
+    Object getUrlImageEvenement(String refEvenement);
 }

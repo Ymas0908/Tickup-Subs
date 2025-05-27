@@ -3,8 +3,6 @@ package org.etix.adapters.driver.controllers;
 import lombok.AllArgsConstructor;
 import org.etix.adapters.driver.api.ResponseApi;
 import org.etix.adapters.driver.facades.FedaPayFacade;
-import org.etix.domain.request.FedaPayRequest;
-import org.etix.domain.request.PaytechPaymentRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

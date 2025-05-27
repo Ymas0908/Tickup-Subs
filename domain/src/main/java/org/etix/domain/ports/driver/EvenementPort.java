@@ -9,7 +9,7 @@ import java.util.List;
 public interface EvenementPort {
 
     Evenement saveEvenement(Evenement evenement);
-    void deleteEvenement(Evenement evenement);
+    void deleteEvenement(String reference);
     Evenement updateEvenement(Evenement idEvenement);
 
 //    List<Evenement> getLesEvenementsByTypeEvenement(TypeEvenement typeEvenement);
@@ -22,5 +22,5 @@ public interface EvenementPort {
     void uploadFile(MultipartFile file, Integer idEvenement);
 
 
-    Object getUrlImageEvenement(Integer idEvenement);
+    Object getUrlImageEvenement(String refEvenement);
 }

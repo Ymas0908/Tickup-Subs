@@ -28,8 +28,8 @@ public class CreerUnEvenementFacade {
         return EvenementEntity.toEntity(evenementPort.updateEvenement(evenement.toDomain()));
     }
 
-    public void supprimerUnEvenement(EvenementEntity evenement) {
-        evenementPort.deleteEvenement(evenement.toDomain());
+    public void supprimerUnEvenement(String reference) {
+        evenementPort.deleteEvenement(reference);
     }
 
 //    public List<EvenementEntity> getLesEvenementsByTypeEvenement(TypeEvenement typeEvenement) {
@@ -59,7 +59,7 @@ public class CreerUnEvenementFacade {
     }
 
 
-    public Object getUrlImageEvenement(Integer idEvenement) {
-        return evenementPort.getUrlImageEvenement(idEvenement);
+    public Object getUrlImageEvenement(String refEvenement) {
+        return evenementPort.getUrlImageEvenement(refEvenement);
     }
 }

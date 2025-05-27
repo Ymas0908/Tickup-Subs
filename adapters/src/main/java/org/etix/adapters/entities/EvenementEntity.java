@@ -23,6 +23,7 @@ public class EvenementEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String nom;
+    private String reference;
     private String urlImage;
     private String libelle;
     private String description;
@@ -39,6 +40,7 @@ public class EvenementEntity {
         return EvenementEntity.builder()
                 .id(evenement.getId())
                 .nom(evenement.getNom())
+                .reference(evenement.getReference())
                 .urlImage(evenement.getUrlImage())
                 .libelle(evenement.getLibelle())
                 .lieu(evenement.getLieu())
@@ -56,6 +58,7 @@ public class EvenementEntity {
         return new Evenement.Builder()
                 .id(this.id)
                 .nom(this.nom)
+                .reference(this.reference)
                 .urlImage(this.urlImage)
                 .libelle(this.libelle)
                 .lieu(this.lieu)

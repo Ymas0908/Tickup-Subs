@@ -111,7 +111,7 @@ public class EvenementService  implements EvenementPort {
     }
 
     @Override
-    public Object getUrlImageEvenement(String refEvenement){
-        return evenementRepo.getUrlImageEvenement(refEvenement);
+    public Object getUrlImageEvenement(Integer idEvenement) {
+        return evenementRepo.getUrlImageEvenement(idEvenement);
     }
 }

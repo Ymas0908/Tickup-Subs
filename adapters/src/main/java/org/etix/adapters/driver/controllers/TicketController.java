@@ -17,7 +17,7 @@ public class TicketController {
     private final CreerUnTicketFacade creerUnTicketFacade;
 
 
-    @PostMapping("/creerUnTicket")
+    @PostMapping("/tickets")
     public ResponseEntity<ResponseApi> creerUnTicket(@RequestBody Ticket ticket) {
         try {
             return new ResponseEntity<>(new ResponseApi("Succès", 200, creerUnTicketFacade.creerUnTicket(TicketEntity.toEntity(ticket))), HttpStatus.OK);
@@ -27,7 +27,7 @@ public class TicketController {
         }
     }
 
-@GetMapping("/getAllTickets/")
+@GetMapping("/tickets")
     public ResponseEntity<ResponseApi> getAllTickets() {
         try {
             return new ResponseEntity<>(new ResponseApi("Succès", 200, creerUnTicketFacade.getAllTickets()), HttpStatus.OK);
@@ -41,10 +41,10 @@ public class TicketController {
 
 
 
-    @GetMapping("/getTicketById/{id}")
-    public ResponseEntity<ResponseApi> getTicketById(@PathVariable Integer idEvenement) {
+    @GetMapping("/evenements/{referenceEvenement}/tickets")
+    public ResponseEntity<ResponseApi> getTicketById(@PathVariable String referenceEvenement) {
         try {
-            return new ResponseEntity<>(new ResponseApi("Succès", 200, creerUnTicketFacade.getTicketByEvenement(idEvenement)), HttpStatus.OK);
+            return new ResponseEntity<>(new ResponseApi("Succès", 200, creerUnTicketFacade.getTicketByEvenement(referenceEvenement)), HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(new ResponseApi("Erreur", 404, null), HttpStatus.NOT_FOUND);

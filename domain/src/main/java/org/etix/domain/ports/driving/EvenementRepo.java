@@ -7,10 +7,11 @@ import java.util.List;
 
 public interface EvenementRepo {
     Evenement saveEvenement(Evenement evenement);
-    void deleteEvenement(Evenement evenement);
+    void deleteEvenement(String reference);
     Evenement updateEvenement(Evenement idEvenement);
 
     Evenement getEvenementById(Integer idEvenement);
+    Evenement getEvenementByReference(String reference);
 
     List<Evenement> getLesEvenementsByNom(String nom);
 
@@ -20,5 +21,5 @@ public interface EvenementRepo {
 
     List<Evenement> getLesEvenementsByLibelle(String libelle);
 
-    Object getUrlImageEvenement(Integer idEvenement);
+    Object getUrlImageEvenement(String refEvenement);
 }

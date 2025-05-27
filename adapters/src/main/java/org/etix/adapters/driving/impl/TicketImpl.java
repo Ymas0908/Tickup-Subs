@@ -19,8 +19,8 @@ public class TicketImpl implements TicketRepo {
     }
 
     @Override
-    public List<Ticket> getTicketByEvenement(Integer idEvenement) {
-        return ticketRepository.findByEvenementId(idEvenement).stream().map(TicketEntity::toDomain).toList();
+    public List<Ticket> collecterLesTicketsParEvenement(String referenceEvenement) {
+        return ticketRepository.findByReferenceEvenement(referenceEvenement).stream().map(TicketEntity::toDomain).toList();
     }
 
     @Override

@@ -28,7 +28,7 @@ public class EvenementController {
             description = "Cette méthode permet de créer un,evènement"
 
     )
-    @PostMapping("/creerUnEvenement/")
+    @PostMapping("/evenements/")
     public ResponseEntity<ResponseApi> creerUnEvenement(@RequestBody Evenement evenement) {
         try {
             return new ResponseEntity<>(new ResponseApi("Succès", 200, creerUnEvenementFacade.creerUnEvenement(EvenementEntity.toEntity(evenement))), HttpStatus.OK);
@@ -81,7 +81,7 @@ public class EvenementController {
                     @Parameter(name = "idEvenement", description = "idEvenement", required = true),
             }
     )
-    @PutMapping("/modifierUnEvenement/")
+    @PutMapping("/evenements")
     public ResponseEntity<ResponseApi> modifierUnEvenement(@RequestBody Evenement evenement) {
         try {
             return new ResponseEntity<>(new ResponseApi("Succès", 200, creerUnEvenementFacade.modifierUnEvenement(EvenementEntity.toEntity(evenement))), HttpStatus.OK);
@@ -92,16 +92,16 @@ public class EvenementController {
     }
 
 
-    @Operation(summary = "Supprimer un,evènement ",
-            description = "Cette.méthode permet de supprimer un évènement",
+    @Operation(summary = "Supprimer un evènement ",
+            description = "Cette méthode permet de supprimer un évènement",
             parameters = {
                     @Parameter(name = "idEvenement", description = "idEvenement", required = true),
             }
     )
-    @DeleteMapping("/supprimerUnEvenement/")
-    public ResponseEntity<ResponseApi> supprimerUnEvenement(@RequestBody Evenement evenement) {
+    @DeleteMapping("/evenements")
+    public ResponseEntity<ResponseApi> supprimerUnEvenement(@PathVariable String reference) {
         try {
-            creerUnEvenementFacade.supprimerUnEvenement(EvenementEntity.toEntity(evenement));
+            creerUnEvenementFacade.supprimerUnEvenement(reference);
             return new ResponseEntity<>(new ResponseApi("Evenement supprimé", 200, null), HttpStatus.OK);
 
         } catch (Exception e) {
@@ -130,7 +130,7 @@ public class EvenementController {
                     @Parameter(name = "typeEvenement", description = "typeEvenement", required = true),
             }
     )
-    @GetMapping("/getAllEvenements")
+    @GetMapping("/evenements")
     public ResponseEntity<ResponseApi> getAllEvenements() {
         try {
             return new ResponseEntity<>(new ResponseApi("Succès, tous les évènements ont été collectés", 200, creerUnEvenementFacade.getAllEvenements()), HttpStatus.OK);
@@ -152,7 +152,7 @@ public class EvenementController {
 
     }
 
-    @GetMapping("/getLesEvenementsByLibelle/{libelle}")
+    @GetMapping("/evenements/{libelle}/evenements")
     public ResponseEntity<ResponseApi> getLesEvenementsByLibelle(@PathVariable("libelle") String libelle) {
         try {
             return new ResponseEntity<>(new ResponseApi("Succès", 200, creerUnEvenementFacade.getLesEvenementsByLibelle(libelle)), HttpStatus.OK);
@@ -163,11 +163,11 @@ public class EvenementController {
     }
 
 
-    @GetMapping("/getUrlImageEvenement")
-    public ResponseEntity<ResponseApi> getUrlImageEvenement(@RequestParam("idEvenement") Integer idEvenement) {
+    @GetMapping("/evenements/{refEvenement}/evenements")
+    public ResponseEntity<ResponseApi> getUrlImageEvenement(@RequestParam("refEvenement") String refEvenement) {
         try {
 
-            return new ResponseEntity<>(new ResponseApi("Succès", 200, creerUnEvenementFacade.getUrlImageEvenement(idEvenement)), HttpStatus.OK);
+            return new ResponseEntity<>(new ResponseApi("Succès", 200, creerUnEvenementFacade.getUrlImageEvenement(refEvenement)), HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException(e);

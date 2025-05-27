@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 public class Evenement {
     private Integer id;
     private String nom;
+    private String reference;
     private String urlImage;
     private String libelle;
     private String description;
@@ -22,9 +23,10 @@ public class Evenement {
     public Evenement() {
     }
 
-    public Evenement(Integer id, String nom,String urlImage,String libelle, String description, String lieu, String prixTicketGP, String prixTicketVIP, String prixTicketVVIP, LocalDateTime dateEvenement, LocalDateTime dateHeureCreation, TypeEvenement typeEvenement) {
+    public Evenement(Integer id, String nom,String reference,String urlImage,String libelle, String description, String lieu, String prixTicketGP, String prixTicketVIP, String prixTicketVVIP, LocalDateTime dateEvenement, LocalDateTime dateHeureCreation, TypeEvenement typeEvenement) {
         this.id = id;
         this.nom = nom;
+        this.reference = reference;
         this.urlImage = urlImage;
         this.libelle = libelle;
         this.description = description;
@@ -51,6 +53,14 @@ public class Evenement {
 
     public void setNom(String nom) {
         this.nom = nom;
+    }
+
+    public String getReference() {
+        return reference;
+    }
+
+    public void setReference(String reference) {
+        this.reference = reference;
     }
 
     public String getUrlImage() {
@@ -136,6 +146,7 @@ public class Evenement {
     private Evenement(Builder builder) {
         id = builder.id;
         nom = builder.nom;
+        reference = builder.reference;
         urlImage = builder.urlImage;
         libelle = builder.libelle;
         description = builder.description;
@@ -151,6 +162,7 @@ public class Evenement {
     public static final class Builder {
         private Integer id;
         private String nom;
+        private String reference;
         private String urlImage;
         private String libelle;
         private String description;
@@ -172,6 +184,11 @@ public class Evenement {
 
         public Builder nom(String nom) {
             this.nom = nom;
+            return this;
+        }
+
+        public Builder reference(String reference) {
+            this.reference = reference;
             return this;
         }
 

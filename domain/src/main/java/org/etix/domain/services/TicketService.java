@@ -1,8 +1,10 @@
 package org.etix.domain.services;
 
 import org.etix.domain.ddd.DomaineService;
+import org.etix.domain.models.Evenement;
 import org.etix.domain.models.Ticket;
 import org.etix.domain.ports.driver.TicketPort;
+import org.etix.domain.ports.driving.EvenementRepo;
 import org.etix.domain.ports.driving.TicketRepo;
 
 import java.time.LocalDateTime;
@@ -13,8 +15,10 @@ import java.util.UUID;
 public class TicketService implements TicketPort {
 
     private final TicketRepo ticketRepo;
+    private final EvenementRepo evenementRepo;
 
-    public TicketService(TicketRepo ticketRepo) {
+    public TicketService(TicketRepo ticketRepo , EvenementRepo evenementRepo) {
+        this.evenementRepo = evenementRepo;
         this.ticketRepo = ticketRepo;
     }
 
@@ -58,8 +62,9 @@ public class TicketService implements TicketPort {
     }
 
     @Override
-    public List<Ticket> getTicketByEvenement(Integer idEvenement) {
-        return ticketRepo.getTicketByEvenement(idEvenement);
+    public List<Ticket> collecterLesTicketsParEvenement(String ReferenceEvenement) {
+        Evenement evenement = evenementRepo.getEvenementByReference(ReferenceEvenement);
+        return ticketRepo.collecterLesTicketsParEvenement(evenement.getReference());
     }
 
     @Override
@@ -69,6 +74,7 @@ public class TicketService implements TicketPort {
 
     @Override
     public Ticket getTicketByReference(String reference) {
-        return ticketRepo.getTicketByReference(reference);
+        Evenement evenement = evenementRepo.getEvenementByReference(reference);
+        return ticketRepo.getTicketByReference(evenement.getReference());
     }
 }
