@@ -20,7 +20,7 @@ public interface EvenementRepository extends JpaRepository<EvenementEntity, Inte
     List<EvenementEntity> findByNom(String nom);
 
     @Query("SELECT e FROM EvenementEntity e WHERE e.reference = :reference")
-    Optional<EvenementEntity> findByReference(String reference);
+    EvenementEntity findByReference(String reference);
 
     @Query("SELECT e FROM EvenementEntity e WHERE e.libelle = :libelle")
     List<EvenementEntity> findByLibelle(String libelle);

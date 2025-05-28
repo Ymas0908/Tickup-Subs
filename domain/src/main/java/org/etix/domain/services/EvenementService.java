@@ -24,20 +24,33 @@ public class EvenementService  implements EvenementPort {
 
     @Override
     public Evenement saveEvenement(Evenement evenement) {
-//        if (evenement.getTypeEvenement() == null) {
-//            throw new IllegalArgumentException("L'evenement doit avoir un type");
-//        }
-        if (evenement.getNom() == null) {
-            throw new IllegalArgumentException("L'evenement doit avoir un nom");
-        }
+        String refEvenement = "REF-" + UUID.randomUUID();
+        conditionEvenement(evenement);
+        evenement.setReference(refEvenement);
         evenement.setDateHeureCreation(LocalDateTime.now());
         return evenementRepo.saveEvenement(evenement);
     }
 
+
+    /***
+     * Conditions sur l'evenement
+     * @param evenement
+     */
+    void conditionEvenement(Evenement evenement) {
+        if (evenement.getNom() == null) {
+            throw new RuntimeException("L'evenement doit avoir un nom");
+        }
+        if (evenement.getLieu() == null) {
+            throw new RuntimeException("L'evenement doit avoir un lieu");
+        }
+        if (evenement.getTypeEvenement() == null) {
+            throw new RuntimeException("L'evenement doit avoir un type");
+        }
+    }
+
     @Override
-    public void deleteEvenement(String reference) {
-        Evenement evenement = evenementRepo.getEvenementByReference(reference);
-        evenementRepo.deleteEvenement(evenement.getReference());
+    public void deleteEvenement(Integer idEvenement) {
+        evenementRepo.deleteEvenement(idEvenement);
     }
 
 

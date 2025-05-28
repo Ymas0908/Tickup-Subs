@@ -98,10 +98,10 @@ public class EvenementController {
                     @Parameter(name = "idEvenement", description = "idEvenement", required = true),
             }
     )
-    @DeleteMapping("/evenements")
-    public ResponseEntity<ResponseApi> supprimerUnEvenement(@PathVariable String reference) {
+    @DeleteMapping("/evenements/{idEvenement}/evenements")
+    public ResponseEntity<ResponseApi> supprimerUnEvenement(@PathVariable Integer idEvenement) {
         try {
-            creerUnEvenementFacade.supprimerUnEvenement(reference);
+            creerUnEvenementFacade.deleteEvenement(idEvenement);
             return new ResponseEntity<>(new ResponseApi("Evenement supprimé", 200, null), HttpStatus.OK);
 
         } catch (Exception e) {
@@ -141,7 +141,7 @@ public class EvenementController {
     }
 
 
-    @GetMapping("/getLesEvenementsByNom/{nom}")
+    @GetMapping("/evenements/{nom}/evenements")
     public ResponseEntity<ResponseApi> getLesEvenementsByNom(@PathVariable("nom") String nom) {
         try {
             return new ResponseEntity<>(new ResponseApi("Succès", 200, creerUnEvenementFacade.getLesEvenementsByNom(nom)), HttpStatus.OK);

@@ -27,16 +27,16 @@ public class TicketController {
         }
     }
 
-@GetMapping("/tickets")
+    @GetMapping("/tickets")
     public ResponseEntity<ResponseApi> getAllTickets() {
         try {
-            return new ResponseEntity<>(new ResponseApi("Succès", 200, creerUnTicketFacade.getAllTickets()), HttpStatus.OK);
+            return new ResponseEntity<>(new ResponseApi("Succès, tous les tickéts ont été collectés", 200, creerUnTicketFacade.getAllTickets()), HttpStatus.OK);
         } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity<>(new ResponseApi("Erreur", 404, null), HttpStatus.NOT_FOUND);
+            throw new RuntimeException(e);
         }
 
     }
+
 
 
 

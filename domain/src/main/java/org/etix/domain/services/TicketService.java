@@ -26,6 +26,17 @@ public class TicketService implements TicketPort {
     @Override
     public Ticket creerTicket(Ticket ticket) {
         // Vérifier que le ticket a un type
+
+        conditionnerTicket(ticket);
+        ticket.setDateHeureCreation(LocalDateTime.now());
+        ticket.setQuantite(ticket.getQuantite());
+        ticket.setReference( ticket.getEvenement().getLibelle() +UUID.randomUUID().toString());
+
+        // Persister le ticket
+        return ticketRepo.saveTicket(ticket);  // ticketRepo.save(ticket) persiste le ticket dans la base de données
+    }
+
+    void conditionnerTicket(Ticket ticket) {
         if (ticket.getTypeTicket() == null) {
             throw new IllegalArgumentException("Le ticket doit avoir un type");
         }
@@ -49,16 +60,6 @@ public class TicketService implements TicketPort {
             default:
                 throw new IllegalArgumentException("Type de ticket inconnu");
         }
-
-        // Assigner la date de création
-        ticket.setDateHeureCreation(LocalDateTime.now());
-        ticket.setQuantite(ticket.getQuantite());
-
-        // Assigner la reference
-        ticket.setReference( ticket.getEvenement().getLibelle() +UUID.randomUUID().toString());
-
-        // Persister le ticket
-        return ticketRepo.saveTicket(ticket);  // ticketRepo.save(ticket) persiste le ticket dans la base de données
     }
 
     @Override
@@ -74,7 +75,6 @@ public class TicketService implements TicketPort {
 
     @Override
     public Ticket getTicketByReference(String reference) {
-        Evenement evenement = evenementRepo.getEvenementByReference(reference);
-        return ticketRepo.getTicketByReference(evenement.getReference());
+        return ticketRepo.getTicketByReference(reference);
     }
 }

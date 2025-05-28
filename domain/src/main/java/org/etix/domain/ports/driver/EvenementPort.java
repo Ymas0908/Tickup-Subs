@@ -9,7 +9,7 @@ import java.util.List;
 public interface EvenementPort {
 
     Evenement saveEvenement(Evenement evenement);
-    void deleteEvenement(String reference);
+    void deleteEvenement(Integer idEvenement);
     Evenement updateEvenement(Evenement idEvenement);
 
 //    List<Evenement> getLesEvenementsByTypeEvenement(TypeEvenement typeEvenement);

@@ -21,15 +21,15 @@ public class EvenementImpl implements EvenementRepo {
     }
 
     @Override
-    public void deleteEvenement(String reference) {
-        evenementRepository.findByReference(reference)
+    public void deleteEvenement(Integer idEvenement) {
+        evenementRepository
+                .findById(idEvenement)
                 .ifPresentOrElse(
-                        evenementRepository::delete,
-                        () -> {
-                            throw new EntityNotExistsException("L'évènement de reference " + reference + " est introuvable");
-                        } // Sinon, exception levée
-                );
+                        evenementRepository::delete, () -> {
+                            throw new EntityNotExistsException("Evènement introuvable");
+                        });
     }
+
 
 
     @Override
@@ -45,8 +45,8 @@ public class EvenementImpl implements EvenementRepo {
 
     @Override
     public Evenement getEvenementByReference(String reference) {
-        return evenementRepository.findByReference(reference)
-                .orElseThrow(() -> new RuntimeException("Evenement introuvable")).toDomain();}
+        return evenementRepository.findByReference(reference).toDomain();
+    }
 
 
 

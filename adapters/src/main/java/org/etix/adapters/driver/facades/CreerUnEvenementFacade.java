@@ -28,8 +28,10 @@ public class CreerUnEvenementFacade {
         return EvenementEntity.toEntity(evenementPort.updateEvenement(evenement.toDomain()));
     }
 
-    public void supprimerUnEvenement(String reference) {
-        evenementPort.deleteEvenement(reference);
+    public void deleteEvenement(Integer idEvenement) {
+        evenementPort.deleteEvenement(idEvenement);
+
+
     }
 
 //    public List<EvenementEntity> getLesEvenementsByTypeEvenement(TypeEvenement typeEvenement) {
