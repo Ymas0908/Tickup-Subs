@@ -48,8 +48,8 @@
                                         <p:column headerText="Nom" filterBy="#{evenement.nom}">
                                             <h:outputText value="#{evenement.nom}"/>
                                         </p:column>
-                                        <p:column headerText="Lieu" filterBy="#{evenement.lieu}">
-                                            <h:outputText value="#{evenement.lieu}"/>
+                                        <p:column headerText="Statut" filterBy="#{evenement.statutEvenement}">
+                                            <p:tag value="#{evenement.statutEvenement}"/>
                                         </p:column>
                                         <p:column headerText="Date de l'évènement">
                                             <h:outputText

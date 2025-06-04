@@ -1,0 +1,167 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template.xhtml">
+
+    <ui:define name="title"> Gestion des évènements | Créer un évènement</ui:define>
+    <ui:define name="viewname">
+        <li>GESTION DES EVENEMENTS</li>
+        <li><i class="pi pi-chevron-right"></i></li>
+        <li><p:link outcome="/gestions-des-evenements/create-evenement.xhtml">CONSULTATION DES EVENEMENTS</p:link>
+        </li>
+    </ui:define>
+    <ui:define name="content">
+        <div class="grid ">
+            <div class="col-12 xl:col-6">
+                <div class="card" style="height: 38em">
+                    <h:form id="dform">
+                        <h4 class="ui-subtitle">Liste des évènements (#{creerEvenementMB.evenementsList.size()})</h4>
+                        <div class="ui-form-icon mb-2">
+                            <i class="pi pi-info-circle"></i>
+                            <span>Veuillez selectionner un évènement pour voir ou modifier ses détails </span>
+                        </div>
+
+                        <p:dataTable id="eventData" reflow="true" scrollable="true" scrollHeight="320"
+                                     styleClass="products-table" lazy="false" var="evenement" value="#{creerEvenementMB.evenementsList}"
+                                     emptyMessage="Aucun évènement disponible" rowKey="#{evenement.id}"
+                                     selection="#{creerEvenementMB.evenement}" selectionMode="single">
+                            <p:ajax event="rowSelect" update="eform" process="@this"/>
+
+                            <p:column headerText="Date de création" >
+                                <h:outputText
+                                        value="#{evenement.dateHeureCreation}">
+                                    <f:convertDateTime pattern="dd/MM/yyyy HH:mm"
+                                                       type="localDateTime"/>
+                                </h:outputText>
+                            </p:column>
+                            <p:column headerText="Nom" filterBy="#{evenement.nom}">
+                                <h:outputText value="#{evenement.nom}"/>
+                            </p:column>
+
+                            <p:column headerText="Date de l'évènement">
+                                <h:outputText
+                                        value="#{evenement.dateEvenement}">
+                                    <f:convertDateTime pattern="dd/MM/yyyy HH:mm"
+                                                       type="localDateTime"/>
+                                </h:outputText>
+                            </p:column>
+                            <p:column headerText="Statut" filterBy="#{evenement.statutEvenement}">
+                                <p:tag value="#{evenement.statutEvenement.label}"
+                                       severity="#{evenement.statutEvenement.severity}" />
+                            </p:column>
+
+
+                        </p:dataTable>
+
+                    </h:form>
+                </div>
+            </div>
+            <div class="col-12 xl:col-6">
+                <div class="card" style="max-height: 38em; overflow-y: auto; padding: 1rem;">
+                    <h:form id="eform">
+                        <h4 class="ui-subtitle">Édition d'un évènement</h4>
+                        <div class="ui-form-icon mb-3">
+                            <i class="pi pi-info-circle"></i>
+                            <span>Veuillez renseigner les champs suivants pour créer ou modifier un évènement</span>
+                        </div>
+
+                        <div class="ui-fluid formgrid grid">
+                            <!-- Nom -->
+                            <div class="field col-12 md:col-6">
+                                <p:outputLabel for="nomEvenement">Nom de l'événement</p:outputLabel>
+                                <p:inputText id="nomEvenement" placeholder="Saisir le nom de l'événement"
+                                             required="true" requiredMessage="Le nom de l'événement est obligatoire"
+                                             value="#{creerEvenementMB.evenement.nom}"/>
+                            </div>
+
+                            <!-- Lieu -->
+                            <div class="field col-12 md:col-6">
+                                <p:outputLabel for="lieuEvenement">Lieu de l'événement</p:outputLabel>
+                                <p:inputText id="lieuEvenement" placeholder="Saisir le lieu de l'événement"
+                                             required="true" requiredMessage="Le lieu de l'événement est obligatoire"
+                                             value="#{creerEvenementMB.evenement.lieu}"/>
+                            </div>
+
+                            <!-- Libellé -->
+                            <div class="field col-12 md:col-6">
+                                <p:outputLabel for="libelle">Libellé de l'événement</p:outputLabel>
+                                <p:inputText id="libelle" placeholder="Saisir le libellé"
+                                             required="true" requiredMessage="Le libellé de l'événement est obligatoire"
+                                             value="#{creerEvenementMB.evenement.libelle}"/>
+                            </div>
+
+                            <!-- Date -->
+                            <div class="field col-12 md:col-6">
+                                <p:outputLabel for="dateEvenement">Date et heure</p:outputLabel>
+                                <p:calendar id="dateEvenement" value="#{creerEvenementMB.evenement.dateEvenement}"
+                                            pattern="dd/MM/yyyy HH:mm" placeholder="Saisir date et heure"
+                                            required="true" requiredMessage="La date est obligatoire"/>
+                            </div>
+
+                            <!-- Type -->
+                            <div class="field col-12 md:col-6">
+                                <p:outputLabel for="typeEvenement">Type d'événement</p:outputLabel>
+                                <p:selectOneMenu id="typeEvenement" value="#{creerEvenementMB.evenement.typeEvenement}"
+                                                 required="true" requiredMessage="Le type est obligatoire">
+                                    <f:selectItem itemLabel="Sélectionnez un type" itemValue="#{null}"/>
+                                    <f:selectItems value="#{creerEvenementMB.typeEvenementList}" var="type"
+                                                   itemLabel="#{type}" itemValue="#{type}"/>
+                                </p:selectOneMenu>
+                            </div>
+
+
+
+                            <!-- Prix -->
+                            <div class="field col-12 md:col-6">
+                                <p:outputLabel for="prixTicketGP">Prix Ticket GP</p:outputLabel>
+                                <p:inputText id="prixTicketGP" placeholder="Prix GP"
+                                             required="true" value="#{creerEvenementMB.evenement.prixTicketGP}"/>
+                            </div>
+
+                            <div class="field col-12 md:col-6">
+                                <p:outputLabel for="prixTicketVIP">Prix Ticket VIP</p:outputLabel>
+                                <p:inputText id="prixTicketVIP" placeholder="Prix VIP"
+                                             required="true" value="#{creerEvenementMB.evenement.prixTicketVIP}"/>
+                            </div>
+
+                            <div class="field col-12 md:col-6">
+                                <p:outputLabel for="prixTicketVVIP">Prix Ticket VVIP</p:outputLabel>
+                                <p:inputText id="prixTicketVVIP" placeholder="Prix VVIP"
+                                             required="true" value="#{creerEvenementMB.evenement.prixTicketVVIP}"/>
+                            </div>
+                            <!-- Description -->
+                            <div class="field col-12 md:col-12">
+                                <p:outputLabel for="description">Description</p:outputLabel>
+                                <p:inputTextarea id="description" value="#{creerEvenementMB.evenement.description}"
+                                                 rows="4" autoResize="false"
+                                                 style="width: 100%;"/>
+                            </div>
+                        </div>
+
+                        <!-- Boutons -->
+                        <div class="my-3 flex flex-wrap gap-2">
+                            <p:commandButton value="Enregistrer" update="eform,dform"
+                                             process="eform" icon="pi pi-save"
+                                             action="#{creerEvenementMB.creerUnEvenement()}"
+                                             styleClass="w-auto"/>
+                            <p:commandButton value="Réinitialiser" process="@this"
+                                             update="eform,dform" icon="pi pi-undo"
+                                             action="#{creerEvenementMB.init()}"
+                                             styleClass="w-auto"/>
+                            <p:commandButton value="Supprimer" process="@this"
+                                             update="eform,dform" icon="pi pi-trash"
+                                             action="#{creerEvenementMB.supprimerUnEvenement()}"
+                                             disabled="#{creerEvenementMB.evenement.id == null}"
+                                             styleClass="w-auto">
+                                <p:confirm header="Attention!" message="Voulez-vous vraiment supprimer ce événement ?"
+                                           icon="pi pi-info-circle"/>
+                            </p:commandButton>
+                        </div>
+                    </h:form>
+                </div>
+            </div>
+        </div>
+    </ui:define>
+</ui:composition>

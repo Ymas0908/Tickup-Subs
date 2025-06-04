@@ -14,6 +14,54 @@
             <p:link outcome="/content/starter">Tableau de Bord</p:link>
         </li>
     </ui:define>
+    <ui:define name="head">
+        <h:outputScript name="js/chart.js" library="demo"/>
+        <script type="text/javascript">
+            //<![CDATA[
+            $(function () {
+                var trafficDataSets = [57, 26, 17]; // Initié, Brouillon, Rejeté
+                var trafficColors = ['#2C84D8FF', '#FFC107', '#E74C3C']; // Couleurs
+                var hoverColors = ['#1B4F91', '#D69B04', '#A8322C']; // Couleurs au survol
+
+                var trafficChart = new Chart(document.getElementById("traffic-chart").getContext('2d'), {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['A venir', 'En cours', 'Terminé'],
+                        datasets: [{
+                            data: trafficDataSets, // Valeurs pour Initié, Brouillon, Rejeté
+                            backgroundColor: trafficColors,// Couleurs associées
+                            hoverBackgroundColor: hoverColors,
+                            borderWidth: 0,
+                        }]
+                    },
+                    options: {
+                        legend: {display: true},
+                        responsive: true,
+                        cutoutPercentage: 70,
+                        plugins: {
+                            tooltip: {
+                                callbacks: {
+                                    label: function (tooltipItem) {
+                                        const label = tooltipItem.label || '';
+                                        const value = tooltipItem.raw || 0;
+                                        return `${label}: ${value}%`;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            });
+            //]]>
+        </script>
+
+        <style type="text/css">
+            .main-content {
+                padding: 0;
+            }
+        </style>
+    </ui:define>
+
 
     <ui:define name="content">
         <div class="grid">
@@ -25,68 +73,88 @@
                 </div>
             </div>
 
-            <!-- Prochains événements -->
-            <div class="col-12 md:col-6">
-                <div class="card">
-                    <h3>Prochains Événements</h3>
-                    <p:dataTable var="event" value="#{eventController.evenementsAVenir}" paginator="true" rows="5">
-                        <p:column headerText="Nom">
-                            <h:outputText value="#{event.nom}"/>
-                        </p:column>
-                        <p:column headerText="Lieu">
-                            <h:outputText value="#{event.lieu}"/>
-                        </p:column>
-                        <p:column headerText="Date">
-                            <h:outputText value="#{event.date}">
-                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm" locale="fr"/>
-                            </h:outputText>
-                        </p:column>
-                    </p:dataTable>
-                </div>
-            </div>
+            <div class="grid">
+                <div class="col-12 md:col-12 xl:col-9">
+                    <div class="grid">
 
-            <!-- Événements en cours -->
-            <div class="col-12 md:col-6">
-                <div class="card">
-                    <h3>Événements en Cours</h3>
-                    <p:dataTable var="event" value="#{eventController.evenementsEnCours}" paginator="true" rows="5">
-                        <p:column headerText="Nom">
-                            <h:outputText value="#{event.nom}"/>
-                        </p:column>
-                        <p:column headerText="Lieu">
-                            <h:outputText value="#{event.lieu}"/>
-                        </p:column>
-                        <p:column headerText="Date de Début">
-                            <h:outputText value="#{event.dateDebut}">
-                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm" locale="fr"/>
-                            </h:outputText>
-                        </p:column>
-                    </p:dataTable>
-                </div>
-            </div>
+                        <div class="col-12 md:col-12 xl:col-4">
+                            <a href="/gestions-des-evenements/create-evenement.xhtml"
+                               style="text-decoration: none;">
+                                <div class="card overview-box-1 blue">
+                                    <div class="card-header">
+                                        <h5>Evenements</h5>
+                                    </div>
+                                    <div class="overview-content">
+                                        <h4>Nombre Total (#{creerEvenementMB.evenementsList.size()})</h4>
+                                        <div>
+                                            <i class="pi pi-th-large" style="font-size: 3em"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
 
-            <!-- Actions rapides -->
-            <div class="col-12">
-                <div class="card">
-                    <h:form id="formActions">
-                        <h3>Actions Rapides</h3>
-                        <div class="grid">
-                            <div class="col-12 md:col-3">
-                                <p:commandButton value="Créer un Événement" icon="pi pi-plus" styleClass="w-full" action="/gestions-des-evenements/creer-un-evenement.xhtml"/>
-                            </div>
-                            <div class="col-12 md:col-3">
-                                <p:commandButton value="Voir tous les Événements" icon="pi pi-list" styleClass="w-full" action="/gestions-des-evenements/consulter-les-evenements.xhtml"/>
-                            </div>
-                            <div class="col-12 md:col-3">
-                                <p:commandButton value="Statistiques" icon="pi pi-chart-bar" styleClass="w-full" action="/statistiques.xhtml?faces-redirect=true"/>
-                            </div>
-                            <div class="col-12 md:col-3">
-                                <p:commandButton value="Paramètres" icon="pi pi-cog" styleClass="w-full" action="/parametres.xhtml?faces-redirect=true"/>
+
+
+
+                        <div class="col-12">
+                            <div class="card sale-graph">
+                                <div class="card-header">
+                                    <h4 class="ui-subtitle">Liste des évènements (#{creerEvenementMB.evenementsList.size()})</h4>
+                                </div>
+                                <p:dataTable id="eventData" reflow="true" scrollable="true" scrollHeight="320"
+                                             styleClass="products-table" lazy="false" var="evenement" value="#{creerEvenementMB.evenementsList}"
+                                             emptyMessage="Aucun évènement disponible" rowKey="#{evenement.id}">
+                                    <p:column headerText="Date de création" >
+                                        <h:outputText
+                                                value="#{evenement.dateHeureCreation}">
+                                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm"
+                                                               type="localDateTime"/>
+                                        </h:outputText>
+                                    </p:column>
+                                    <p:column headerText="Nom" filterBy="#{evenement.nom}">
+                                        <h:outputText value="#{evenement.nom}"/>
+                                    </p:column>
+
+                                    <p:column headerText="Date de l'évènement">
+                                        <h:outputText
+                                                value="#{evenement.dateEvenement}">
+                                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm"
+                                                               type="localDateTime"/>
+                                        </h:outputText>
+                                    </p:column>
+                                    <p:column headerText="Statut" filterBy="#{evenement.statutEvenement}">
+                                        <p:tag value="#{evenement.statutEvenement.label}"
+                                               severity="#{evenement.statutEvenement.severity}" />
+                                    </p:column>
+
+
+                                </p:dataTable>
                             </div>
                         </div>
-                    </h:form>
+
+                    </div>
+                </div>
+
+
+                <div class="col-12 md:col-12 xl:col-3">
+                    <div class="grid">
+                        <div class="col-12 md:col-6 xl:col-12">
+                            <div class="card traffic">
+                                <div class="card-header">
+                                    <h6>Suivi des évènements</h6>
+                                </div>
+                                <div class="traffic-chart">
+                                    <canvas id="traffic-chart" width="200px" height="200px"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
                 </div>
             </div>
+
         </div>
     </ui:define>
 </ui:composition>

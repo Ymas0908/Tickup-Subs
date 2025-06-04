@@ -1,153 +1,153 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:f="http://java.sun.com/jsf/core"
-                xmlns:ui="http://java.sun.com/jsf/facelets"
-                xmlns:p="http://primefaces.org/ui"
-                template="/WEB-INF/template.xhtml">
+<!--<ui:composition xmlns="http://www.w3.org/1999/xhtml"-->
+<!--                xmlns:h="http://java.sun.com/jsf/html"-->
+<!--                xmlns:f="http://java.sun.com/jsf/core"-->
+<!--                xmlns:ui="http://java.sun.com/jsf/facelets"-->
+<!--                xmlns:p="http://primefaces.org/ui"-->
+<!--                template="/WEB-INF/template.xhtml">-->
 
-    <ui:define name="title">Gestion des évènements | Créer un évènement</ui:define>
+<!--    <ui:define name="title">Gestion des évènements | Créer un évènement</ui:define>-->
 
-    <ui:define name="viewname">
-        <li>GESTION DES EVENEMENTS</li>
-        <li><i class="pi pi-chevron-right"></i></li>
-        <li>
-            <p:link outcome="/gestions-des-evenements/creer-un-evenement.xhtml">
-                CREATION D'UN NOUVEL EVENEMENT
-            </p:link>
-        </li>
-    </ui:define>
+<!--    <ui:define name="viewname">-->
+<!--        <li>GESTION DES EVENEMENTS</li>-->
+<!--        <li><i class="pi pi-chevron-right"></i></li>-->
+<!--        <li>-->
+<!--            <p:link outcome="/gestions-des-evenements/creer-un-evenement.xhtml">-->
+<!--                CREATION D'UN NOUVEL EVENEMENT-->
+<!--            </p:link>-->
+<!--        </li>-->
+<!--    </ui:define>-->
 
-    <ui:define name="content">
-        <div class="card">
-            <h4 class="font-bold my-3">Création d'un nouvel événement</h4>
-        </div>
-            <div class="grid">
-                <h:form id="formEvenement">
-                    <div class="col flex align-items-center justify-content-center">
-                        <div class="card col-12 mt-12 md:col-">
-                            <div class="grid">
-                                <div class="col-12">
-                                    <div class="my-3">
-                                        <h5 class="font-bold">Informations de l'événement</h5>
-                                    </div>
+<!--    <ui:define name="content">-->
+<!--        <div class="card">-->
+<!--            <h4 class="font-bold my-3">Création d'un nouvel événement</h4>-->
+<!--        </div>-->
+<!--            <div class="grid">-->
+<!--                <h:form id="formEvenement">-->
+<!--                    <div class="col flex align-items-center justify-content-center">-->
+<!--                        <div class="card col-12 mt-12 md:col-">-->
+<!--                            <div class="grid">-->
+<!--                                <div class="col-12">-->
+<!--                                    <div class="my-3">-->
+<!--                                        <h5 class="font-bold">Informations de l'événement</h5>-->
+<!--                                    </div>-->
 
-                                    <div class="ui-fluid formgrid grid">
-                                        <!-- Champs existants -->
-                                        <div class="field col-6">
-                                            <p:outputLabel for="nomEvenement">Nom de l'événement</p:outputLabel>
-                                            <p:inputText id="nomEvenement"
-                                                         placeholder="Saisir le nom de l'événement"
-                                                         required="true"
-                                                         requiredMessage="Le nom de l'événement est obligatoire"
-                                                         value="#{creerEvenementMB.evenement.nom}"/>
-                                        </div>
+<!--                                    <div class="ui-fluid formgrid grid">-->
+<!--                                        &lt;!&ndash; Champs existants &ndash;&gt;-->
+<!--                                        <div class="field col-6">-->
+<!--                                            <p:outputLabel for="nomEvenement">Nom de l'événement</p:outputLabel>-->
+<!--                                            <p:inputText id="nomEvenement"-->
+<!--                                                         placeholder="Saisir le nom de l'événement"-->
+<!--                                                         required="true"-->
+<!--                                                         requiredMessage="Le nom de l'événement est obligatoire"-->
+<!--                                                         value="#{creerEvenementMB.evenement.nom}"/>-->
+<!--                                        </div>-->
 
-                                        <div class="field col-6">
-                                            <p:outputLabel for="lieuEvenement">Lieu de l'événement</p:outputLabel>
-                                            <p:inputText id="lieuEvenement"
-                                                         placeholder="Saisir le lieu de l'événement"
-                                                         required="true"
-                                                         requiredMessage="Le lieu de l'événement est obligatoire"
-                                                         value="#{creerEvenementMB.evenement.lieu}"/>
-                                        </div>
+<!--                                        <div class="field col-6">-->
+<!--                                            <p:outputLabel for="lieuEvenement">Lieu de l'événement</p:outputLabel>-->
+<!--                                            <p:inputText id="lieuEvenement"-->
+<!--                                                         placeholder="Saisir le lieu de l'événement"-->
+<!--                                                         required="true"-->
+<!--                                                         requiredMessage="Le lieu de l'événement est obligatoire"-->
+<!--                                                         value="#{creerEvenementMB.evenement.lieu}"/>-->
+<!--                                        </div>-->
 
-                                        <div class="field col-6">
-                                            <p:outputLabel for="libelle">libellé de l'événement</p:outputLabel>
-                                            <p:inputText id="libelle"
-                                                         placeholder="Saisir le libellé de l'événement"
-                                                         required="true"
-                                                         requiredMessage="Le libellé de l'événement est obligatoire"
-                                                         value="#{creerEvenementMB.evenement.libelle}"/>
-                                        </div>
+<!--                                        <div class="field col-6">-->
+<!--                                            <p:outputLabel for="libelle">libellé de l'événement</p:outputLabel>-->
+<!--                                            <p:inputText id="libelle"-->
+<!--                                                         placeholder="Saisir le libellé de l'événement"-->
+<!--                                                         required="true"-->
+<!--                                                         requiredMessage="Le libellé de l'événement est obligatoire"-->
+<!--                                                         value="#{creerEvenementMB.evenement.libelle}"/>-->
+<!--                                        </div>-->
 
-                                        <div class="field col-6">
-                                            <p:outputLabel for="dateEvenement">Date et heure de l'événement</p:outputLabel>
-                                            <p:calendar id="dateEvenement"
-                                                        value="#{creerEvenementMB.evenement.dateEvenement}"
-                                                        pattern="dd/MM/yyyy HH:mm"
-                                                        placeholder="Saisir la date et l'heure de l'événement"
-                                                        required="true"
-                                                        requiredMessage="La date de l'événement est obligatoire"/>
-                                        </div>
+<!--                                        <div class="field col-6">-->
+<!--                                            <p:outputLabel for="dateEvenement">Date et heure de l'événement</p:outputLabel>-->
+<!--                                            <p:calendar id="dateEvenement"-->
+<!--                                                        value="#{creerEvenementMB.evenement.dateEvenement}"-->
+<!--                                                        pattern="dd/MM/yyyy HH:mm"-->
+<!--                                                        placeholder="Saisir la date et l'heure de l'événement"-->
+<!--                                                        required="true"-->
+<!--                                                        requiredMessage="La date de l'événement est obligatoire"/>-->
+<!--                                        </div>-->
 
-                                        <div class="field col-12">
-                                            <p:outputLabel for="typeEvenement">Type d'événement</p:outputLabel>
-                                            <p:selectOneMenu id="typeEvenement"
-                                                             value="#{creerEvenementMB.evenement.typeEvenement}"
-                                                             required="true"
-                                                             requiredMessage="Le type d'événement est obligatoire">
-                                                <f:selectItem itemLabel="Sélectionnez un type d'événement" itemValue="#{null}"/>
-                                                <f:selectItems value="#{creerEvenementMB.typeEvenementList}" var="type"
-                                                               itemLabel="#{type}" itemValue="#{type}"/>
-                                            </p:selectOneMenu>
-                                        </div>
+<!--                                        <div class="field col-12">-->
+<!--                                            <p:outputLabel for="typeEvenement">Type d'événement</p:outputLabel>-->
+<!--                                            <p:selectOneMenu id="typeEvenement"-->
+<!--                                                             value="#{creerEvenementMB.evenement.typeEvenement}"-->
+<!--                                                             required="true"-->
+<!--                                                             requiredMessage="Le type d'événement est obligatoire">-->
+<!--                                                <f:selectItem itemLabel="Sélectionnez un type d'événement" itemValue="#{null}"/>-->
+<!--                                                <f:selectItems value="#{creerEvenementMB.typeEvenementList}" var="type"-->
+<!--                                                               itemLabel="#{type}" itemValue="#{type}"/>-->
+<!--                                            </p:selectOneMenu>-->
+<!--                                        </div>-->
 
-                                        <div class="field col-12">
-                                            <p:outputLabel for="description" value="Description"/>
-                                            <p:inputTextarea id="description"
-                                                             value="#{creerEvenementMB.evenement.description}"
-                                                             rows="6"
-                                                             cols="50"
-                                                             autoResize="false"
-                                                             style="width: 100%; height: 150px;"/>
-                                        </div>
+<!--                                        <div class="field col-12">-->
+<!--                                            <p:outputLabel for="description" value="Description"/>-->
+<!--                                            <p:inputTextarea id="description"-->
+<!--                                                             value="#{creerEvenementMB.evenement.description}"-->
+<!--                                                             rows="6"-->
+<!--                                                             cols="50"-->
+<!--                                                             autoResize="false"-->
+<!--                                                             style="width: 100%; height: 150px;"/>-->
+<!--                                        </div>-->
 
-                                        <!-- Nouveaux champs pour les prix des tickets -->
-                                        <div class="field col-4">
-                                            <p:outputLabel for="prixTicketGP">Prix Ticket GP</p:outputLabel>
-                                            <p:inputText id="prixTicketGP"
-                                                         placeholder="Prix du ticket GP"
-                                                         required="true"
-                                                         requiredMessage="Le prix du ticket GP est obligatoire"
-                                                         value="#{creerEvenementMB.evenement.prixTicketGP}"
-                                                         label="Prix Ticket GP"/>
-                                        </div>
+<!--                                        &lt;!&ndash; Nouveaux champs pour les prix des tickets &ndash;&gt;-->
+<!--                                        <div class="field col-4">-->
+<!--                                            <p:outputLabel for="prixTicketGP">Prix Ticket GP</p:outputLabel>-->
+<!--                                            <p:inputText id="prixTicketGP"-->
+<!--                                                         placeholder="Prix du ticket GP"-->
+<!--                                                         required="true"-->
+<!--                                                         requiredMessage="Le prix du ticket GP est obligatoire"-->
+<!--                                                         value="#{creerEvenementMB.evenement.prixTicketGP}"-->
+<!--                                                         label="Prix Ticket GP"/>-->
+<!--                                        </div>-->
 
-                                        <div class="field col-4">
-                                            <p:outputLabel for="prixTicketVIP">Prix Ticket VIP</p:outputLabel>
-                                            <p:inputText id="prixTicketVIP"
-                                                         placeholder="Prix du ticket VIP"
-                                                         required="true"
-                                                         requiredMessage="Le prix du ticket VIP est obligatoire"
-                                                         value="#{creerEvenementMB.evenement.prixTicketVIP}"
-                                                         label="Prix Ticket VIP"/>
-                                        </div>
+<!--                                        <div class="field col-4">-->
+<!--                                            <p:outputLabel for="prixTicketVIP">Prix Ticket VIP</p:outputLabel>-->
+<!--                                            <p:inputText id="prixTicketVIP"-->
+<!--                                                         placeholder="Prix du ticket VIP"-->
+<!--                                                         required="true"-->
+<!--                                                         requiredMessage="Le prix du ticket VIP est obligatoire"-->
+<!--                                                         value="#{creerEvenementMB.evenement.prixTicketVIP}"-->
+<!--                                                         label="Prix Ticket VIP"/>-->
+<!--                                        </div>-->
 
-                                        <div class="field col-4">
-                                            <p:outputLabel for="prixTicketVVIP">Prix Ticket VVIP</p:outputLabel>
-                                            <p:inputText id="prixTicketVVIP"
-                                                         placeholder="Prix du ticket VVIP"
-                                                         required="true"
-                                                         requiredMessage="Le prix du ticket VVIP est obligatoire"
-                                                         value="#{creerEvenementMB.evenement.prixTicketVVIP}"
-                                                         label="Prix Ticket VVIP"/>
-                                        </div>
+<!--                                        <div class="field col-4">-->
+<!--                                            <p:outputLabel for="prixTicketVVIP">Prix Ticket VVIP</p:outputLabel>-->
+<!--                                            <p:inputText id="prixTicketVVIP"-->
+<!--                                                         placeholder="Prix du ticket VVIP"-->
+<!--                                                         required="true"-->
+<!--                                                         requiredMessage="Le prix du ticket VVIP est obligatoire"-->
+<!--                                                         value="#{creerEvenementMB.evenement.prixTicketVVIP}"-->
+<!--                                                         label="Prix Ticket VVIP"/>-->
+<!--                                        </div>-->
 
-                                    </div>
+<!--                                    </div>-->
 
-                                    <div class="flex my-3">
-                                        <p:commandButton value="Enregistrer"
-                                                         action="#{creerEvenementMB.creerUnEvenement()}"
-                                                         update="formEvenement"
-                                                         process="formEvenement"
-                                                         icon="pi pi-save" styleClass="w-auto mr-2"/>
+<!--                                    <div class="flex my-3">-->
+<!--                                        <p:commandButton value="Enregistrer"-->
+<!--                                                         action="#{creerEvenementMB.creerUnEvenement()}"-->
+<!--                                                         update="formEvenement"-->
+<!--                                                         process="formEvenement"-->
+<!--                                                         icon="pi pi-save" styleClass="w-auto mr-2"/>-->
 
-                                        <!-- Bouton Annuler corrigé -->
-                                        <p:commandButton value="Annuler"
-                                                         actionListener="#{creerEvenementMB.resetCreerUnEvenement()}"
-                                                         update="formEvenement"
-                                                         process="@this"
-                                                         icon="pi pi-times"
-                                                         styleClass="w-auto"/>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+<!--                                        &lt;!&ndash; Bouton Annuler corrigé &ndash;&gt;-->
+<!--                                        <p:commandButton value="Annuler"-->
+<!--                                                         actionListener="#{creerEvenementMB.resetCreerUnEvenement()}"-->
+<!--                                                         update="formEvenement"-->
+<!--                                                         process="@this"-->
+<!--                                                         icon="pi pi-times"-->
+<!--                                                         styleClass="w-auto"/>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
 
-                </h:form>
+<!--                </h:form>-->
 
-            </div>
+<!--            </div>-->
 
-    </ui:define>
-</ui:composition>
+<!--    </ui:define>-->
+<!--</ui:composition>-->

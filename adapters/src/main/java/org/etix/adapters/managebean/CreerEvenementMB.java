@@ -16,6 +16,7 @@ import org.primefaces.PrimeFaces;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,15 +51,21 @@ public class CreerEvenementMB implements Serializable {
 
     public void creerUnEvenement() {
         try {
+            if (evenement.getDateEvenement().isBefore(LocalDateTime.now())) {
+                FlashMessage.flash(FlashMessage.ERROR, "Erreur", "Impossible de créer un événement dans le passé.");
+                return;
+            }
+
             creerUnEvenementFacade.creerUnEvenement(evenement);
+
             ListUtils.addItem(new ArrayList<>(evenementsList), evenement);
             resetCreerUnEvenement();
-            System.out.println("Evenement créé" + evenement);
-            FlashMessage.flash(FlashMessage.INFO, "Succès", "L'evenement à bien été crée.");
+            System.out.println("Événement créé : " + evenement);
+            FlashMessage.flash(FlashMessage.INFO, "Succès", "L'événement a bien été créé.");
             this.collecterLesEvenements();
         } catch (Exception e) {
             e.printStackTrace();
-            FlashMessage.flash(FlashMessage.ERROR, "Erreur", "Une erreur s'est produite."+e.getMessage());
+            FlashMessage.flash(FlashMessage.ERROR, "Erreur", "Une erreur s'est produite : " + e.getMessage());
             throw new RuntimeException(e);
         }
     }
@@ -81,12 +88,12 @@ public class CreerEvenementMB implements Serializable {
     public void supprimerUnEvenement() {
       try {
           creerUnEvenementFacade.deleteEvenement(evenement.getId());
-          ListUtils.removeItem(evenementsList, evenement);
           System.out.println("Evenement supprimé" + evenement.getNom());
-          FlashMessage.flash(FlashMessage.INFO, "Succès", "L'evenement à bien été supprimé.");
+          FlashMessage.flash(FlashMessage.INFO, "Succès", "L'évènement à bien été supprimé.");
           PrimeFaces.current().ajax().update("formEvenement");
           this.collecterLesEvenements();
       } catch (Exception e) {
+          e.printStackTrace();
           FlashMessage.flash(FlashMessage.ERROR, "Erreur", "Une erreur s'est produite." + e.getMessage());
       }
     }
@@ -98,6 +105,16 @@ public class CreerEvenementMB implements Serializable {
 
     public void resetCreerUnEvenement() {
         evenement = new EvenementEntity();
+    }
+
+    public int countByStatus(String status) {
+        return (int) evenementsList.stream()
+                .filter(e -> e.getStatutEvenement().name().equals(status))
+                .count();
+    }
+
+    public void refreshStats() {
+        this.collecterLesEvenements();
     }
 
 

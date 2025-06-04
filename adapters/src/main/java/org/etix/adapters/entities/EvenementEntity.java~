@@ -3,7 +3,6 @@ package org.etix.adapters.entities;
 import jakarta.persistence.*;
 import lombok.*;
 import org.etix.domain.models.Evenement;
-import org.etix.domain.models.enumerations.StatutEvenement;
 import org.etix.domain.models.enumerations.TypeEvenement;
 //import org.etix.domain.models.enumerations.TypeEvenement;
 
@@ -43,7 +42,6 @@ public class EvenementEntity {
                 .id(evenement.getId())
                 .nom(evenement.getNom())
                 .reference(evenement.getReference())
-                .statutEvenement(evenement.getStatutEvenement())
                 .urlImage(evenement.getUrlImage())
                 .libelle(evenement.getLibelle())
                 .lieu(evenement.getLieu())
@@ -62,7 +60,6 @@ public class EvenementEntity {
                 .id(this.id)
                 .nom(this.nom)
                 .reference(this.reference)
-                .statutEvenement(this.statutEvenement)
                 .urlImage(this.urlImage)
                 .libelle(this.libelle)
                 .lieu(this.lieu)

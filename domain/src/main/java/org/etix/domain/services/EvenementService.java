@@ -3,6 +3,7 @@ package org.etix.domain.services;
 import org.etix.domain.ddd.DomaineService;
 import org.etix.domain.models.Evenement;
 //import org.etix.domain.models.enumerations.TypeEvenement;
+import org.etix.domain.models.enumerations.StatutEvenement;
 import org.etix.domain.ports.driver.EvenementPort;
 import org.etix.domain.ports.driving.EvenementRepo;
 import org.springframework.web.multipart.MultipartFile;
@@ -25,9 +26,23 @@ public class EvenementService  implements EvenementPort {
     @Override
     public Evenement saveEvenement(Evenement evenement) {
         String refEvenement = "REF-" + UUID.randomUUID();
-        conditionEvenement(evenement);
+        conditionEvenement(evenement); // Ta méthode de validation
+
+        // Détermination automatique du statut
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime dateEvent = evenement.getDateEvenement();
+
+        if (dateEvent.toLocalDate().isAfter(now.toLocalDate())) {
+            evenement.setStatutEvenement(StatutEvenement.A_VENIR);
+        } else if (dateEvent.toLocalDate().isEqual(now.toLocalDate())) {
+            evenement.setStatutEvenement(StatutEvenement.EN_COURS);
+        } else  if (dateEvent.toLocalDate().isBefore(now.toLocalDate())) {
+            evenement.setStatutEvenement(StatutEvenement.TERMINE);
+            throw new RuntimeException("Impossible de créer un evenement passé.");
+        }
+
         evenement.setReference(refEvenement);
-        evenement.setDateHeureCreation(LocalDateTime.now());
+        evenement.setDateHeureCreation(now);
         return evenementRepo.saveEvenement(evenement);
     }
 

@@ -1,5 +1,6 @@
 package org.etix.domain.models;
 
+import org.etix.domain.models.enumerations.StatutEvenement;
 import org.etix.domain.models.enumerations.TypeEvenement;
 
 import java.sql.Blob;
@@ -9,6 +10,7 @@ public class Evenement {
     private Integer id;
     private String nom;
     private String reference;
+    private StatutEvenement statutEvenement;
     private String urlImage;
     private String libelle;
     private String description;
@@ -23,10 +25,11 @@ public class Evenement {
     public Evenement() {
     }
 
-    public Evenement(Integer id, String nom,String reference,String urlImage,String libelle, String description, String lieu, String prixTicketGP, String prixTicketVIP, String prixTicketVVIP, LocalDateTime dateEvenement, LocalDateTime dateHeureCreation, TypeEvenement typeEvenement) {
+    public Evenement(Integer id, String nom,String reference, StatutEvenement statutEvenement,String urlImage,String libelle, String description, String lieu, String prixTicketGP, String prixTicketVIP, String prixTicketVVIP, LocalDateTime dateEvenement, LocalDateTime dateHeureCreation, TypeEvenement typeEvenement) {
         this.id = id;
         this.nom = nom;
         this.reference = reference;
+        this.statutEvenement = statutEvenement;
         this.urlImage = urlImage;
         this.libelle = libelle;
         this.description = description;
@@ -61,6 +64,14 @@ public class Evenement {
 
     public void setReference(String reference) {
         this.reference = reference;
+    }
+
+    public StatutEvenement getStatutEvenement() {
+        return statutEvenement;
+    }
+
+    public void setStatutEvenement(StatutEvenement statutEvenement) {
+        this.statutEvenement = statutEvenement;
     }
 
     public String getUrlImage() {
@@ -147,6 +158,7 @@ public class Evenement {
         id = builder.id;
         nom = builder.nom;
         reference = builder.reference;
+        statutEvenement = builder.statutEvenement;
         urlImage = builder.urlImage;
         libelle = builder.libelle;
         description = builder.description;
@@ -163,6 +175,7 @@ public class Evenement {
         private Integer id;
         private String nom;
         private String reference;
+        private StatutEvenement statutEvenement;
         private String urlImage;
         private String libelle;
         private String description;
@@ -189,6 +202,11 @@ public class Evenement {
 
         public Builder reference(String reference) {
             this.reference = reference;
+            return this;
+        }
+
+        public Builder statutEvenement(StatutEvenement statutEvenement) {
+            this.statutEvenement = statutEvenement;
             return this;
         }
 
