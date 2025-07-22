@@ -1,6 +1,10 @@
-$primaryColor:#2c84d8;
-$primaryLightColor:#3B92E5;
-$primaryTextColor:#ffffff;
+//$primaryColor:#2c84d8;
+//$primaryLightColor:#3B92E5;
+//$primaryTextColor:#ffffff;
+$primaryColor: #A8E6CF; // Vert menthe au lait (doux et pastel)
+$primaryLightColor: #CFF3E4; // Variante plus claire pour les effets hover ou backgrounds
+$primaryTextColor: #3E3E3E; // Gris chaud foncé qui contraste bien avec le vert menthe
+
 
 @import '../../sass/variables/layout/_layout_dim';
 @import '../../sass/layout/_layout';

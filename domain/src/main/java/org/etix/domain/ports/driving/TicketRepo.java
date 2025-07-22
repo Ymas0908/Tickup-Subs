@@ -13,4 +13,6 @@ public interface TicketRepo {
      List<Ticket> getAllTicket();
 
     Ticket getTicketByReference(String reference);
+
+    Integer getNombresTotalTickets();
 }

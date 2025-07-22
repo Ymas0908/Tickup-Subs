@@ -1,0 +1,39 @@
+version: "3.9"
+
+volumes:
+  mysql-data:
+
+services:
+  mariadb:
+    image: mariadb
+    container_name: etix_mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: etix
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - etix-network
+
+  backend:
+    build: .
+    container_name: etix_backend
+    ports:
+      - "9000:9001"
+    depends_on:
+      - mariadb
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mariadb://mariadb:3306/etix
+      SPRING_DATASOURCE_USERNAME: user
+      SPRING_DATASOURCE_PASSWORD:
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+    networks:
+      - etix-network
+
+networks:
+  etix-network:
+    driver: bridge

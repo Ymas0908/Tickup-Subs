@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Tableau de bord</title>
+    <link rel="stylesheet" th:href="@{/css/dashboard.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+<div class="container">
+    <!-- Barre latérale -->
+    <aside class="sidebar">
+        <h2 class="logo">MonApp</h2>
+        <ul class="menu">
+            <li><a th:href="@{/}" class="active"><i class="fas fa-home"></i> Accueil</a></li>
+            <li><a th:href="@{/profil}"><i class="fas fa-user"></i> Profil</a></li>
+            <li><a th:href="@{/parametres}"><i class="fas fa-cog"></i> Paramètres</a></li>
+            <li><a th:href="@{/logout}"><i class="fas fa-sign-out-alt"></i> Déconnexion</a></li>
+        </ul>
+    </aside>
+
+    <!-- Contenu principal -->
+    <main class="main-content">
+        <!-- Barre supérieure -->
+        <header class="topbar">
+            <span>Bienvenue, <strong th:text="${username}">Utilisateur</strong></span>
+        </header>
+
+        <!-- Zone de widgets / statistiques -->
+        <section class="dashboard">
+            <div class="card">
+                <h3>Total des utilisateurs</h3>
+                <p>1 245</p>
+            </div>
+            <div class="card">
+                <h3>Revenus mensuels</h3>
+                <p>245 000 FCFA</p>
+            </div>
+            <div class="card">
+                <h3>Nouvelles notifications</h3>
+                <p>17</p>
+            </div>
+        </section>
+    </main>
+</div>
+</body>
+</html>

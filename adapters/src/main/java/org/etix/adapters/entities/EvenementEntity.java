@@ -5,9 +5,6 @@ import lombok.*;
 import org.etix.domain.models.Evenement;
 import org.etix.domain.models.enumerations.StatutEvenement;
 import org.etix.domain.models.enumerations.TypeEvenement;
-//import org.etix.domain.models.enumerations.TypeEvenement;
-
-import java.sql.Blob;
 import java.time.LocalDateTime;
 
 @Getter
@@ -25,7 +22,6 @@ public class EvenementEntity {
     private Integer id;
     private String nom;
     private String reference;
-    private StatutEvenement statutEvenement;
     private String urlImage;
     private String libelle;
     private String description;
@@ -33,7 +29,7 @@ public class EvenementEntity {
     private String prixTicketGP;
     private String prixTicketVIP;
     private String prixTicketVVIP;
-    private LocalDateTime dateEvenement;
+    private LocalDateTime dateHeureEvenement;
     private LocalDateTime dateHeureCreation;
     @Enumerated(EnumType.STRING)
     private TypeEvenement typeEvenement;
@@ -43,7 +39,6 @@ public class EvenementEntity {
                 .id(evenement.getId())
                 .nom(evenement.getNom())
                 .reference(evenement.getReference())
-                .statutEvenement(evenement.getStatutEvenement())
                 .urlImage(evenement.getUrlImage())
                 .libelle(evenement.getLibelle())
                 .lieu(evenement.getLieu())
@@ -51,7 +46,7 @@ public class EvenementEntity {
                 .prixTicketVIP(evenement.getPrixTicketVIP())
                 .prixTicketVVIP(evenement.getPrixTicketVVIP())
                 .description(evenement.getDescription())
-                .dateEvenement(evenement.getDateEvenement())
+                .dateHeureEvenement(evenement.getDateHeureEvenement())
                 .dateHeureCreation(evenement.getDateHeureCreation())
                 .typeEvenement(evenement.getTypeEvenement())
                 .build();
@@ -62,7 +57,6 @@ public class EvenementEntity {
                 .id(this.id)
                 .nom(this.nom)
                 .reference(this.reference)
-                .statutEvenement(this.statutEvenement)
                 .urlImage(this.urlImage)
                 .libelle(this.libelle)
                 .lieu(this.lieu)
@@ -70,7 +64,7 @@ public class EvenementEntity {
                 .prixTicketVIP(this.prixTicketVIP)
                 .prixTicketVVIP(this.prixTicketVVIP)
                 .description(this.description)
-                .dateEvenement(this.dateEvenement)
+                .dateHeureEvenement(this.dateHeureEvenement)
                 .dateHeureCreation(this.dateHeureCreation)
                 .typeEvenement(this.typeEvenement)
                 .build();

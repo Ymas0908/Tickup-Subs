@@ -10,7 +10,6 @@ public class Evenement {
     private Integer id;
     private String nom;
     private String reference;
-    private StatutEvenement statutEvenement;
     private String urlImage;
     private String libelle;
     private String description;
@@ -18,18 +17,17 @@ public class Evenement {
     private String prixTicketGP;
     private String prixTicketVIP;
     private String prixTicketVVIP;
-    private LocalDateTime dateEvenement;
+    private LocalDateTime dateHeureEvenement;
     private LocalDateTime dateHeureCreation;
     private TypeEvenement typeEvenement;
 
     public Evenement() {
     }
 
-    public Evenement(Integer id, String nom,String reference, StatutEvenement statutEvenement,String urlImage,String libelle, String description, String lieu, String prixTicketGP, String prixTicketVIP, String prixTicketVVIP, LocalDateTime dateEvenement, LocalDateTime dateHeureCreation, TypeEvenement typeEvenement) {
+    public Evenement(Integer id, String nom,String reference,String urlImage,String libelle, String description, String lieu, String prixTicketGP, String prixTicketVIP, String prixTicketVVIP, LocalDateTime dateHeureEvenement, LocalDateTime dateHeureCreation, TypeEvenement typeEvenement) {
         this.id = id;
         this.nom = nom;
         this.reference = reference;
-        this.statutEvenement = statutEvenement;
         this.urlImage = urlImage;
         this.libelle = libelle;
         this.description = description;
@@ -37,7 +35,7 @@ public class Evenement {
         this.prixTicketGP = prixTicketGP;
         this.prixTicketVIP = prixTicketVIP;
         this.prixTicketVVIP = prixTicketVVIP;
-        this.dateEvenement = dateEvenement;
+        this.dateHeureEvenement = dateHeureEvenement;
         this.dateHeureCreation = dateHeureCreation;
         this.typeEvenement = typeEvenement;
     }
@@ -66,13 +64,6 @@ public class Evenement {
         this.reference = reference;
     }
 
-    public StatutEvenement getStatutEvenement() {
-        return statutEvenement;
-    }
-
-    public void setStatutEvenement(StatutEvenement statutEvenement) {
-        this.statutEvenement = statutEvenement;
-    }
 
     public String getUrlImage() {
         return urlImage;
@@ -130,12 +121,12 @@ public class Evenement {
         this.prixTicketVVIP = prixTicketVVIP;
     }
 
-    public LocalDateTime getDateEvenement() {
-        return dateEvenement;
+    public LocalDateTime getDateHeureEvenement() {
+        return dateHeureEvenement;
     }
 
-    public void setDateEvenement(LocalDateTime dateEvenement) {
-        this.dateEvenement = dateEvenement;
+    public void sedateHeureEvenement(LocalDateTime dateHeureEvenement) {
+        this.dateHeureEvenement = dateHeureEvenement;
     }
 
     public LocalDateTime getDateHeureCreation() {
@@ -158,7 +149,6 @@ public class Evenement {
         id = builder.id;
         nom = builder.nom;
         reference = builder.reference;
-        statutEvenement = builder.statutEvenement;
         urlImage = builder.urlImage;
         libelle = builder.libelle;
         description = builder.description;
@@ -166,7 +156,7 @@ public class Evenement {
         prixTicketGP = builder.prixTicketGP;
         prixTicketVIP = builder.prixTicketVIP;
         prixTicketVVIP = builder.prixTicketVVIP;
-        dateEvenement = builder.dateEvenement;
+        dateHeureEvenement = builder.dateHeureEvenement;
         dateHeureCreation = builder.dateHeureCreation;
         typeEvenement = builder.typeEvenement;
     }
@@ -175,7 +165,6 @@ public class Evenement {
         private Integer id;
         private String nom;
         private String reference;
-        private StatutEvenement statutEvenement;
         private String urlImage;
         private String libelle;
         private String description;
@@ -183,7 +172,7 @@ public class Evenement {
         private String prixTicketGP;
         private String prixTicketVIP;
         private String prixTicketVVIP;
-        private LocalDateTime dateEvenement;
+        private LocalDateTime dateHeureEvenement;
         private LocalDateTime dateHeureCreation;
         private TypeEvenement typeEvenement;
 
@@ -205,10 +194,7 @@ public class Evenement {
             return this;
         }
 
-        public Builder statutEvenement(StatutEvenement statutEvenement) {
-            this.statutEvenement = statutEvenement;
-            return this;
-        }
+
 
         public Builder urlImage(String urlImage) {
             this.urlImage = urlImage;
@@ -245,8 +231,8 @@ public class Evenement {
             return this;
         }
 
-        public Builder dateEvenement(LocalDateTime dateEvenement) {
-            this.dateEvenement = dateEvenement;
+        public Builder dateHeureEvenement(LocalDateTime dateHeureEvenement) {
+            this.dateHeureEvenement = dateHeureEvenement;
             return this;
         }
 

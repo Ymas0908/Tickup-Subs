@@ -14,4 +14,7 @@ public interface TicketRepository extends JpaRepository<TicketEntity, Integer> {
     @Query("SELECT t FROM TicketEntity t WHERE t.reference = :reference")
     TicketEntity findByReference(String reference);
 
+    @Query("SELECT COUNT(*) FROM TicketEntity ")
+    Integer getTotalTickets();
+
 }

@@ -5,156 +5,113 @@
                 xmlns:p="http://primefaces.org/ui"
                 template="/WEB-INF/template.xhtml">
 
-    <ui:define name="title">Accueil - Gestion des Événements 2025</ui:define>
+    <ui:define name="title">Tableau de bord</ui:define>
 
     <ui:define name="viewname">
-        <li>ACCUEIL</li>
+        <li>PAGES</li>
         <li><i class="pi pi-chevron-right"></i></li>
         <li>
-            <p:link outcome="/content/starter">Tableau de Bord</p:link>
+            <p:link outcome="/content/starter">Tableau de bord</p:link>
         </li>
     </ui:define>
-    <ui:define name="head">
-        <h:outputScript name="js/chart.js" library="demo"/>
-        <script type="text/javascript">
-            //<![CDATA[
-            $(function () {
-                var trafficDataSets = [57, 26, 17]; // Initié, Brouillon, Rejeté
-                var trafficColors = ['#2C84D8FF', '#FFC107', '#E74C3C']; // Couleurs
-                var hoverColors = ['#1B4F91', '#D69B04', '#A8322C']; // Couleurs au survol
-
-                var trafficChart = new Chart(document.getElementById("traffic-chart").getContext('2d'), {
-                    type: 'doughnut',
-                    data: {
-                        labels: ['A venir', 'En cours', 'Terminé'],
-                        datasets: [{
-                            data: trafficDataSets, // Valeurs pour Initié, Brouillon, Rejeté
-                            backgroundColor: trafficColors,// Couleurs associées
-                            hoverBackgroundColor: hoverColors,
-                            borderWidth: 0,
-                        }]
-                    },
-                    options: {
-                        legend: {display: true},
-                        responsive: true,
-                        cutoutPercentage: 70,
-                        plugins: {
-                            tooltip: {
-                                callbacks: {
-                                    label: function (tooltipItem) {
-                                        const label = tooltipItem.label || '';
-                                        const value = tooltipItem.raw || 0;
-                                        return `${label}: ${value}%`;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                });
-            });
-            //]]>
-        </script>
-
-        <style type="text/css">
-            .main-content {
-                padding: 0;
-            }
-        </style>
-    </ui:define>
-
 
     <ui:define name="content">
         <div class="grid">
-            <!-- Section de bienvenue -->
-            <div class="col-12">
-                <div class="card p-4 bg-indigo-50 shadow-md">
-                    <h1 class="text-xl font-bold text-indigo-800">Bienvenue dans la plateforme de gestion des événements 2025</h1>
-                    <p class="text-gray-600">Planifiez, suivez et participez à des événements tout au long de l'année.</p>
-                </div>
-            </div>
-
-            <div class="grid">
-                <div class="col-12 md:col-12 xl:col-9">
-                    <div class="grid">
-
-                        <div class="col-12 md:col-12 xl:col-4">
-                            <a href="/gestions-des-evenements/create-evenement.xhtml"
-                               style="text-decoration: none;">
-                                <div class="card overview-box-1 blue">
-                                    <div class="card-header">
-                                        <h5>Evenements</h5>
-                                    </div>
-                                    <div class="overview-content">
-                                        <h4>Nombre Total (#{creerEvenementMB.evenementsList.size()})</h4>
-                                        <div>
-                                            <i class="pi pi-th-large" style="font-size: 3em"/>
-                                        </div>
-                                    </div>
+            <div class="col-12 md:col-12 xl:col-9">
+                <div class="grid" style="height: 100%">
+                    <div class="col-12 md:col-12 xl:col-4">
+                        <div class="card overview-box-1 blue">
+                            <div class="card-header">
+                                <h6>Nombre total des transactions</h6>
+                                <span>(#{dashboardMB.data.formattedPeriod})</span>
+                                <div class="header-buttons">
+                                    <a href="#"><i class="pi pi-arrow-up"/></a>
                                 </div>
-                            </a>
-                        </div>
-
-
-
-
-                        <div class="col-12">
-                            <div class="card sale-graph">
-                                <div class="card-header">
-                                    <h4 class="ui-subtitle">Liste des évènements (#{creerEvenementMB.evenementsList.size()})</h4>
-                                </div>
-                                <p:dataTable id="eventData" reflow="true" scrollable="true" scrollHeight="320"
-                                             styleClass="products-table" lazy="false" var="evenement" value="#{creerEvenementMB.evenementsList}"
-                                             emptyMessage="Aucun évènement disponible" rowKey="#{evenement.id}">
-                                    <p:column headerText="Date de création" >
-                                        <h:outputText
-                                                value="#{evenement.dateHeureCreation}">
-                                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm"
-                                                               type="localDateTime"/>
-                                        </h:outputText>
-                                    </p:column>
-                                    <p:column headerText="Nom" filterBy="#{evenement.nom}">
-                                        <h:outputText value="#{evenement.nom}"/>
-                                    </p:column>
-
-                                    <p:column headerText="Date de l'évènement">
-                                        <h:outputText
-                                                value="#{evenement.dateEvenement}">
-                                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm"
-                                                               type="localDateTime"/>
-                                        </h:outputText>
-                                    </p:column>
-                                    <p:column headerText="Statut" filterBy="#{evenement.statutEvenement}">
-                                        <p:tag value="#{evenement.statutEvenement.label}"
-                                               severity="#{evenement.statutEvenement.severity}" />
-                                    </p:column>
-
-
-                                </p:dataTable>
+                            </div>
+                            <div class="overview-content">
+                                <h3>#{dashboardMB.data.nbreEvenement}</h3>
                             </div>
                         </div>
-
                     </div>
-                </div>
-
-
-                <div class="col-12 md:col-12 xl:col-3">
-                    <div class="grid">
-                        <div class="col-12 md:col-6 xl:col-12">
-                            <div class="card traffic">
-                                <div class="card-header">
-                                    <h6>Suivi des évènements</h6>
-                                </div>
-                                <div class="traffic-chart">
-                                    <canvas id="traffic-chart" width="200px" height="200px"></canvas>
+                    <div class="col-12 md:col-12 xl:col-4">
+                        <div class="card overview-box-1 teal">
+                            <div class="card-header">
+                                <h6>Montant total des commissions</h6>
+                                <span>(#{dashboardMB.data.formattedPeriod})</span>
+                                <div class="header-buttons">
+                                    <a href="#"><i class="pi pi-arrow-up"/></a>
                                 </div>
                             </div>
+                            <div class="overview-content">
+                                <h3>
+                                    <h:outputText value="#{dashboardMB.data.nbreTickets}">
+                                        <f:convertNumber groupingUsed="true" maxFractionDigits="0" />
+                                    </h:outputText> F CFA
+                                </h3>
+                            </div>
                         </div>
+                    </div>
+                    <div class="col-12 md:col-12 xl:col-4">
+                        <div class="card  overview-box-1 orange">
+                            <div class="card-header">
+                                <h6>Nombre d'acquéreur</h6>
+                                <div class="header-buttons">
+                                    <a href="#"><i class="pi pi-arrow-up"/></a>
+                                </div>
+                            </div>
+                            <div class="overview-content">
+                                <h3># {dashboardMB.data.nbrePartiePrenante}</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="card sale-graph">
+                            <div class="card-header">
+                                <h6>Récapulatif des évènements</h6>
+                            </div>
+                            <div id="order-tabs-container" class="order-tabs">
+                                <div class="order-tab " data-label="Previous Sales" data-index="1" data-stroke="#2f8ee5">
+                                <h6>Année précédente</h6>
+                                <h3>#{dashboardMB.data.nbreEventsLastYear}</h3>
+                            </div>
+                                <div class="order-tab order-tab-active" data-label="New Sales" data-index="0" data-stroke="#00acac" >
+                                    <h6>Cette année</h6>
+                                    <h3>#{dashboardMB.data.nbreEventsThisYear}</h3>
+                                </div>
 
-
+                            </div>
+                            <div class="overview-chart">
+                                <p:lineChart type="line" model="#{dashboardMB.lineModel}" style="width: 100%;"/>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+            <div class="col-12 md:col-12 xl:col-3">
+                <div class="grid" style="height: 100%">
+                    <div class="col-12 md:col-6 xl:col-12">
+                        <div class="card traffic">
+                            <div class="card-header">
+                                <h6>Détails des transactions</h6>
+                            </div>
+                            <span>(#{dashboardMB.data.formattedPeriod})</span>
 
+                            <p:donutChart model="#{dashboardMB.donutModel}" style="width: 100%;"/>
+                        </div>
+                    </div>
+                    <div class="col-12 md:col-6 xl:col-12">
+                        <div class="card goals">
+                            <div class="card-header">
+                                <h6>Type de transactions</h6>
+                            </div>
+                            <span>(#{dashboardMB.data.formattedPeriod})</span>
+                            <div class="goal-graph">
+                                <p:pieChart model="#{dashboardMB.pieModel}" style="width: 100%;"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </ui:define>
 </ui:composition>

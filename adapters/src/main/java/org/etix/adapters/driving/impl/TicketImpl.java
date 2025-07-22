@@ -32,4 +32,9 @@ public class TicketImpl implements TicketRepo {
     public Ticket getTicketByReference(String reference) {
         return ticketRepository.findByReference(reference).toDomain();
     }
+
+    @Override
+    public Integer getNombresTotalTickets() {
+        return ticketRepository.getTotalTickets();
+    }
 }

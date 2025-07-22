@@ -29,27 +29,20 @@
                                      selection="#{creerEvenementMB.evenement}" selectionMode="single">
                             <p:ajax event="rowSelect" update="eform" process="@this"/>
 
-                            <p:column headerText="Date de création" >
-                                <h:outputText
-                                        value="#{evenement.dateHeureCreation}">
-                                    <f:convertDateTime pattern="dd/MM/yyyy HH:mm"
-                                                       type="localDateTime"/>
-                                </h:outputText>
-                            </p:column>
+
                             <p:column headerText="Nom" filterBy="#{evenement.nom}">
                                 <h:outputText value="#{evenement.nom}"/>
                             </p:column>
+                            <p:column headerText="Lieu" filterBy="#{evenement.lieu}">
+                                <h:outputText value="#{evenement.lieu}"/>
+                            </p:column>
 
-                            <p:column headerText="Date de l'évènement">
+                            <p:column headerText="Date et l'heure de l'évènement">
                                 <h:outputText
-                                        value="#{evenement.dateEvenement}">
+                                        value="#{evenement.dateHeureEvenement}">
                                     <f:convertDateTime pattern="dd/MM/yyyy HH:mm"
                                                        type="localDateTime"/>
                                 </h:outputText>
-                            </p:column>
-                            <p:column headerText="Statut" filterBy="#{evenement.statutEvenement}">
-                                <p:tag value="#{evenement.statutEvenement.label}"
-                                       severity="#{evenement.statutEvenement.severity}" />
                             </p:column>
 
 
@@ -67,78 +60,75 @@
                             <span>Veuillez renseigner les champs suivants pour créer ou modifier un évènement</span>
                         </div>
 
+
                         <div class="ui-fluid formgrid grid">
-                            <!-- Nom -->
-                            <div class="field col-12 md:col-6">
-                                <p:outputLabel for="nomEvenement">Nom de l'événement</p:outputLabel>
-                                <p:inputText id="nomEvenement" placeholder="Saisir le nom de l'événement"
-                                             required="true" requiredMessage="Le nom de l'événement est obligatoire"
+                            <div class="field col-12 md:col-4">
+                                <p:outputLabel for="nom"
+                                               style="font-weight: bold">Nom de l'evenement</p:outputLabel>
+                                <p:inputText id="nom"
                                              value="#{creerEvenementMB.evenement.nom}"/>
                             </div>
-
-                            <!-- Lieu -->
-                            <div class="field col-12 md:col-6">
-                                <p:outputLabel for="lieuEvenement">Lieu de l'événement</p:outputLabel>
-                                <p:inputText id="lieuEvenement" placeholder="Saisir le lieu de l'événement"
-                                             required="true" requiredMessage="Le lieu de l'événement est obligatoire"
-                                             value="#{creerEvenementMB.evenement.lieu}"/>
+                            <div class="field col-12 md:col-4">
+                                <p:outputLabel for="libelle"
+                                               style="font-weight: bold">Libellé</p:outputLabel>
+                                <p:inputText id="libelle"
+                                             value="#{creerEvenementMB.evenement.libelle}">
+                                </p:inputText>
                             </div>
-
-                            <!-- Libellé -->
-                            <div class="field col-12 md:col-6">
-                                <p:outputLabel for="libelle">Libellé de l'événement</p:outputLabel>
-                                <p:inputText id="libelle" placeholder="Saisir le libellé"
-                                             required="true" requiredMessage="Le libellé de l'événement est obligatoire"
-                                             value="#{creerEvenementMB.evenement.libelle}"/>
-                            </div>
-
-                            <!-- Date -->
-                            <div class="field col-12 md:col-6">
-                                <p:outputLabel for="dateEvenement">Date et heure</p:outputLabel>
-                                <p:calendar id="dateEvenement" value="#{creerEvenementMB.evenement.dateEvenement}"
+                            <div class="field col-12 md:col-4">
+                                <p:outputLabel for="dateEvenement"
+                                               style="font-weight: bold">Date et heure de l'évènement</p:outputLabel>
+                                <p:calendar id="dateEvenement" value="#{creerEvenementMB.evenement.dateHeureEvenement}"
                                             pattern="dd/MM/yyyy HH:mm" placeholder="Saisir date et heure"
                                             required="true" requiredMessage="La date est obligatoire"/>
                             </div>
+                        </div>
 
-                            <!-- Type -->
-                            <div class="field col-12 md:col-6">
-                                <p:outputLabel for="typeEvenement">Type d'événement</p:outputLabel>
-                                <p:selectOneMenu id="typeEvenement" value="#{creerEvenementMB.evenement.typeEvenement}"
-                                                 required="true" requiredMessage="Le type est obligatoire">
-                                    <f:selectItem itemLabel="Sélectionnez un type" itemValue="#{null}"/>
-                                    <f:selectItems value="#{creerEvenementMB.typeEvenementList}" var="type"
-                                                   itemLabel="#{type}" itemValue="#{type}"/>
-                                </p:selectOneMenu>
-                            </div>
-
-
-
-                            <!-- Prix -->
-                            <div class="field col-12 md:col-6">
-                                <p:outputLabel for="prixTicketGP">Prix Ticket GP</p:outputLabel>
+                        <div class="ui-fluid formgrid grid">
+                            <div class="field col-12 md:col-4">
+                                <p:outputLabel for="prixTicketGP" style="font-weight: bold">Prix ticket GP </p:outputLabel>
                                 <p:inputText id="prixTicketGP" placeholder="Prix GP"
                                              required="true" value="#{creerEvenementMB.evenement.prixTicketGP}"/>
                             </div>
-
-                            <div class="field col-12 md:col-6">
-                                <p:outputLabel for="prixTicketVIP">Prix Ticket VIP</p:outputLabel>
+                            <div class="field col-12 md:col-4">
+                                <p:outputLabel for="prixTicketVIP" style="font-weight: bold">Prix ticket VIP </p:outputLabel>
                                 <p:inputText id="prixTicketVIP" placeholder="Prix VIP"
                                              required="true" value="#{creerEvenementMB.evenement.prixTicketVIP}"/>
                             </div>
-
-                            <div class="field col-12 md:col-6">
-                                <p:outputLabel for="prixTicketVVIP">Prix Ticket VVIP</p:outputLabel>
+                            <div class="field col-12 md:col-4">
+                                <p:outputLabel for="prixTicketVVIP" style="font-weight: bold">Prix ticket VVIP </p:outputLabel>
                                 <p:inputText id="prixTicketVVIP" placeholder="Prix VVIP"
                                              required="true" value="#{creerEvenementMB.evenement.prixTicketVVIP}"/>
                             </div>
-                            <!-- Description -->
-                            <div class="field col-12 md:col-12">
-                                <p:outputLabel for="description">Description</p:outputLabel>
-                                <p:inputTextarea id="description" value="#{creerEvenementMB.evenement.description}"
-                                                 rows="4" autoResize="false"
-                                                 style="width: 100%;"/>
-                            </div>
                         </div>
+                        <div class="ui-fluid formgrid grid">
+                            <div class="field col-12 md:col-6">
+                                <p:outputLabel for="typeEvenement" style="font-weight: bold">Type d'événement</p:outputLabel>
+                                     <p:selectOneMenu id="typeEvenement" value="#{creerEvenementMB.evenement.typeEvenement}"
+                                                        required="true" requiredMessage="Le type est obligatoire">
+                                           <f:selectItem itemLabel="Sélectionnez un type" itemValue="#{null}"/>
+                                           <f:selectItems value="#{creerEvenementMB.typeEvenementList}" var="type"
+                                                          itemLabel="#{type}" itemValue="#{type}"/>
+                                       </p:selectOneMenu>
+                            </div>
+                            <div class="field col-12 md:col-6">
+                                <p:outputLabel for="lieu" style="font-weight: bold">Lieu </p:outputLabel>
+                                <p:inputText id="lieu" placeholder="Lieu"
+                                             required="true" value="#{creerEvenementMB.evenement.lieu}"/>
+                            </div>
+
+                        </div>
+                        <div class="ui-fluid formgrid grid">
+                            <div class="field col-12 md:col-12">
+                                <p:outputLabel for="description" style="font-weight: bold">Description</p:outputLabel>
+                                <p:inputTextarea id="description" value="#{creerEvenementMB.evenement.description}"
+                                                 rows="4" autoResize="false"/>
+                            </div>
+
+                        </div>
+
+
+
 
                         <!-- Boutons -->
                         <div class="my-3 flex flex-wrap gap-2">

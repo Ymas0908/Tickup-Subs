@@ -1,14 +1,12 @@
 package org.etix.adapters.managebean;
 
 import jakarta.annotation.PostConstruct;
-import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
 import lombok.Getter;
 import lombok.Setter;
 import org.etix.adapters.driver.facades.CreerUnEvenementFacade;
 import org.etix.adapters.entities.EvenementEntity;
 import org.etix.adapters.notification.FlashMessage;
-//import org.etix.domain.models.enumerations.TypeEvenement;
 import org.etix.adapters.utils.ListUtils;
 import org.etix.domain.models.enumerations.TypeEvenement;
 import org.etix.domain.models.enumerations.TypeTicket;
@@ -51,7 +49,7 @@ public class CreerEvenementMB implements Serializable {
 
     public void creerUnEvenement() {
         try {
-            if (evenement.getDateEvenement().isBefore(LocalDateTime.now())) {
+            if (evenement.getDateHeureEvenement().isBefore(LocalDateTime.now())) {
                 FlashMessage.flash(FlashMessage.ERROR, "Erreur", "Impossible de créer un événement dans le passé.");
                 return;
             }
@@ -88,13 +86,14 @@ public class CreerEvenementMB implements Serializable {
     public void supprimerUnEvenement() {
       try {
           creerUnEvenementFacade.deleteEvenement(evenement.getId());
+          evenement = new EvenementEntity();
           System.out.println("Evenement supprimé" + evenement.getNom());
           FlashMessage.flash(FlashMessage.INFO, "Succès", "L'évènement à bien été supprimé.");
           PrimeFaces.current().ajax().update("formEvenement");
           this.collecterLesEvenements();
       } catch (Exception e) {
           e.printStackTrace();
-          FlashMessage.flash(FlashMessage.ERROR, "Erreur", "Une erreur s'est produite." + e.getMessage());
+          FlashMessage.flash(FlashMessage.ERROR, "Erreur", "Une erreur s'est produite.");
       }
     }
     public void collecterLesEvenements() {
@@ -107,11 +106,7 @@ public class CreerEvenementMB implements Serializable {
         evenement = new EvenementEntity();
     }
 
-    public int countByStatus(String status) {
-        return (int) evenementsList.stream()
-                .filter(e -> e.getStatutEvenement().name().equals(status))
-                .count();
-    }
+
 
     public void refreshStats() {
         this.collecterLesEvenements();

@@ -6,9 +6,12 @@ import org.etix.adapters.entities.EvenementEntity;
 import org.etix.domain.exceptions.EntityNotExistsException;
 import org.etix.domain.models.Evenement;
 //import org.etix.domain.models.enumerations.TypeEvenement;
+import org.etix.domain.models.enumerations.TypeEvenement;
 import org.etix.domain.ports.driving.EvenementRepo;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.List;
 @AllArgsConstructor
 @Component
@@ -79,5 +82,20 @@ public class EvenementImpl implements EvenementRepo {
     @Override
     public Object getUrlImageEvenement(String refEvenement) {
         return evenementRepository.getUrlImageEvenement(refEvenement);
+    }
+
+    @Override
+    public Integer getNombresEvenements() {
+        return evenementRepository.getTotalEvenements();
+    }
+
+    @Override
+    public Integer getNombresEvenementsByType(TypeEvenement typeEvenement) {
+        return null;
+    }
+
+    @Override
+    public Integer getTotalEvenementsParPeriode(LocalDateTime startDate, LocalDateTime endDate) {
+        return evenementRepository.getTotalEvenementsParPeriode(startDate, endDate);
     }
 }

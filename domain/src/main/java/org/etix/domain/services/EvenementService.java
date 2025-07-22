@@ -30,16 +30,16 @@ public class EvenementService  implements EvenementPort {
 
         // Détermination automatique du statut
         LocalDateTime now = LocalDateTime.now();
-        LocalDateTime dateEvent = evenement.getDateEvenement();
+        LocalDateTime dateEvent = evenement.getDateHeureEvenement();
 
-        if (dateEvent.toLocalDate().isAfter(now.toLocalDate())) {
-            evenement.setStatutEvenement(StatutEvenement.A_VENIR);
-        } else if (dateEvent.toLocalDate().isEqual(now.toLocalDate())) {
-            evenement.setStatutEvenement(StatutEvenement.EN_COURS);
-        } else  if (dateEvent.toLocalDate().isBefore(now.toLocalDate())) {
-            evenement.setStatutEvenement(StatutEvenement.TERMINE);
-            throw new RuntimeException("Impossible de créer un evenement passé.");
-        }
+//        if (dateEvent.toLocalDate().isAfter(now.toLocalDate())) {
+//            evenement.setStatutEvenement(StatutEvenement.A_VENIR);
+//        } else if (dateEvent.toLocalDate().isEqual(now.toLocalDate())) {
+//            evenement.setStatutEvenement(StatutEvenement.EN_COURS);
+//        } else  if (dateEvent.toLocalDate().isBefore(now.toLocalDate())) {
+//            evenement.setStatutEvenement(StatutEvenement.TERMINE);
+//            throw new RuntimeException("Impossible de créer un evenement passé.");
+//        }
 
         evenement.setReference(refEvenement);
         evenement.setDateHeureCreation(now);

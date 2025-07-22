@@ -36,15 +36,6 @@
                                                  scrollable="true"
                                                  scrollHeight="500">
 
-                                        <p:column headerText="Date de création" >
-                                            <h:outputText
-                                                    value="#{evenement.dateHeureCreation}">
-                                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm"
-                                                                   type="localDateTime"/>
-                                            </h:outputText>
-                                        </p:column>
-
-
                                         <p:column headerText="Nom" filterBy="#{evenement.nom}">
                                             <h:outputText value="#{evenement.nom}"/>
                                         </p:column>
@@ -53,7 +44,7 @@
                                         </p:column>
                                         <p:column headerText="Date de l'évènement">
                                             <h:outputText
-                                                    value="#{evenement.dateEvenement}">
+                                                    value="#{evenement.dateHeureCreation}">
                                                 <f:convertDateTime pattern="dd/MM/yyyy HH:mm"
                                                                    type="localDateTime"/>
                                             </h:outputText>
@@ -139,7 +130,7 @@
                                 <div class="field col-12 md:col-6">
                                     <p:outputLabel for="@next" value="Date de l'évènement"/>
                                     <p:inputText readonly="true"
-                                                 value="#{creerEvenementMB.evenement.dateEvenement}">
+                                                 value="#{creerEvenementMB.evenement.dateHeureEvenement}">
                                         <f:convertDateTime pattern="dd/MM/yyyy HH:mm"
                                                            type="localDateTime"/>
                                     </p:inputText>

@@ -5,6 +5,7 @@ import java.util.List;
 public enum TypeEvenement {
     CONCERT,
     THEATRE,
+    SHOWCASE,
     CINEMA,
     FESTIVAL,
     EXPOSITION,

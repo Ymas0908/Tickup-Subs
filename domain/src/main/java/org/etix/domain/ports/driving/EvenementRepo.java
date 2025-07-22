@@ -1,8 +1,10 @@
 package org.etix.domain.ports.driving;
 
 import org.etix.domain.models.Evenement;
+import org.etix.domain.models.enumerations.TypeEvenement;
 //import org.etix.domain.models.enumerations.TypeEvenement;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface EvenementRepo {
@@ -22,4 +24,10 @@ public interface EvenementRepo {
     List<Evenement> getLesEvenementsByLibelle(String libelle);
 
     Object getUrlImageEvenement(String refEvenement);
+
+    Integer getNombresEvenements();
+
+    Integer getNombresEvenementsByType(TypeEvenement typeEvenement);
+
+    Integer getTotalEvenementsParPeriode(LocalDateTime startDate, LocalDateTime endDate);
 }

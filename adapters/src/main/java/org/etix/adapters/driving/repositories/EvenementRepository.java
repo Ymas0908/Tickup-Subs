@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
@@ -27,4 +28,10 @@ public interface EvenementRepository extends JpaRepository<EvenementEntity, Inte
 
     @Query("SELECT e FROM EvenementEntity e WHERE e.urlImage = :refEvenement")
     Object getUrlImageEvenement(String refEvenement);
+
+    @Query("SELECT COUNT(*) FROM EvenementEntity")
+    Integer getTotalEvenements();
+
+    @Query("SELECT COUNT(*) FROM EvenementEntity e WHERE e.dateHeureEvenement BETWEEN :startDate AND :endDate")
+    Integer getTotalEvenementsParPeriode(LocalDateTime startDate, LocalDateTime endDate);
 }

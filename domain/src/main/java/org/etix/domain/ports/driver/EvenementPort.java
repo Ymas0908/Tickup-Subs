@@ -4,8 +4,10 @@ import org.etix.domain.models.Evenement;
 import org.springframework.web.multipart.MultipartFile;
 //import org.etix.domain.models.enumerations.TypeEvenement;
 
+import java.beans.JavaBean;
 import java.util.List;
 
+@JavaBean
 public interface EvenementPort {
 
     Evenement saveEvenement(Evenement evenement);
