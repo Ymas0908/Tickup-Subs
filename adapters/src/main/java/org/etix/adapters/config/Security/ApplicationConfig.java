@@ -1,8 +1,8 @@
 package org.etix.adapters.config.Security;
 
 
-import com.itcentrex.domain.ports.driven.LogAccesRepo;
 import lombok.RequiredArgsConstructor;
+import org.etix.domain.ports.driving.LogAccesRepo;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;

@@ -1,11 +1,12 @@
 package org.etix.adapters.config.Security;
 
-import com.itcentrex.adapter.entities.Security.LogAccesEntity;
-import com.itcentrex.domain.models.enumeration.TypeLog;
-import com.itcentrex.domain.ports.driven.LogAccesRepo;
+
 import jakarta.faces.context.FacesContext;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.etix.adapters.entities.Security.LogAccesEntity;
+import org.etix.domain.models.enumerations.TypeLog;
+import org.etix.domain.ports.driving.LogAccesRepo;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;

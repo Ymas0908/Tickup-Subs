@@ -1,8 +1,8 @@
 package org.etix.adapters.config.Security;
 
-import com.itcentrex.adapter.entities.Security.FonctionnaliteEntity;
-import com.itcentrex.adapter.entities.Security.UtilisateurEntity;
 import lombok.Getter;
+import org.etix.adapters.entities.Security.FonctionnaliteEntity;
+import org.etix.adapters.entities.Security.UtilisateurEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

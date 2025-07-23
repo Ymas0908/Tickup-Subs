@@ -17,7 +17,7 @@ public class PasswordRegExGenerator {
      * @param specialChars
      * @return
      */
-    public static String generateRegex(Integer minLength, Integer numUpperCase, Integer numSpecialChars, Integer numDigits,
+    public static String generateRegex(int minLength, int numUpperCase, int numSpecialChars, int numDigits,
                                        String specialChars) {
         StringBuilder regexBuilder = new StringBuilder("^");
         regexBuilder.append("(?=(.*[A-Z]){" + numUpperCase + "})");

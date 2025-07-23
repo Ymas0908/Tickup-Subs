@@ -28,7 +28,7 @@ public class SwaggerConfig {
         return new OpenAPI()
                 .servers(
                         List.of(
-                                new Server().url("http://localhost:9005").description("Serveur local....8")
+                                new Server().url("http://localhost:9000").description("Serveur local....1")
 //                                new Server().url("https://gimpaywallet.it-centrex.com").description("Serveur de pré-production....")
                         )
                 )

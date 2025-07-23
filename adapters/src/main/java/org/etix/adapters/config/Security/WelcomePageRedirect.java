@@ -20,7 +20,7 @@ public class WelcomePageRedirect implements WebMvcConfigurer {
 
 
         registry.addViewController("/")
-                .setViewName("redirect:/content/dashboard.xhtml");
+                .setViewName("redirect:/content/starter.xhtml");
         registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
     }
 

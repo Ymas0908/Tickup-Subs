@@ -25,8 +25,7 @@ public class UploadedFileUtil {
      */
     public static String unifyFileName(String filename) {
         String fileExtension = filename.substring(filename.lastIndexOf(".") + 1);
-        return filename.substring(0, filename.lastIndexOf("."))
-                + randomString() + "." + fileExtension;
+        return filename.substring(0, filename.lastIndexOf(".")) + randomString() + "." + fileExtension;
     }
 
 
@@ -36,7 +35,7 @@ public class UploadedFileUtil {
      * @return
      */
     private static String randomString() {
-        return LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddhhmmSSSn"));
+        return LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddmmSSS"));
     }
 
 
@@ -57,7 +56,6 @@ public class UploadedFileUtil {
         String folder = parts[parts.length - 1];
         return folder;
     }
-
 
     public static boolean isAcceptedExtensions(String fileExtension) {
         return fileExtension.equalsIgnoreCase(XLS) || fileExtension.equalsIgnoreCase(XLSX);

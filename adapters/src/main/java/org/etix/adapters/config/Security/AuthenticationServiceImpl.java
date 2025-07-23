@@ -3,28 +3,38 @@ package org.etix.adapters.config.Security;
 
 
 import lombok.RequiredArgsConstructor;
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.etix.adapters.driving.repositories.StrategieCompteRepository;
 import org.etix.adapters.driving.repositories.UtilisateurRepository;
+import org.etix.adapters.entities.Security.LogAccesEntity;
 import org.etix.adapters.entities.Security.ProfilAccesEntity;
 import org.etix.adapters.entities.Security.StrategieCompteEntity;
 import org.etix.adapters.entities.Security.UtilisateurEntity;
+import org.etix.adapters.utils.Request;
 import org.etix.domain.exceptions.ApplicationAuthenticationException;
 import org.etix.domain.exceptions.BadRequestException;
 import org.etix.domain.exceptions.EntityNotExistsException;
 import org.etix.domain.exceptions.NotificationException;
 import org.etix.domain.models.Security.Principal;
+import org.etix.domain.models.enumerations.TypeLog;
 import org.etix.domain.models.request.MailRequest;
-import org.etix.domain.ports.in.MailNotification;
+import org.etix.domain.ports.driver.GererSecurite;
+import org.etix.domain.ports.driver.MailNotification;
 import org.etix.domain.utils.CommonValidator;
 import org.etix.domain.utils.Constant;
 import org.etix.domain.utils.UtilisateurValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import org.springframework.security.authentication.*;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.security.sasl.AuthenticationException;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
@@ -62,7 +72,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             if (!UtilisateurValidator.isValidLogin(username)) {
                 throw new ApplicationAuthenticationException("Format du nom d'utilisateur invalide.");
             }
-            final Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
+            final org.springframework.security.core.Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
 
             // Set the authentication in the SecurityContextHolder
             if (authentication.isAuthenticated()) {
@@ -82,10 +92,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         } catch (LockedException e) {
             logger.error("Compte verrouillé: " + username, e);
             throw new ApplicationAuthenticationException("Votre compte est verrouillé. Contactez l'administrateur.");
-
-        } catch (AuthenticationException e) {
-            logger.error("Erreur d'authentification pour: " + username, e);
-            throw new ApplicationAuthenticationException("Échec de l'authentification.");
 
         } catch (Exception e) {
             logger.error("Erreur inattendue lors de la connexion: " + username, e);
@@ -186,7 +192,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         MailRequest mailResquest = new MailRequest();
         String url = Request.urlBase() + "/auth/password-token/" + token;
         mailResquest.setRecipients(new String[]{utilisateur.getEmail()});
-        mailResquest.setObject("DCC Proxy - Changement de mot de passe");
+        mailResquest.setObject("eTix - Changement de mot de passe");
 
         Map<String, String> messageParams = new HashMap<String, String>();
         messageParams.put("NOM_OPERATEUR", utilisateur.getPrenom());
@@ -246,7 +252,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
         MailRequest mailResquest = new MailRequest();
         mailResquest.setRecipients(new String[]{utilisateur.getEmail()});
-        mailResquest.setObject("DCC Proxy  - Confirmation de changement de mot de passe");
+        mailResquest.setObject("eTix  - Confirmation de changement de mot de passe");
         Map<String, String> messageParams = new HashMap<String, String>();
         messageParams.put("NOM_OPERATEUR", utilisateur.getPrenom());
         mailResquest.setContent(notifyRecipient.format("confirme-changement-mot-passe.html", messageParams));
@@ -265,7 +271,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     public boolean isAuthenticated() {
         try {
-            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            org.springframework.security.core.Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             if (authentication == null || AnonymousAuthenticationToken.class.isAssignableFrom(authentication.getClass())) {
                 return false;
             }

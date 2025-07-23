@@ -1,6 +1,6 @@
 package org.etix.adapters.config.Security;
 
-import com.itcentrex.adapter.entities.Security.UtilisateurEntity;
+import org.etix.adapters.entities.Security.UtilisateurEntity;
 import org.modelmapper.ModelMapper;
 
 public class UtilisateurMapper {

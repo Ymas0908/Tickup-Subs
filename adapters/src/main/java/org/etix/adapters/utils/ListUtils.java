@@ -12,7 +12,7 @@ public class ListUtils {
      * @param element
      */
     public static <T> void addItem(List<T> elements, T element) {
-        Integer index = elements.indexOf(element);
+        int index = elements.indexOf(element);
         if (index != -1) {
             elements.set(index, element);
         } else {

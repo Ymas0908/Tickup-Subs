@@ -1,5 +1,8 @@
 package org.etix.adapters.utils;
 
+
+import org.etix.adapters.entities.Security.StrategieCompteEntity;
+
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -20,9 +23,9 @@ public class PasswordStringGenerator {
      * @param streategie
      * @return
      */
-//    public static String generatePassword(StrategieCompte streategie) {
-//        return generateStringMatchingRegex(streategie.generateRegex(), streategie.getNbreCaractereMajuscule(), streategie.getNbrCaractereSpeciaux(), streategie.getNbrChiffre(), streategie.getLongueurMinimalePassword());
-//    }
+    public static String generatePassword(StrategieCompteEntity streategie) {
+        return generateStringMatchingRegex(streategie.generateRegex(), streategie.getNbreCaractereMajuscule(), streategie.getNbrCaractereSpeciaux(), streategie.getNbrChiffre(), streategie.getLongueurMinimalePassword());
+    }
 
     /**
      * @param regex
@@ -32,26 +35,26 @@ public class PasswordStringGenerator {
      * @param minLength
      * @return
      */
-    private static String generateStringMatchingRegex(String regex, Integer numUppercase, Integer numSpecialChars, Integer numDigits, Integer minLength) {
+    private static String generateStringMatchingRegex(String regex, int numUppercase, int numSpecialChars, int numDigits, int minLength) {
 
         List<Character> characters = new ArrayList<>();
 
         // Add uppercase letters
-        for (Integer i = 0; i < numUppercase; i++) {
+        for (int i = 0; i < numUppercase; i++) {
             characters.add(getRandomCharacter(UPPERCASE_LETTERS));
         }
         // Add special characters
-        for (Integer i = 0; i < numSpecialChars; i++) {
+        for (int i = 0; i < numSpecialChars; i++) {
             characters.add(getRandomCharacter(SPECIAL_CHARACTERS));
         }
         // Add digits
-        for (Integer i = 0; i < numDigits; i++) {
+        for (int i = 0; i < numDigits; i++) {
             characters.add(getRandomCharacter(NUMBERS));
         }
 
         // Add remaining characters (minimum length: 8)
-        Integer remainingLength = minLength - (numUppercase + numSpecialChars + numDigits);
-        for (Integer i = 0; i < remainingLength; i++) {
+        int remainingLength = minLength - (numUppercase + numSpecialChars + numDigits);
+        for (int i = 0; i < remainingLength; i++) {
             characters.add(getRandomCharacter(UPPERCASE_LETTERS + SPECIAL_CHARACTERS + NUMBERS));
         }
 
@@ -73,7 +76,7 @@ public class PasswordStringGenerator {
      * @return
      */
     private static char getRandomCharacter(String characters) {
-        Integer index = random.nextInt(characters.length());
+        int index = random.nextInt(characters.length());
         return characters.charAt(index);
     }
 }

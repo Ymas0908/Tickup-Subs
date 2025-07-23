@@ -1,12 +1,13 @@
 package org.etix.adapters.config.Security;
 
 
-import com.itcentrex.adapter.entities.Security.FonctionnaliteEntity;
-import com.itcentrex.adapter.entities.Security.ProfilAccesEntity;
-import com.itcentrex.adapter.entities.Security.UtilisateurEntity;
-import com.itcentrex.adapter.ports.driven.repositories.UtilisateurRepository;
-import com.itcentrex.domain.ports.driven.FonctionnaliteRepo;
+
 import lombok.AllArgsConstructor;
+import org.etix.adapters.driving.repositories.UtilisateurRepository;
+import org.etix.adapters.entities.Security.FonctionnaliteEntity;
+import org.etix.adapters.entities.Security.ProfilAccesEntity;
+import org.etix.adapters.entities.Security.UtilisateurEntity;
+import org.etix.domain.ports.driving.FonctionnaliteRepo;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
