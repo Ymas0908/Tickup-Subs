@@ -1,7 +1,7 @@
-package com.itcentrex.adapter.ports.driven.repositories;
+package org.etix.adapters.driving.repositories;
 
 
-import com.itcentrex.adapter.entities.Security.FonctionnaliteEntity;
+import org.etix.adapters.entities.Security.FonctionnaliteEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

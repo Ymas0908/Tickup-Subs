@@ -46,7 +46,7 @@ public class DashboardFacade {
         return dashboard.getNombresEvenementByYear(year);
     }
 
-    public Integer getNombreTransactions(LocalDate dateDebut, LocalDate dateFin) {
+    public Integer getNombresEvenements(LocalDate dateDebut, LocalDate dateFin) {
         return dashboard.getNombreEvenementsSurPeriode(dateDebut, dateFin);
     }
 }

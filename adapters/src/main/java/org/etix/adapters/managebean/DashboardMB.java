@@ -6,7 +6,6 @@ import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.extern.slf4j.Slf4j;
 import org.etix.adapters.driver.facades.DashboardFacade;
 import org.etix.adapters.notification.FlashMessage;
 import org.etix.domain.models.enumerations.TypeEvenement;
@@ -143,12 +142,12 @@ public class DashboardMB {
         // Chargement des données annuelles
         int currentYear = Year.now().getValue();
         data.nbreEventsThisYear = fetchData(
-                () -> dashboardFacade.getNombreTransactions(LocalDate.of(currentYear, 1, 1), LocalDate.of(currentYear, 12, 31)),
+                () -> dashboardFacade.getNombresEvenements(LocalDate.of(currentYear, 1, 1), LocalDate.of(currentYear, 12, 31)),
                 "events.year.error"
         );
 
         data.nbreEventsLastYear = fetchData(
-                () -> dashboardFacade.getNombreTransactions(LocalDate.of(currentYear - 1, 1, 1), LocalDate.of(currentYear - 1, 12, 31)),
+                () -> dashboardFacade.getNombresEvenements(LocalDate.of(currentYear - 1, 1, 1), LocalDate.of(currentYear - 1, 12, 31)),
                 "events.year.error"
         );
     }
@@ -228,8 +227,8 @@ public class DashboardMB {
 
         // Récupération des données
         int currentYear = Year.now().getValue();
-        List<Number> currentYearData = fetchMonthlyData(currentYear);
         List<Number> lastYearData = fetchMonthlyData(currentYear - 1);
+        List<Number> currentYearData = fetchMonthlyData(currentYear);
 
         // Création des datasets
         LineChartDataSet lastYearSet = createLineDataSet(
