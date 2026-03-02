@@ -1,0 +1,29 @@
+services:
+
+  mariadb:
+    image: mariadb:11
+    container_name: tickup-mariadb
+    restart: always
+    environment:
+      MARIADB_ROOT_PASSWORD: root
+      MARIADB_DATABASE: tickupDB
+    ports:
+      - "3307:3306"
+    volumes:
+      - mariadb_data:/var/lib/mysql
+
+  app:
+    build: .
+    container_name: tickup-app
+    restart: always
+    depends_on:
+      - mariadb
+    ports:
+      - "9000:9000"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mariadb://mariadb:3306/tickupDB
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+
+volumes:
+  mariadb_data:

@@ -1,0 +1,197 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui" xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="/WEB-INF/template.xhtml">
+    <ui:define name="title"> Gestion des évènements | Créer un évènement</ui:define>
+
+    <ui:define name="viewname">
+        <li>GESTION DES EVENEMENTS</li>
+        <li><i class="pi pi-chevron-right"></i></li>
+    <li><p:link outcome="/gestions-des-evenements/creer-un-evenement.xhtml">CONSULTATION DES EVENEMENTS</p:link>
+        </li>
+    </ui:define>
+    <ui:define name="content">
+        <div class="card">
+            <h4 class="font-bold my-3">Consultation des événements </h4>
+        </div>
+            <div class="grid">
+                <h:form id="formEvenement">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="flex my-4">
+                                <div class="flex-1 flex flex-column">
+                                    <h5>Liste des évènements (#{creerEvenementMB.evenementsList.size()}) </h5>
+                                </div>
+                            </div>
+                            <div class="grid">
+                                <div class="col-12">
+                                    <p:dataTable widgetVar="dtEvenements"
+                                                 id="dtEvenements"
+                                                 var="evenement"
+                                                 value="#{creerEvenementMB.evenementsList}"
+                                                 reflow="true"
+                                                 emptyMessage="Pas de données"
+                                                 rowKey="#{evenement.id}"
+                                                 scrollable="true"
+                                                 scrollHeight="500">
+
+                                        <p:column headerText="Nom" filterBy="#{evenement.nom}">
+                                            <h:outputText value="#{evenement.nom}"/>
+                                        </p:column>
+                                        <p:column headerText="Statut" filterBy="#{evenement.statutEvenement}">
+                                            <p:tag value="#{evenement.statutEvenement}"/>
+                                        </p:column>
+                                        <p:column headerText="Date de l'évènement">
+                                            <h:outputText
+                                                    value="#{evenement.dateHeureCreation}">
+                                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm"
+                                                                   type="localDateTime"/>
+                                            </h:outputText>
+                                        </p:column>
+                                        <p:column headerText="Type d'évènement" style="width: 200px"
+                                                  filterBy="#{evenement.typeEvenement}">
+                                            <f:facet name="filter">
+                                                <p:selectOneMenu onchange="PF('dtEvenements').filter()"
+                                                                 styleClass="ui-custom-filter"
+                                                                 value="#{creerEvenementMB.typeEvenement}">
+                                                    <f:selectItem itemLabel="--TOUS--" itemValue=""/>
+                                                    <f:selectItems value="#{creerEvenementMB.typeEvenementList}" var="statut"
+                                                                   itemLabel="#{statut}" itemValue="#{statut}"/>
+                                                </p:selectOneMenu>
+                                            </f:facet>
+                                            <h:outputText value="#{evenement.typeEvenement}"/>
+                                        </p:column>
+
+                                        <p:column headerText="Actions" width="7em">
+                                            <p:commandButton icon="pi pi-eye" title="Voir les détails"
+                                                             styleClass="rounded-button mr-2"
+                                                             oncomplete="PF('detailEvenementSideBar').show()"
+                                                             update="detailEvenementForm">
+                                                <f:setPropertyActionListener value="#{evenement}"
+                                                                             target="#{creerEvenementMB.evenement}"/>
+                                            </p:commandButton>
+
+                                            <p:commandButton icon="pi pi-trash" title="Supprimer"
+                                                             styleClass="rounded-button"
+                                                             action="#{creerEvenementMB.supprimerUnEvenement()}"
+                                                             process="formEvenement"
+                                                             update="formEvenement">
+                                                <p:confirm header="Confirmation"
+                                                           message="Voulez vous supprimer cet événement ?"/>
+                                            </p:commandButton>
+                                        </p:column>
+                                    </p:dataTable>
+                                </div>
+                                <div class="col-12">
+                                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade"
+                                                     responsive="true" styleClass="col-12">
+                                        <div class="flex flex-column align-items-start ">
+                                            <div class="flex gap-2 my-2">
+                                                <p:commandButton value="Oui" type="button"
+                                                                 styleClass="ui-confirmdialog-yes "/>
+                                                <p:commandButton value="Non" type="button"
+                                                                 styleClass="ui-confirmdialog-yes "/>
+                                            </div>
+                                        </div>
+                                    </p:confirmDialog>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </h:form>
+
+            </div>
+        <p:sidebar widgetVar="detailEvenementSideBar" styleClass="w-full lg:w-6 h-full overflow-y-auto" position="right">
+                <div class="grid">
+                    <h:form id="detailEvenementForm">
+                        <div class="col-12">
+                            <h4 class="font-bold">Détails de l'événement</h4>
+                            <p:divider styleClass="mb-3"/>
+                            <span><i class="pi pi-info-circle my-3"></i> Veuillez vérifier les détails suivants :</span>
+                            <div class="ui-fluid formgrid grid ">
+                                <div class="field col-12 md:col-6">
+                                    <p:outputLabel for="@next" value="Nom de l'évènement"/>
+                                    <p:inputText
+                                            value="#{creerEvenementMB.evenement.nom}"/>
+                                </div>
+                                <div class="field col-12 md:col-6">
+                                    <p:outputLabel for="@next" value="libellé"/>
+                                    <p:inputText
+                                            value="#{creerEvenementMB.evenement.libelle}"/>
+                                </div>
+                                <div class="field col-12 md:col-6">
+                                    <p:outputLabel value="Lieu"/>
+                                    <p:inputText
+                                            value="#{creerEvenementMB.evenement.lieu}"/>
+                                </div>
+                                <div class="field col-12 md:col-6">
+                                    <p:outputLabel for="@next" value="Date de l'évènement"/>
+                                    <p:inputText readonly="true"
+                                                 value="#{creerEvenementMB.evenement.dateHeureEvenement}">
+                                        <f:convertDateTime pattern="dd/MM/yyyy HH:mm"
+                                                           type="localDateTime"/>
+                                    </p:inputText>
+
+                                </div>
+                                <div class="field col-12 md:col-6">
+                                    <p:outputLabel value="Type de l'évènement"/>
+                                    <p:inputText readonly="true"
+                                                 value="#{creerEvenementMB.evenement.typeEvenement}"/>
+                                </div>
+                                <div class="field col-12 md:col-6">
+                                    <p:outputLabel for="@next" value="Prix ticket GP"/>
+                                    <p:inputText readonly="false"
+                                                 value="#{creerEvenementMB.evenement.prixTicketGP}">
+
+                                    </p:inputText>
+
+                                </div>
+                                <div class="field col-12 md:col-6">
+                                    <p:outputLabel for="@next" value="Prix ticket VIP"/>
+                                    <p:inputText readonly="false"
+                                                 value="#{creerEvenementMB.evenement.prixTicketVIP}">
+                                    </p:inputText>
+
+                                </div>
+                                <div class="field col-12 md:col-6">
+                                    <p:outputLabel for="@next" value="Prix ticket VVIP"/>
+                                    <p:inputText readonly="false"
+                                                 value="#{creerEvenementMB.evenement.prixTicketVVIP}">
+
+                                    </p:inputText>
+
+                                </div>
+                                <div class="field col-12 md:col-12">
+                                    <p:outputLabel for="@next" value="Description"/>
+                                    <p:inputTextarea readonly="false"
+                                                     value="#{creerEvenementMB.evenement.description}"
+                                                     rows="10"
+                                                     cols="50"
+                                                     autoResize="false"
+                                                     style="width: 100%; height: 150px;"/>
+                                </div>
+                            </div>
+                            <div class="flex my-3">
+                                <p:commandButton value="Modifier"
+                                                 action="#{creerEvenementMB.modifierUnEvenement()}"
+                                                 process="detailEvenementForm"
+                                                 oncomplete="PF('detailEvenementSideBar').hide()"
+                                                 update="formEvenement"
+                                                 icon="pi pi-check" styleClass="w-auto mr-2"/>
+
+                                <p:commandButton value="Annuler"
+                                                 process="@this"
+                                                 oncomplete="PF('detailEvenementSideBar').hide()"
+                                                 update="formEvenement"
+                                                 icon="pi pi-times" styleClass="w-auto"/>
+                            </div>                    </div>
+                    </h:form>
+                </div>
+        </p:sidebar>
+
+    </ui:define>
+
+</ui:composition>

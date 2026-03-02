@@ -1,0 +1,54 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:p="http://primefaces.org/ui"
+>
+
+    <div class="layout-topbar">
+        <div class="layout-topbar-wrapper">
+            <div class="layout-topbar-left">
+                <h:link id="logolink" outcome="/content/starter" styleClass="layout-topbar-logo">
+                      <span class="text-color-secondary text-xl font-bold">
+                        e-Tix
+                    </span>
+                </h:link>
+            </div>
+            <div class="layout-topbar-right">
+                <a href="#" class="menu-button">
+                    <i class="pi pi-bars"/>
+                </a>
+                <ul class="layout-topbar-actions">
+
+                    <li class="topbar-item user-profile">
+                        <a href="#">
+                            <p:graphicImage name="images/avatar-profile.png" library="poseidon-layout"/>
+                            <div class="profile-info">
+<!--                                <h6>#{utilisateurMB.getUtilisateurConnected().fullName()}</h6>-->
+<!--                                <span>#{utilisateurMB.getUtilisateurConnected().fonction.libelle}</span>-->
+                                <h6>Admin</h6>
+                                <span>Adminstrateur</span>
+                            </div>
+                        </a>
+                        <ul>
+                            <li>
+                                <a href="/content/starter.xhtml">
+                                    <i class="pi pi-home"/>
+                                    <h6>Tableau de bord</h6>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/logout">
+                                    <i class="pi pi-power-off"/>
+                                    <h6>Se déconnecter</h6>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+</ui:composition>

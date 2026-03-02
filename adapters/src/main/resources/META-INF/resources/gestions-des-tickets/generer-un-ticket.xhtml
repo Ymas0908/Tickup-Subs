@@ -1,0 +1,62 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="title">Génération des Tickets</ui:define>
+
+    <ui:define name="content">
+        <h:form id="ticketsForm">
+            <div class="card col-12 mt-12 md:col-">
+                <h4 class="font-bold my-3">Création de tickets </h4>
+
+                <div class="ui-fluid formgrid grid">
+                    <!-- Sélection de l'événement -->
+                    <div class="field col-6">
+                        <p:outputLabel for="concert">Sélectionner un événement</p:outputLabel>
+                        <p:selectOneMenu id="concert"
+                                         converter="#{entityConverter}"
+                                         value="#{ticketMB.ticket.evenement}" required="true"
+                                         requiredMessage="Veuillez sélectionner un événement">
+                            <f:selectItem itemLabel="Sélectionnez un événement" itemValue="#{null}" />
+                            <f:selectItems value="#{creerEvenementMB.evenementsList}" var="concert" itemLabel="#{concert.nom}"
+                                           itemValue="#{concert}" />
+                        </p:selectOneMenu>
+                    </div>
+
+                    <!-- Sélection du type de ticket -->
+                    <div class="field col-6">
+                        <p:outputLabel for="typeTicket">Sélectionner un type de ticket</p:outputLabel>
+                        <p:selectOneMenu id="typeTicket"
+                                         value="#{ticketMB.ticket.typeTicket}" required="true"
+                                         requiredMessage="Veuillez sélectionner un type de ticket">
+                            <f:selectItem itemLabel="Sélectionnez un type de ticket" itemValue="#{null}" />
+                            <f:selectItems value="#{ticketMB.typeTicketList}" var="ticket" itemLabel="#{ticket}"
+                                           itemValue="#{ticket}" />
+                        </p:selectOneMenu>
+                    </div>
+
+                    <!-- Choix du nombre de tickets -->
+                    <div class="field col-6">
+                        <p:outputLabel for="quantite">Nombre de tickets</p:outputLabel>
+                        <p:spinner id="quantite" value="#{ticketMB.ticket.quantite}" min="1" required="true"
+                                   requiredMessage="Veuillez spécifier le nombre de tickets"/>
+                    </div>
+                </div>
+
+                <!-- Bouton pour générer les tickets -->
+                <div class="flex my-3">
+                    <p:commandButton value="Créer Ticket"
+                                     action="#{ticketMB.creerUnTicket()}"
+                                     update="ticketsForm"
+                                     process="ticketsForm"
+                                     icon="pi pi-plus" styleClass="w-auto"/>
+                </div>
+            </div>
+
+
+        </h:form>
+    </ui:define>
+</ui:composition>
