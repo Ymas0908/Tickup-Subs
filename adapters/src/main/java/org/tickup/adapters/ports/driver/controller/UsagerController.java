@@ -1,5 +1,6 @@
 package org.tickup.adapters.ports.driver.controller;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
@@ -18,6 +19,8 @@ import org.tickup.domain.requests.UsagersRequest;
 @RestController
 @Slf4j
 @RequestMapping("/api/v1/usagers")
+@Tag(name = "Gestion des usagers de l'application")
+
 @AllArgsConstructor
 public class UsagerController {
 
