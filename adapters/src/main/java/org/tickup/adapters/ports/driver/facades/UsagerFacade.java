@@ -47,7 +47,15 @@ public class UsagerFacade {
             messageParams.put("{{PASSWORD}}", password);
             mailRequest.setRecipients(new String[]{usagerRequest.getEmail()});
             mailRequest.setObject("Bienvenue sur votre espace marchand.");
+//            String content = "Bonjour,\n\n" +
+//                    "Votre compte marchand a été créé avec succès. Voici vos informations de connexion :\n\n" +
+//                    "Login : " + merchantRequest.getEmail() + "\n" +
+//                    "Mot de passe : {{PASSWORD}}\n\n" + password +
+//                    "Veuillez vous connecter à votre espace marchand pour gérer vos transactions et votre profil.\n\n" +
+//                    "Cordialement,\n" +
+//                    "L'équipe de support";
 //            String content = notifyFacade.formatMail("enrolement-marchand.html", messageParams);
+//            mailRequest.setContent(content);
 //            if (content == null || content.isBlank()) {
 //                throw new RuntimeException("Le contenu du mail est vide ou le template est introuvable");
 //            }
@@ -55,7 +63,8 @@ public class UsagerFacade {
 //            mailRequest.setContent(content);
 //            notifyFacade.envoyerMail(mailRequest);
         } catch (Exception e) {
-//           log.error(e.getMessage(),e);
+            e.printStackTrace();
+            log.error(e.getMessage(),e);
             throw new RuntimeException("Une erreur est survenue");
         }
     }
