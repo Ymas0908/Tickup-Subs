@@ -1,0 +1,109 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:po="http://primefaces.org/poseidon">
+
+    <div class="menu-wrapper">
+        <div class="layout-menu-container">
+            <h:form id="menuform">
+                <po:menu widgetVar="PoseidonMenuWidget">
+                    <p:submenu id="m_homepage" label="Favorites" icon="pi pi-home">
+                        <!--                        <p:menuitem id="m_dashboard" value="Dashboard" icon="pi pi-home" outcome="/content/starter"/>-->
+
+                        <p:menuitem id="m_dashboard1" value="Dashboard" icon="pi pi-home"
+                                    outcome="/content/Dashboard1"/>
+
+                        <p:submenu id="planContributeur" label="Gestion des contributeurs" icon="pi pi-th-large">
+
+                            <p:menuitem id="contributeurResgiter" value="Enregistrement de demandes d'inscriptions"
+                                        icon="pi pi-pencil"
+                                        outcome="/inscription-contributeur/demande-inscription-contributeur.xhtml"/>
+                            <p:menuitem id="contributeurValidation" value="Validation d'inscriptions"
+                                        icon="pi pi-pencil"
+                                        outcome="/inscription-contributeur/valider-rejeter-demande-inscription"/>
+                            <p:menuitem id="contributeurConsultation" value="Consultation des contributeurs"
+                                        icon="pi pi-pencil"
+                                        outcome="/inscription-contributeur/consulter-contributeur"/>
+                            <p:menuitem id="contributeurActivation" value="Activation de contributeurs"
+                                        icon="pi pi-pencil"
+                                        outcome="/inscription-contributeur/activer-desactiver-contributeur"/>
+                            <!-- <p:menuitem id="desinscrire" value="Désinscription de contributeurs"
+                                         icon="pi pi-pencil"
+                                         outcome="/desinscription-contributeur/desinscrire-contributeur"/>-->
+                            <p:menuitem id="idAjoutRetraitPaysOperation" value="Rattacher pays d'opération"
+                                        icon="pi pi-pencil"
+                                        outcome="/ajout-retrait-pays-operation/ajout-retrait-pays-operations"/>
+                            <p:menuitem id="validRejetInscription" value="Validation désinscription contributeur"
+                                        icon="pi pi-pencil"
+                                        outcome="/desinscription-contributeur/valider-rejeter-desinscription-contributeur"/>
+
+                        </p:submenu>
+
+                        <p:submenu id="mmp" label="Gestion des mini-places de marché" icon="pi pi-th-large">
+                            <p:menuitem id="editMmp" value="Edition des mini-places de marché"
+                                        icon="pi pi-pencil"
+                                        outcome="/gestion-mmp-services/mini-market-place"/>
+
+                            <p:menuitem id="ajoutMmp" value="Rattacher des mini-places de marché à un contributeur"
+                                        icon="pi pi-pencil"
+                                        outcome="/gestion-mmp-services/ajoutRetraitMini-market-place"/>
+
+                            <p:menuitem id="rattachMmpPays" value="Rattacher des mini-places de marché à un pays"
+                                        icon="pi pi-pencil"
+                                        outcome="/gestion-mmp-services/rattacher-mmp-pays"/>
+                        </p:submenu>
+
+                        <p:submenu id="planRepartition" label="Gestion des plans de repartitions"
+                                   icon="pi pi-th-large">
+
+                            <p:menuitem id="plan" value="Plan de repartitions"
+                                        icon="pi pi-pencil"
+                                        outcome="/gestion-plan-commission-frais-service/plan-commission.xhtml"/>
+                            <p:menuitem id="historisation" value="Historisation des plans de repartitions"
+                                        icon="pi pi-pencil"
+                                        outcome="/gestion-plan-commission-frais-service/historique-plan-commission.xhtml"/>
+                        </p:submenu>
+
+                        <p:submenu id="services" label="Gestion des services" icon="pi pi-th-large">
+                            <p:menuitem id="idGestionService" value="Edition des services" icon="pi pi-pencil"
+                                        outcome="/gestion-services-contributeur/contributeur-paysop-mpm.xhtml"/>
+                            <p:menuitem id="idGestionServiceType" value="Gestion de service type" icon="pi pi-pencil"
+                                        outcome="/GestionServiceType/gestionServiceType"/>
+                            <p:menuitem id="idGestionPlanTarifaireService" value="Gestion de plan tarifaire service"
+                                        icon="pi pi-pencil"
+                                        outcome="/GestionPlanTarifaireService/gestionPlanTarifaireService"/>
+                            <p:menuitem id="gServices" value="Gestion des accès aux services"
+                                        icon="pi pi-pencil"
+                                        outcome="/Acces-service/Autoriser-acces-services"/>
+                            <p:menuitem id="gHplanTarifaire" value="Historique des plans tarifaires"
+                                        icon="pi pi-pencil"
+                                        outcome="/GestionPlanTarifaireService/historisationPanTarifaire.xhtml"/>
+                        </p:submenu>
+
+
+                    </p:submenu>
+                    <p:submenu id="parametre" label="Parametrage basique" icon="pi pi-folder-open">
+                        <p:menuitem id="pays" value="Pays"
+                                    icon="pi pi-cog"
+                                    outcome="/parametre-basique/pays"/>
+                        <p:menuitem id="prefixe" value="Préfixe téléphonique"
+                                    icon="pi pi-cog"
+                                    outcome="/parametre-basique/prefixe-telephonique"/>
+                        <p:menuitem id="docType" value="Type de documents"
+                                    icon="pi pi-cog"
+                                    outcome="/parametre-basique/type-document"/>
+                        <p:menuitem id="raison" value="Raison-type désabonnement"
+                                    icon="pi pi-cog"
+                                    outcome="/parametre-basique/raison-type-desabonnement"/>
+                    </p:submenu>
+
+                    <p:separator/>
+
+                </po:menu>
+            </h:form>
+        </div>
+    </div>
+
+</ui:composition>

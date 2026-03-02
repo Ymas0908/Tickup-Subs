@@ -1,0 +1,30 @@
+package com.itcentrex.domain.ports.driving;
+
+import com.itcentrex.domain.models.DetailCommission;
+import com.itcentrex.domain.models.HistoriqueSolde;
+import com.itcentrex.domain.models.Transaction;
+import com.itcentrex.domain.models.enumeration.StatutDeRapprochement;
+import com.itcentrex.domain.models.enumeration.StatutValidation;
+
+import java.util.List;
+
+public interface DetailCommissionRepo {
+
+    DetailCommission saveDetailCommission(DetailCommission detailCommission);
+
+    DetailCommission getDetailCommissionById(Integer idDetailCommission);
+
+    List<DetailCommission> getAllDetailCommissions();
+
+    List<DetailCommission> getLesDetailsDeCommissionsByTransaction(Transaction transaction);
+
+    List<DetailCommission> getLesDetailsDeCommissionsNonRattaches();
+
+
+    List<DetailCommission> getLesDetailsDeCommissionParHistoSolde(HistoriqueSolde historiqueSolde);
+
+
+    List<DetailCommission> getLesDetailsDeCommission(Transaction transaction, StatutDeRapprochement statutDeRapprochement, StatutValidation statutValidation);
+}
+
+

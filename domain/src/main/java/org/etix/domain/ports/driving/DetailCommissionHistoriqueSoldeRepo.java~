@@ -1,0 +1,14 @@
+package com.itcentrex.domain.ports.driving;
+
+import com.itcentrex.domain.models.DetailCommission;
+import com.itcentrex.domain.models.DetailCommissionHistoriqueSolde;
+import com.itcentrex.domain.models.HistoriqueSolde;
+
+public interface DetailCommissionHistoriqueSoldeRepo {
+    void save(DetailCommissionHistoriqueSolde detailCommissionHistoriqueSolde);
+
+    DetailCommissionHistoriqueSolde getById(Integer idDetailCommissionHistoriqueSolde);
+
+    DetailCommissionHistoriqueSolde getBydetailCommissionAndHistoriqueSolde(DetailCommission detailCommission, HistoriqueSolde historiqueSolde);
+
+}

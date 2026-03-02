@@ -1,0 +1,193 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="title">Empty Page</ui:define>
+
+    <ui:define name="viewname">
+        <li>PAGES</li>
+        <li><i class="pi pi-chevron-right"></i></li>
+        <li>
+            <p:link outcome="/content/Dashboard1">Dashboard</p:link>
+        </li>
+    </ui:define>
+
+    <ui:define name="head">
+        <h:outputScript name="js/chart.js" library="demo"/>
+        <script type="text/javascript">
+            //<![CDATA[
+            $(function () {
+                var trafficDataSets = [57, 26, 17]; // Initié, Brouillon, Rejeté
+                var trafficColors = ['#2C84D8FF', '#FFC107', '#E74C3C']; // Couleurs
+                var hoverColors = ['#1B4F91', '#D69B04', '#A8322C']; // Couleurs au survol
+
+                var trafficChart = new Chart(document.getElementById("traffic-chart").getContext('2d'), {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Initié', 'Brouillon', 'Rejeté'],
+                        datasets: [{
+                            data: trafficDataSets, // Valeurs pour Initié, Brouillon, Rejeté
+                            backgroundColor: trafficColors,// Couleurs associées
+                            hoverBackgroundColor: hoverColors,
+                            borderWidth: 0,
+                        }]
+                    },
+                    options: {
+                        legend: { display: true },
+                        responsive: true,
+                        cutoutPercentage: 70,
+                        plugins: {
+                            tooltip: {
+                                callbacks: {
+                                    label: function (tooltipItem) {
+                                        const label = tooltipItem.label || '';
+                                        const value = tooltipItem.raw || 0;
+                                        return `${label}: ${value}%`;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            });
+            //]]>
+        </script>
+
+        <style type="text/css">
+            .main-content {
+                padding: 0;
+            }
+        </style>
+    </ui:define>
+
+    <ui:define name="content">
+        <h:form>
+            <div class="layout-dashboard">
+                <div class="grid">
+                    <div class="col-12 md:col-12 xl:col-9">
+                        <div class="grid">
+
+                            <div class="col-12 md:col-12 xl:col-4">
+                                <a href="/inscription-contributeur/consulter-contributeur.xhtml" style="text-decoration: none;">
+                                    <div class="card overview-box-1 blue">
+                                        <div class="card-header">
+                                            <h5>Contributeurs</h5>
+                                        </div>
+                                        <div class="overview-content">
+                                            <h4>Nombre Total (#{consulterLesContributeursMB.listeContributeurs.size()})</h4>
+                                            <div>
+                                                <i class="pi pi-users" style="font-size: 3em"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+
+                            <div class="col-12 md:col-12 xl:col-4">
+                                <a href="/gestion-mmp-services/mini-market-place.xhtml" style="text-decoration: none;">
+                                    <div class="card overview-box-1 blue">
+                                        <div class="card-header">
+                                            <h5>Mini market place</h5>
+                                        </div>
+                                        <div class="overview-content">
+                                            <div class="overview-graph">
+                                                <h4>Nombre Total (#{creationDeMmpMB.mmpList.size()})</h4>
+                                            </div>
+                                            <div>
+                                                <i class="pi pi-shopping-cart" style="font-size: 3em"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+
+                            <div class="col-12 md:col-12 xl:col-4">
+                                <a href="/Acces-service/Autoriser-acces-service.xhtml" style="text-decoration: none;">
+                                    <div class="card overview-box-1 blue">
+                                        <div class="card-header">
+                                            <h5>contributeurs promoteurs</h5>
+                                        </div>
+                                        <div class="overview-content">
+                                            <h4>Nombre Total (#{autorisationAccesAunServiceMB.contributeursPromoteurs.size()})</h4>
+                                            <div>
+                                                <i class="pi pi-users" style="font-size: 3em"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+
+
+                            <div class="col-12">
+                                <div class="card sale-graph">
+                                    <div class="card-header">
+                                        <h4 class="ui-subtitle">Liste des pays (#{paysMB.paysList.size()})</h4>
+                                    </div>
+                                    <p:dataTable id="paysData" reflow="true" lazy="false"
+                                                 styleClass="products-table" var="pays" value="#{paysMB.paysList}"
+                                                 emptyMessage="Aucun pays disponible" rowKey="#{pays.ID}">
+
+                                        <p:column headerText="Code iso" filterBy="#{pays.codeIso}" filterMatchMode="contains">
+                                            <h:outputText value="#{pays.codeIso}"/>
+                                        </p:column>
+                                        <p:column headerText="Indicatif" filterBy="#{pays.indicatifInternational}"
+                                                  filterMatchMode="contains">
+                                            <h:outputText value="#{pays.indicatifInternational}"/>
+                                        </p:column>
+                                        <p:column headerText="Libelle" filterBy="#{pays.nom}" filterMatchMode="contains">
+                                            <h:outputText value="#{pays.nom}"/>
+                                        </p:column>
+                                    </p:dataTable>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <div class="col-12 md:col-12 xl:col-3">
+                        <div class="grid">
+                            <div class="col-12 md:col-6 xl:col-12">
+                                <div class="card traffic">
+                                    <div class="card-header">
+                                        <h6>Suivi des contributeurs</h6>
+                                    </div>
+                                    <div class="traffic-chart">
+                                        <canvas id="traffic-chart" width="200px" height="200px"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 md:col-6 xl:col-12">
+                                <div class="card traffic">
+                                    <div class="grid">
+                                        <div class="col-12 md:col-12 xl:col-12" style="height: 257px;">
+                                            <a href="/GestionServiceType/gestionServiceType.xhtml" style="text-decoration: none;">
+                                                <div class="card overview-box-1 blue">
+                                                    <div class="card-header">
+                                                        <h5>Services types</h5>
+                                                    </div>
+                                                    <div class="overview-content">
+                                                        <h4>Nombre Total (#{gestionUnServiceTypeMB.serviceTypes.size()})</h4>
+                                                        <div>
+                                                            <i class="pi pi-cog" style="font-size: 3em"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

@@ -1,0 +1,105 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+
+                template="/WEB-INF/template.xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="title">Parametrage basique | Préfixe téléphonique</ui:define>
+    <ui:define name="viewname">
+        <li>PARAMETRAGES</li>
+        <li><i class="pi pi-chevron-right"></i></li>
+        <li><p:link
+                outcome="/parametre-basique/prefixe-telephonique">Préfixes téléphoniques</p:link>
+        </li>
+    </ui:define>
+    <ui:define name="content">
+        <div class="grid ">
+            <div class="col-12 xl:col-6">
+                <div class="card">
+                    <h:form id="dform">
+                        <h4 class="ui-subtitle">Liste des préfixes téléphoniques (#{prefixeTelephoniqueMB.prefixeTelephoniqueList.size()})</h4>
+                        <div class="ui-form-icon mb-2">
+                            <i class="pi pi-info-circle"></i>
+                            <span>Veuillez selectionner un préfixe téléphonique pour voir ses détails </span>
+                        </div>
+
+                        <p:dataTable scrollable="true" scrollHeight="150" reflow="true"
+                                     styleClass="products-table" lazy="false" var="prefixe"
+                                     value="#{prefixeTelephoniqueMB.prefixeTelephoniqueList}"
+                                     emptyMessage="Aucun préfixe téléphonique disponible" rowKey="#{prefixe.ID}"
+                                     selection="#{prefixeTelephoniqueMB.prefixeTelephonique}" selectionMode="single">
+
+                            <p:ajax event="rowSelect" update="eform" process="@this"/>
+
+                            <p:column headerText="Nom du pays" filterBy="#{prefixe.pays.nom}"
+                                      filterMatchMode="contains">
+                                <h:outputText value="#{prefixe.pays.nom}"/>
+                            </p:column>
+                            <p:column headerText="Préfixe" filterBy="#{prefixe.prefixe}" filterMatchMode="contains">
+                                <h:outputText value="#{prefixe.prefixe}"/>
+                            </p:column>
+                        </p:dataTable>
+
+                    </h:form>
+                </div>
+            </div>
+            <div class="col-12 xl:col-6">
+                <div class="card">
+                    <h:form id="eform">
+                        <h4 class="ui-subtitle">Edition d'un préfixe téléphonique</h4>
+                        <div class="ui-form-icon mb-2">
+                            <i class="pi pi-info-circle"></i> <span>Veuillez renseigner les champs suivants </span>
+                        </div>
+                        <div class="ui-fluid formgrid grid">
+                            <div class="field col-12 md:col-12">
+                                <p:outputLabel for="@next" value="Pays"/>
+                                <p:selectOneMenu rendered="true" required="true"
+                                                 requiredMessage="le pays est obligatoire"
+                                                 converter="#{entityConverter}"
+                                                 placeholder="Pays du préfixe"
+                                                 filterPlaceholder="Rechercher..."
+                                                 value="#{prefixeTelephoniqueMB.prefixeTelephonique.pays}"
+                                                 filter="true" id="paysPrefixe">
+                                    <f:selectItem itemLabel="- Sélectionner -" itemValue="#{null}"/>
+                                    <f:selectItems
+                                            value="#{prefixeTelephoniqueMB.paysList}"
+                                            var="pays" itemValue="#{pays}"
+                                            itemLabel="#{pays.nom}"/>
+                                </p:selectOneMenu>
+                            </div>
+                            <div class="field col-12 md:col-12">
+                                <p:outputLabel for="@next" value="Préfixe téléphonique"/>
+                                <p:inputText id="indicInterId" required="true" requiredMessage="Veuillez saisir le préfixe"
+                                             placeholder="Saisir le préfixe "
+                                             value="#{prefixeTelephoniqueMB.prefixeTelephonique.prefixe}"/>
+                            </div>
+
+
+                            <div class="my-5">
+                                <p:commandButton value="Enregistrer" update="eform,dform"
+                                                 process="eform"
+                                                 action="#{prefixeTelephoniqueMB.creerPrefixeTelephonique()}"
+                                                 icon="pi pi-save" styleClass="w-auto"/>
+                                <p:commandButton value="Réinitialiser" update="eform,dform"
+                                                 process="@this" icon="pi pi-undo"
+                                                 action="#{prefixeTelephoniqueMB.initPrefixeTelephonique()}"
+                                                 styleClass="ml-2 w-auto"/>
+                                <p:commandButton value="Supprimer" process="@this"
+                                                 update="eform,dform"
+                                                 action="#{prefixeTelephoniqueMB.supprimerPrefixeTelephonique()}"
+                                                 disabled="#{prefixeTelephoniqueMB.prefixeTelephonique.ID==null}"
+                                                 icon="pi pi-trash" styleClass="ml-2 w-auto">
+                                    <p:confirm header="Attention!"
+                                               message="Voulez-vous vraiment supprimer ce préfixe téléphonique?"
+                                               icon="pi pi-info-circle"/>
+                                </p:commandButton>
+                            </div>
+                        </div>
+                    </h:form>
+                </div>
+            </div>
+        </div>
+    </ui:define>
+</ui:composition>

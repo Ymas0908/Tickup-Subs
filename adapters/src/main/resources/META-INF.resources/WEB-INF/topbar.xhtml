@@ -1,0 +1,50 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:p="http://primefaces.org/ui"
+>
+
+    <div class="layout-topbar">
+        <div class="layout-topbar-wrapper">
+            <div class="layout-topbar-left">
+                <h:link id="logolink" outcome="/content/starter" styleClass="layout-topbar-logo">
+                      <span class="text-color-secondary text-xl font-bold">
+                        GIMregistrar
+                    </span>
+                </h:link>
+            </div>
+            <div class="layout-topbar-right">
+                <a href="#" class="menu-button">
+                    <i class="pi pi-bars"></i>
+                </a>
+                <ul class="layout-topbar-actions">
+
+                    <li class="topbar-item user-profile">
+                        <a href="#">
+                            <p:graphicImage name="images/avatar-profile.png" library="poseidon-layout"/>
+                            <div class="profile-info">
+                                <h6>Anicet Sagne</h6>
+                                <span>Développeur</span>
+                            </div>
+                        </a>
+                        <ul>
+                            <li>
+                                <i class="pi pi-home"></i>
+                                <h6>Tableau de bord</h6>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="pi pi-power-off"></i>
+                                    <h6>Se déconnecter</h6>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+</ui:composition>

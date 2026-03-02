@@ -1,0 +1,16 @@
+package com.itcentrex.domain.ports.driving;
+
+import com.itcentrex.domain.models.InfoConnexion;
+
+import java.util.List;
+
+public interface InfoConnexionRepo {
+
+    InfoConnexion saveInfoConnexion(InfoConnexion infoConnexion);
+
+    InfoConnexion getInfoConnexionById(Integer idInfoConnexion);
+
+    List<InfoConnexion> getAllInfoConnexion();
+
+    void deleteInfoConnexion(Integer idInfoConnexion);
+}

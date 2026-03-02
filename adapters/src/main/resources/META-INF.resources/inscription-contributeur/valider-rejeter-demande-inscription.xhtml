@@ -1,0 +1,369 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui" xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="title">Valider/Rejeter une inscription</ui:define>
+    <ui:define name="viewname">
+        <li>CONTRIBUTEUR</li>
+        <li><i class="pi pi-chevron-right"></i></li>
+        <li><p:link
+                outcome="/inscription-contributeur/valider-rejeter-demande-inscription">VALIDATION D'UNE INSCRIPITION</p:link>
+        </li>
+    </ui:define>
+
+    <ui:define name="content">
+        <div class="grid mt-1">
+            <div class="col-12 xl:col-5">
+                <h:form id="formListeContributeurs">
+                    <div class="card">
+                        <h3 class="font-bold mb-2"> Validation d'une demande d'inscription
+                        </h3>
+                        <h5>Liste des contributeurs (#{validationRejetDeDemandeDeInscriptionAuRegistreMB.listeContributeurs.size()})</h5>
+                        <div class="col-12">
+                            <p:dataTable id="contribs" widgetVar="dtContribs"
+                                         lazy="false" reflow="true"
+                                         selectionMode="single"
+                                         paginator="true" rows="100" paginatorPosition="bottom"
+                                         scrollable="true"
+                                         scrollHeight="550px"
+                                         var="contributeur"
+                                         value="#{validationRejetDeDemandeDeInscriptionAuRegistreMB.listeContributeurs}"
+                                         emptyMessage="Aucun contributeur disponible"
+                                         selection="#{validationRejetDeDemandeDeInscriptionAuRegistreMB.contributeur}"
+                                         rowKey="#{contributeur.ID}">
+                                <p:ajax event="rowSelect"
+                                        listener="#{validationRejetDeDemandeDeInscriptionAuRegistreMB.collecterPaysRattacheEtNonRattacher()}"
+                                        update="detailContributeurTB,formValidation
+
+
+
+"/>
+                                <p:column headerText="Raison social " filterBy="#{contributeur.raisonSociale}">
+                                    <h:outputText value="#{contributeur.raisonSociale}"/>
+                                </p:column>
+                                <p:column headerText="Type de contributeur"
+                                          filterBy="#{contributeur.typeContributeur.toString()}">
+                                    <f:facet name="filter">
+                                        <p:selectOneMenu onchange="PF('dtContribs').filter()"
+                                                         styleClass="ui-custom-filter"
+                                                         value="#{validationRejetDeDemandeDeInscriptionAuRegistreMB.typeContributeur}">
+                                            <f:selectItem itemLabel="TOUS" itemValue="#{null}"
+                                            />
+                                            <f:selectItems
+                                                    value="#{validationRejetDeDemandeDeInscriptionAuRegistreMB.listeTypeContributeurs}"/>
+                                        </p:selectOneMenu>
+                                    </f:facet>
+
+                                    <h:outputText value="#{contributeur.typeContributeur.name()}"/>
+                                </p:column>
+                                <p:column headerText="Statut"
+                                          filterBy="#{contributeur.statutContributeur.toString()}">
+                                    <f:facet name="filter">
+                                        <p:selectOneMenu onchange="PF('dtContribs').filter()"
+                                                         styleClass="ui-custom-filter"
+                                                         value="#{validationRejetDeDemandeDeInscriptionAuRegistreMB.statutContributeur}">
+                                            <f:selectItem itemLabel="TOUS" itemValue="#{null}"
+                                            />
+                                            <f:selectItems
+                                                    value="#{validationRejetDeDemandeDeInscriptionAuRegistreMB.listeStatutContributeurs}"/>
+                                        </p:selectOneMenu>
+                                    </f:facet>
+
+                                    <h:outputText value="#{contributeur.statutContributeur.name()}"/>
+                                </p:column>
+
+                            </p:dataTable>
+                        </div>
+
+                    </div>
+                </h:form>
+            </div>
+            <div class="col-12 xl:col-7">
+                <div>
+                    <div class="card">
+                        <div>
+                            <p:tabView id="detailContributeurTB">
+                                <p:tab title="Détails"
+                                       disabled="#{validationRejetDeDemandeDeInscriptionAuRegistreMB.contributeur.ID == null}">
+                                    <p:scrollPanel mode="native"
+                                                   style="height: 400px; overflow-y: auto; border: none;">
+                                        <h:form id="formDetailContributeur">
+                                            <div class="flex-1 flex flex-column">
+                                                <h5>Détails d'un contributeur</h5>
+                                            </div>
+                                            <div class="ui-fluid formgrid grid">
+                                                <div class="field col-12 md:col-6">
+                                                    <p:outputLabel for="@next" value="pays"/>
+                                                    <p:inputText id="paysId"
+                                                                 value="#{validationRejetDeDemandeDeInscriptionAuRegistreMB.contributeur.pays.nom}"
+                                                                 readonly="true"/>
+                                                </div>
+                                                <div class="field col-12 md:col-6">
+                                                    <p:outputLabel for="@next" value="Profil contributeur"/>
+                                                    <p:inputText id="contribProf"
+                                                                 value="#{validationRejetDeDemandeDeInscriptionAuRegistreMB.contributeur.profilContributeur}"
+                                                                 readonly="true"/>
+                                                </div>
+                                                <div class="field col-12 md:col-6">
+                                                    <p:outputLabel for="@next" value="Raison sociale"/>
+                                                    <p:inputText id="idRaisonSoc"
+                                                                 value="#{validationRejetDeDemandeDeInscriptionAuRegistreMB.contributeur.raisonSociale}"
+                                                                 readonly="true"/>
+                                                </div>
+
+                                                <div class="field col-12 md:col-6">
+                                                    <p:outputLabel for="@next" value="Identifiant GIMPay"/>
+                                                    <p:inputText id="idGimPay"
+                                                                 value="#{validationRejetDeDemandeDeInscriptionAuRegistreMB.contributeur.identifiantFiscal}"
+                                                                 readonly="true"/>
+                                                </div>
+
+                                                <div class="field col-12 md:col-6">
+                                                    <p:outputLabel for="@next" value="Identifiant fiscal"/>
+                                                    <p:inputText id="contribFiscalId"
+                                                                 value="#{validationRejetDeDemandeDeInscriptionAuRegistreMB.contributeur.identifiantFiscal}"
+                                                                 readonly="true"/>
+                                                </div>
+                                                <div class="field col-12 md:col-6">
+                                                    <p:outputLabel for="@next" value="Identifiant social"/>
+                                                    <p:inputText id="contribSocialId"
+                                                                 value="#{validationRejetDeDemandeDeInscriptionAuRegistreMB.contributeur.identifiantSocial}"
+                                                                 readonly="true"/>
+                                                </div>
+                                                <div class="field col-12 md:col-6">
+                                                    <p:outputLabel for="@next" value="Référence d'agrément"/>
+                                                    <p:inputText id="contribrefagree"
+                                                                 value="#{validationRejetDeDemandeDeInscriptionAuRegistreMB.contributeur.referenceAgrement}"
+                                                                 readonly="true"/>
+                                                </div>
+                                                <div class="field col-12 md:col-6">
+                                                    <p:outputLabel for="@next" value="Contact téléphonique"/>
+                                                    <p:inputText id="contribPhone"
+                                                                 value="#{validationRejetDeDemandeDeInscriptionAuRegistreMB.contributeur.contactTelephonique}"
+                                                                 readonly="true"/>
+                                                </div>
+
+                                                <div class="field col-12 md:col-6">
+                                                    <p:outputLabel for="@next" value="Contact électronique"/>
+                                                    <p:inputText id="contribelectroContact"
+                                                                 value="#{validationRejetDeDemandeDeInscriptionAuRegistreMB.contributeur.contactElectronique}"
+                                                                 readonly="true"/>
+                                                </div>
+                                                <div class="field col-12 md:col-6">
+                                                    <p:outputLabel for="@next" value="Adresse géographique"/>
+                                                    <p:inputText id="contribAdrGeo"
+                                                                 value="#{validationRejetDeDemandeDeInscriptionAuRegistreMB.contributeur.adresseGeographique}"
+                                                                 readonly="true"/>
+                                                </div>
+                                                <div class="field col-12 md:col-6">
+                                                    <p:outputLabel for="@next" value="Adresse postale"/>
+                                                    <p:inputText id="contribAdrPost"
+                                                                 value="#{validationRejetDeDemandeDeInscriptionAuRegistreMB.contributeur.adressePostale}"
+                                                                 readonly="true"/>
+                                                </div>
+                                                <div class="field col-12 md:col-6">
+                                                    <p:outputLabel for="@next" value="Eméteur agrément"/>
+                                                    <p:inputText id="emet"
+                                                                 value="#{validationRejetDeDemandeDeInscriptionAuRegistreMB.contributeur.emetteurAgrement}"
+                                                                 readonly="true"/>
+                                                </div>
+                                                <div class="field col-12 md:col-12">
+                                                    <p:outputLabel for="@next" value="Description des activités "/>
+                                                    <p:inputTextarea rows="3" maxlength="255"
+                                                                     value="#{validationRejetDeDemandeDeInscriptionAuRegistreMB.contributeur.descriptionActivites}"
+                                                                     readonly="true"/>
+                                                </div>
+                                                <div class="field col-12 md:col-12">
+                                                    <p:outputLabel for="@next" value="Secret Token"/>
+                                                    <p:inputTextarea rows="3" maxlength="255"
+                                                                     value="#{validationRejetDeDemandeDeInscriptionAuRegistreMB.contributeur.secretToken}"
+                                                                     readonly="true"/>
+                                                </div>
+                                                <div class="field col-12 md:col-6">
+                                                    <p:outputLabel for="@next" value="Login"/>
+                                                    <p:inputText id="log"
+                                                                 value="#{validationRejetDeDemandeDeInscriptionAuRegistreMB.contributeur.login}"
+                                                                 readonly="true"/>
+                                                </div>
+
+                                            </div>
+                                            <h5 class="my-4"><i
+                                                    class="pi pi-info-circle"/> Saisir les informations du dirigeant
+                                            </h5>
+                                            <div class="ui-fluid formgrid grid">
+                                                <div class="field col-12 md:col-6">
+                                                    <p:outputLabel for="@next" value="Nom du dirigeant"/>
+                                                    <p:inputText id="dirigeantNom"
+                                                                 value="#{validationRejetDeDemandeDeInscriptionAuRegistreMB.contributeur.nomDirigeant}"
+                                                                 readonly="true"/>
+                                                </div>
+                                                <div class="field col-12 md:col-6">
+                                                    <p:outputLabel for="@next" value="Fonction du dirigeant"/>
+                                                    <p:inputText id="dirigeantFonction"
+                                                                 value="#{validationRejetDeDemandeDeInscriptionAuRegistreMB.contributeur.fonctionDirigeant}"
+                                                                 readonly="true"/>
+                                                </div>
+                                                <div class="field col-12 md:col-6">
+                                                    <p:outputLabel for="@next" value="Courriel du dirigeant"/>
+                                                    <p:inputText id="dirigeantCourriel"
+                                                                 value="#{validationRejetDeDemandeDeInscriptionAuRegistreMB.contributeur.courrielDirigeant}"
+                                                                 readonly="true"/>
+                                                </div>
+                                                <div class="field col-12 md:col-6">
+                                                    <p:outputLabel for="@next" value="Mobile du dirigeant "/>
+                                                    <p:inputText id="dirigeantPhone"
+                                                                 value="#{validationRejetDeDemandeDeInscriptionAuRegistreMB.contributeur.mobileDirigeant}"
+                                                                 readonly="true"/>
+                                                </div>
+                                            </div>
+
+                                        </h:form>
+                                    </p:scrollPanel>
+
+                                </p:tab>
+                                <p:tab title="Pays opérations / Mmps"
+                                       disabled="#{validationRejetDeDemandeDeInscriptionAuRegistreMB.contributeur.ID == null}">
+                                    <p:scrollPanel mode="native" style="height: 400px; overflow-y: auto; border: none ">
+                                        <div class="grid ">
+                                            <div class="col-12 md:col-6 lg:col-6">
+                                                <h:form id="formListMmps">
+                                                    <div class="flex-1 flex flex-column">
+                                                        <h5>Liste des pays (#{validationRejetDeDemandeDeInscriptionAuRegistreMB.listPaysRattache.size()})</h5>
+                                                    </div>
+                                                    <p:dataTable id="paysmmps" widgetVar="paysmmps"
+                                                                 lazy="false" reflow="true"
+                                                                 scrollable="true"
+                                                                 scrollHeight="300px"
+                                                                 scrollRows="20"
+                                                                 var="listPays"
+                                                                 selection="#{validationRejetDeDemandeDeInscriptionAuRegistreMB.pays}"
+                                                                 value="#{validationRejetDeDemandeDeInscriptionAuRegistreMB.listPaysRattache}"
+                                                                 emptyMessage="Aucun contributeur disponible"
+                                                                 rowKey="#{listPays.ID}">
+                                                        <p:ajax event="rowSelect"
+                                                                listener="#{validationRejetDeDemandeDeInscriptionAuRegistreMB.collecterMmps()}"
+                                                                update="detailContributeurTB:formMmmpsRattache"/>
+                                                        <p:column headerText="Libellé">
+                                                            <h:outputText value="#{listPays.nom}"/>
+                                                        </p:column>
+                                                    </p:dataTable>
+                                                </h:form>
+                                            </div>
+                                            <div class="col-12 md:col-6 lg:col-6">
+                                                <h:form id="formMmmpsRattache">
+                                                    <div class="flex-1 flex flex-column">
+                                                        <h5>Listes des mini-places de marché rattachées (#{validationRejetDeDemandeDeInscriptionAuRegistreMB.listeMmpRattach.size()})</h5>
+                                                    </div>
+                                                    <p:dataTable scrollable="true" scrollHeight="300px"
+                                                                 var="MmpsRattache" lazy="true"
+                                                                 emptyMessage="Aucune pays non rattaché trouvé."
+                                                                 value="#{validationRejetDeDemandeDeInscriptionAuRegistreMB.listeMmpRattach}"
+                                                                 selection="#{validationRejetDeDemandeDeInscriptionAuRegistreMB.mmpsADetacher}"
+                                                                 rowKey="#{MmpsRattache.id}"
+                                                                 selectionMode="single">
+                                                        <p:column headerText="Libellé">
+                                                            <h:outputText
+                                                                    value="#{MmpsRattache.libelle}"/>
+                                                        </p:column>
+                                                    </p:dataTable>
+                                                </h:form>
+                                            </div>
+                                        </div>
+                                    </p:scrollPanel>
+
+                                </p:tab>
+                                <p:tab title="Annotations"
+                                       disabled="#{validationRejetDeDemandeDeInscriptionAuRegistreMB.contributeur.ID == null}">
+                                    <p:scrollPanel mode="native"
+                                                   style="height: 400px; overflow-y: auto; border: none;">
+                                        <h:form id="formListAnnotation">
+                                            <div class="flex-1 flex flex-column">
+                                                <h5>Liste des annotations (#{validationRejetDeDemandeDeInscriptionAuRegistreMB.listeAnnotations.size()})</h5>
+                                            </div>
+                                            <p:dataTable id="idAnnotations" widgetVar="wAnnotations"
+                                                         lazy="false" reflow="true"
+                                                         selectionMode="single" scrollable="true"
+                                                         var="annotation" scrollHeight="150px"
+                                                         selection="#{validationRejetDeDemandeDeInscriptionAuRegistreMB.annotation}"
+                                                         value="#{validationRejetDeDemandeDeInscriptionAuRegistreMB.listeAnnotations}"
+                                                         emptyMessage="Aucune donnée trouvée"
+                                                         rowKey="#{annotation.ID}">
+                                                <p:ajax event="rowSelect" process="detailContributeurTB:formListAnnotation"
+                                                        update="detailContributeurTB:formDetailAnnotation"/>
+                                                <p:column headerText="Initiateur ">
+                                                    <h:outputText value="#{annotation.utilisateur.nomPrenoms()}"/>
+                                                </p:column>
+                                                <p:column headerText="Date et heure de Creation">
+                                                    <h:outputText value="#{annotation.dateHeureCreation}">
+                                                        <f:convertDateTime pattern="dd-MM-yyyy hh:mm" type="localDateTime" locale="fr"/>
+                                                    </h:outputText>
+                                                </p:column>
+                                            </p:dataTable>
+                                        </h:form>
+                                        <h:form id="formDetailAnnotation">
+                                            <div class="ui-fluid mt-3">
+                                                <div class="field col-12 md:col-12">
+                                                    <p:inputTextarea rows="3" maxlength="255"
+                                                                     value="#{validationRejetDeDemandeDeInscriptionAuRegistreMB.annotation.commentaire}"/>
+                                                </div>
+                                            </div>
+                                        </h:form>
+                                    </p:scrollPanel>
+                                </p:tab>
+
+                            </p:tabView>
+                        </div>
+                    </div>
+                    <div class="col-12 ">
+                        <div class="card" style="height: 25vh">
+                            <h:form id="formValidation">
+                                <div class="flex-1 flex flex-column">
+                                    <h5>Valider un contributeur</h5>
+                                </div>
+                                <div class="ui-fluid formgrid grid">
+                                    <div class="field col-12 md:col-12">
+                                        <p:outputLabel for="@next" value="Faire une annotation"/>
+                                        <p:inputTextarea rows="3" maxlength="255" required="true" requiredMessage="Veuillez saisir le motif"
+                                                         value="#{validationRejetDeDemandeDeInscriptionAuRegistreMB.annotationValid.commentaire}"/>
+                                    </div>
+                                    <div class="field col-12 md:col-12 flex gap-3">
+                                        <p:commandButton value="Valider"
+                                                         action="#{validationRejetDeDemandeDeInscriptionAuRegistreMB.validerDemandeInscription()}"
+                                                         update="formValidation, detailContributeurTB,formListeContributeurs "
+                                                         icon="pi pi-check-circle" styleClass="w-auto"
+                                                         process="formValidation">
+                                            <p:confirm header="Attention!"
+                                                       message="Voulez-vous vraiment valider cette demande d'inscription ?"
+                                                       icon="pi pi-info-circle"/>
+                                        </p:commandButton>
+                                        <p:commandButton value="Rejeter"
+                                                         disabled="#{validationRejetDeDemandeDeInscriptionAuRegistreMB.contributeur.statutContributeur == 'REJETTE'}"
+                                                         action="#{validationRejetDeDemandeDeInscriptionAuRegistreMB.rejeterDemandeInscription()}"
+                                                         icon="pi pi-minus-circle" styleClass="w-auto"
+                                                         update="formValidation, detailContributeurTB,formListeContributeurs"
+                                                         process="formValidation">
+                                            <p:confirm header="Attention!"
+                                                       message="Voulez-vous vraiment rejeter cette demande d'inscription ?"
+                                                       icon="pi pi-info-circle"/>
+                                        </p:commandButton>
+
+                                    </div>
+                                </div>
+                            </h:form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+    </ui:define>
+
+</ui:composition>
+
+
+
