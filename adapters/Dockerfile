@@ -1,3 +1,3 @@
-#FROM openjdk:17-jdk-slim
-#COPY target/*.jar etix-backend-1.0.jar
-#ENTRYPOINT ["java","-jar","etix-backend-1.0.jar"]
+FROM eclipse-temurin:17-jdk-alpine
+COPY target/*.jar tickup-subs-1.0.jar
+ENTRYPOINT ["java","-jar","tickup-subs-1.0.jar"]

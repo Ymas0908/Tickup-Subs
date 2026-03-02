@@ -1,0 +1,22 @@
+package org.tickup.adapters.ports.driving.impl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.tickup.adapters.entites.UsagerEntity;
+import org.tickup.adapters.ports.driving.repositories.UsagerRepositoryRepo;
+import org.tickup.domain.models.Usager;
+import org.tickup.domain.ports.driving.UsagerDriving;
+
+@Component
+public class UsagerPortDrivingImpl implements UsagerDriving {
+
+    @Autowired
+    private UsagerRepositoryRepo usagerRepository;
+
+
+
+    @Override
+    public Usager saveUsager(Usager usager) {
+        return 	usagerRepository.save(UsagerEntity.toEntity(usager)).toDomain();
+    }
+}
