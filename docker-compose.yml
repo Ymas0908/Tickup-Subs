@@ -15,7 +15,7 @@ services:
       - mariadb_data:/var/lib/mysql
 
   app:
-    build: adapters
+    build: .
     container_name: tickup-app
     restart: always
     depends_on:
