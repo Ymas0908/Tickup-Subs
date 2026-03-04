@@ -54,6 +54,7 @@ public class SecurityConfig {
 							// tes propres endpoints
 
 							.requestMatchers("/api/v1/auth/**").permitAll()
+							.requestMatchers("/api/v1/tickets/**").permitAll()
 							.requestMatchers("/api/v1/usagers/**").permitAll()
 							.requestMatchers("/content/starter.xhtml").permitAll()
 							.requestMatchers("/health/**").permitAll()

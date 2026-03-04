@@ -1,0 +1,43 @@
+### Test API de génération de ticket et envoi par mail
+POST http://localhost:8080/api/v1/tickets/generate
+Content-Type: application/json
+
+{
+  "eventName": "Festival de Musique 2026",
+  "participantName": "Jean Dupont",
+  "ticketNumber": "TKT-2026-001",
+  "eventDate": "15 Mars 2026 - 20:00",
+  "location": "Palais des Congrès, Abidjan",
+  "category": "VIP",
+  "price": 15000.00,
+  "email": "jean.dupont@example.com"
+}
+
+### Test avec un autre événement
+POST http://localhost:8080/api/v1/tickets/generate
+Content-Type: application/json
+
+{
+  "eventName": "Conférence Tech 2026",
+  "participantName": "Marie Koné",
+  "ticketNumber": "TKT-2026-002",
+  "eventDate": "20 Mars 2026 - 09:00",
+  "location": "Centre de Conférence, Cocody",
+  "category": "Standard",
+  "price": 7500.00,
+  "email": "marie.kone@example.com"
+}
+
+### Test pour un événement sportif
+POST http://localhost:8080/api/v1/tickets/generate
+Content-Type: application/json
+
+{
+  "eventName": "Match de Football: ASEC vs Mimos",
+  "ticketNumber": "TKT-2026-003",
+  "eventDate": "25 Mars 2026 - 16:00",
+  "location": "Stade Félix Houphouët-Boigny",
+  "category": "Tribune",
+  "price": 5000.00,
+  "email": "supporter@example.com"
+}

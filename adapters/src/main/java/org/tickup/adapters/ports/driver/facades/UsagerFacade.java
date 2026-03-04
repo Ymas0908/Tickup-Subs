@@ -8,6 +8,7 @@ import org.tickup.adapters.requestModel.SignUpRequest;
 import org.tickup.adapters.utils.RandomPasswordGenerator;
 import org.tickup.domain.apiRequest.MailRequest;
 import org.tickup.domain.ports.driver.UsagerPortDriver;
+import org.tickup.domain.ports.driving.recipients.NotifyRecipient;
 import org.tickup.domain.requests.UsagersRequest;
 
 import java.util.HashMap;
@@ -20,6 +21,8 @@ public class UsagerFacade {
     private UsagerPortDriver usagerPortDriver;
     @Autowired
     private AuthService authService;
+    @Autowired
+    private NotifyRecipient notifyFacade;
 
     public void saveUsager (UsagersRequest usagerRequest) {
         String saveUsager = usagerPortDriver.saveUsager(usagerRequest);
@@ -31,7 +34,11 @@ public class UsagerFacade {
             System.out.println("User created with login: " + signUpRequest.getLogin() + " and password: " + password);
             signUpRequest.setRefUsager(saveUsager);
             authService.singup(signUpRequest);
-//            envoyerAccesUsager(usagerRequest, password);
+            envoyerAccesUsager(usagerRequest, password);
+//            boolean emailEnvoye = brevoSmtpService.envoyerAccesUsager(usagerRequest.getEmail(), password);
+//            if (!emailEnvoye) {
+//                log.warn("L'email n'a pas pu être envoyé à {}", usagerRequest.getEmail());
+//            }
 
         } else {
             log.error("Failed to save Usager");
@@ -46,7 +53,7 @@ public class UsagerFacade {
             messageParams.put("{{LOGIN}}", usagerRequest.getEmail());
             messageParams.put("{{PASSWORD}}", password);
             mailRequest.setRecipients(new String[]{usagerRequest.getEmail()});
-            mailRequest.setObject("Bienvenue sur votre espace marchand.");
+            mailRequest.setObject("Bienvenue sur votre espace.");
 //            String content = "Bonjour,\n\n" +
 //                    "Votre compte marchand a été créé avec succès. Voici vos informations de connexion :\n\n" +
 //                    "Login : " + merchantRequest.getEmail() + "\n" +
@@ -54,14 +61,14 @@ public class UsagerFacade {
 //                    "Veuillez vous connecter à votre espace marchand pour gérer vos transactions et votre profil.\n\n" +
 //                    "Cordialement,\n" +
 //                    "L'équipe de support";
-//            String content = notifyFacade.formatMail("enrolement-marchand.html", messageParams);
+            String content = notifyFacade.formatMail("inscription-usager.html", messageParams);
 //            mailRequest.setContent(content);
 //            if (content == null || content.isBlank()) {
 //                throw new RuntimeException("Le contenu du mail est vide ou le template est introuvable");
 //            }
 //
-//            mailRequest.setContent(content);
-//            notifyFacade.envoyerMail(mailRequest);
+            mailRequest.setContent(content);
+            notifyFacade.envoyerMail(mailRequest);
         } catch (Exception e) {
             e.printStackTrace();
             log.error(e.getMessage(),e);

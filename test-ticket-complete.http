@@ -1,0 +1,44 @@
+### Test complet avec toutes les données requises
+POST http://localhost:9000/api/v1/tickets/generate
+Content-Type: application/json
+
+{
+  "eventName": "Concert Live 2026",
+  "participantName": "Samuel Kebe",
+  "ticketNumber": "TKT-2026-001",
+  "eventDate": "15 Mars 2026 - 20:00",
+  "location": "Palais de la Culture, Abidjan",
+  "category": "VIP",
+  "price": 15000.00,
+  "email": "samuelkebe09.skb@gmail.com"
+}
+
+### Test avec données minimales valides
+POST http://localhost:9000/api/v1/tickets/generate
+Content-Type: application/json
+
+{
+  "eventName": "Test Event",
+  "participantName": "Test User",
+  "ticketNumber": "TEST-001",
+  "eventDate": "",
+  "location": "",
+  "category": "",
+  "price": 0,
+  "email": "samuelkebe09.skb@gmail.com"
+}
+
+### Test avec champ manquant (doit retourner une erreur 400)
+POST http://localhost:9000/api/v1/tickets/generate
+Content-Type: application/json
+
+{
+  "eventName": "",
+  "participantName": "Test User",
+  "ticketNumber": "TEST-002",
+  "eventDate": "",
+  "location": "",
+  "category": "",
+  "price": 0,
+  "email": "samuelkebe09.skb@gmail.com"
+}

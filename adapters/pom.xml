@@ -168,10 +168,45 @@
             <groupId>org.joinfaces</groupId>
             <artifactId>security-spring-boot-starter</artifactId>
         </dependency>
+                <dependency>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-mail</artifactId>
+                </dependency>
         <dependency>
             <groupId>org.primefaces.themes</groupId>
             <artifactId>poseidon-jakarta</artifactId>
             <version>6.0.0</version>
+        </dependency>
+        <!-- ================= PDF iText 7 ================= -->
+        <dependency>
+            <groupId>com.itextpdf</groupId>
+            <artifactId>kernel</artifactId>
+            <version>7.2.5</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.itextpdf</groupId>
+            <artifactId>layout</artifactId>
+            <version>7.2.5</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.itextpdf</groupId>
+            <artifactId>io</artifactId>
+            <version>7.2.5</version>
+        </dependency>
+
+        <!-- ================= QR CODE ZXing ================= -->
+        <dependency>
+            <groupId>com.google.zxing</groupId>
+            <artifactId>core</artifactId>
+            <version>3.5.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.zxing</groupId>
+            <artifactId>javase</artifactId>
+            <version>3.5.1</version>
         </dependency>
         <dependency>
             <groupId>org.tickup</groupId>
