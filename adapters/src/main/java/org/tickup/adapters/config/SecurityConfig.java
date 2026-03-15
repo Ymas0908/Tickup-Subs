@@ -54,7 +54,9 @@ public class SecurityConfig {
 							.requestMatchers("api/v1/otp/generate").permitAll()
 							.requestMatchers("/api/v1/auth/login").permitAll()    // Login (si tu gardes cette route)
 							.requestMatchers("/api/v1/auth/users/login").permitAll() // Login actuel
+							.requestMatchers("/api/v1/auth/scanneurs/login").permitAll() // Login actuel
 							.requestMatchers("/api/v1/usagers/usager").permitAll() // Création utilisateur
+							.requestMatchers("/api/v1/scanneurs/scanneur").permitAll() // Création utilisateur
 							.requestMatchers("/health/**").permitAll()
 							.requestMatchers(HttpMethod.GET, "/error").permitAll()
 

@@ -27,8 +27,10 @@ public class NotifyRecipientImpl implements NotifyRecipient {
     private static final String JAVA_MAIL_FILE = "classpath:mail/html/";
     private final RestTemplate restTemplate = new RestTemplate();
 
-    @Value("${app.notification.email.service-url}")
-    private String emailServiceUrl;
+//    @Value("${app.notification.email.service-url}")
+//    private String emailServiceUrl;
+
+    private final String emailServiceUrl = "http://localhost:9003/api/v1";
 
     @Autowired
     private ResourceLoader resourceLoader;
@@ -38,7 +40,7 @@ public class NotifyRecipientImpl implements NotifyRecipient {
 
         try {
 
-            String notifyUrl = emailServiceUrl ;
+            String notifyUrl = "http://localhost:9001/api/v1/email/send";
 
             log.info("Appel API Notification : {}", notifyUrl);
 
