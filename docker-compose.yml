@@ -1,5 +1,19 @@
 services:
 
+  nginx:
+    image: nginx:alpine
+    container_name: tickup-nginx
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - app
+    networks:
+      - tickup-network
+
   mariadb:
     image: mariadb:11
     container_name: tickup-mariadb
