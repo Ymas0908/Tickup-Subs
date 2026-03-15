@@ -1,0 +1,41 @@
+# Fichiers à ignorer lors du build Docker
+
+# Git
+.git
+.gitignore
+
+# IDE
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+
+# Maven
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!target/  # On garde target pour copier les JAR buildés
+
+# Logs
+logs/
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Documentation
+README.md
+*.md
+
+# Docker files
+Dockerfile*
+docker-compose*
+.dockerignore

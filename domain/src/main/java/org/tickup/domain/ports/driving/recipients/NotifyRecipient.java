@@ -11,6 +11,4 @@ public interface NotifyRecipient {
     Boolean envoyerMail(MailRequest mRequest);
     String formatMail(String string, Map<String, String> messageParams) throws IOException;
 
-
-
 }

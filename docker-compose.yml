@@ -11,6 +11,8 @@ services:
       - "3307:3306"
     volumes:
       - mariadb_data:/var/lib/mysql
+    networks:
+      - tickup-network
 
   app:
     build: .
@@ -24,6 +26,26 @@ services:
       SPRING_DATASOURCE_URL: jdbc:mariadb://mariadb:3306/tickupDB
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: root
+      SPRING_PROFILES_ACTIVE: docker
+    networks:
+      - tickup-network
+    volumes:
+      - ./logs:/app/logs
+
+  # Service de notification pour les emails (optionnel)
+  mailhog:
+    image: mailhog/mailhog
+    container_name: tickup-mailhog
+    restart: always
+    ports:
+      - "1025:1025"  # SMTP port
+      - "8026:8025"  # Web interface (port 8026 au lieu de 8025)
+    networks:
+      - tickup-network
 
 volumes:
   mariadb_data:
+
+networks:
+  tickup-network:
+    driver: bridge

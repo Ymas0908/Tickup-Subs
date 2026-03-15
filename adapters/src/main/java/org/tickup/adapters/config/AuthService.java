@@ -3,7 +3,7 @@ package org.tickup.adapters.config;
 
 import org.tickup.adapters.entites.UsagerEntity;
 import org.tickup.adapters.entites.UtilisateurEntity;
-import org.tickup.adapters.ports.driving.repositories.UsagerRepositoryRepo;
+import org.tickup.adapters.ports.driving.repositories.UsagerRepository;
 import org.tickup.adapters.ports.driving.repositories.UtilisateurRepository;
 import org.tickup.adapters.requestModel.SignUpRequest;
 import org.tickup.adapters.requestModel.UpdateUserPasswordForgetRequest;
@@ -39,9 +39,9 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
     private final GererUtilisateurPortDriver gererUtilisateurPortDriver;
-    private final UsagerRepositoryRepo usagerRepositoryRepo;
+    private final UsagerRepository usagerRepositoryRepo;
 
-    public AuthService(UtilisateurRepository userRepo, PasswordEncoder passwordEncoder, AuthenticationManager authenticationManager, GererUtilisateurPortDriver gererUtilisateurPortDriver, UsagerRepositoryRepo usagerRepositoryRepo) {
+    public AuthService(UtilisateurRepository userRepo, PasswordEncoder passwordEncoder, AuthenticationManager authenticationManager, GererUtilisateurPortDriver gererUtilisateurPortDriver, UsagerRepository usagerRepositoryRepo) {
         this.userRepo = userRepo;
         this.passwordEncoder = passwordEncoder;
         this.authenticationManager = authenticationManager;

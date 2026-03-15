@@ -5,7 +5,7 @@ import org.tickup.adapters.entites.UsagerEntity;
 
 import java.util.Optional;
 
-public interface UsagerRepositoryRepo extends JpaRepository<UsagerEntity, Integer> {
+public interface UsagerRepository extends JpaRepository<UsagerEntity, Integer> {
     Optional<UsagerEntity> findByRefUsager(String refUsager);
 
 }

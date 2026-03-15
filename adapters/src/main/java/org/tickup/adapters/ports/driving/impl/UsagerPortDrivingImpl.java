@@ -3,7 +3,7 @@ package org.tickup.adapters.ports.driving.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.tickup.adapters.entites.UsagerEntity;
-import org.tickup.adapters.ports.driving.repositories.UsagerRepositoryRepo;
+import org.tickup.adapters.ports.driving.repositories.UsagerRepository;
 import org.tickup.domain.models.Usager;
 import org.tickup.domain.ports.driving.UsagerDriving;
 
@@ -11,7 +11,7 @@ import org.tickup.domain.ports.driving.UsagerDriving;
 public class UsagerPortDrivingImpl implements UsagerDriving {
 
     @Autowired
-    private UsagerRepositoryRepo usagerRepository;
+    private UsagerRepository usagerRepository;
 
 
 

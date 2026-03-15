@@ -41,24 +41,24 @@ public class SecurityConfig {
 					.csrf(AbstractHttpConfigurer::disable)
 					.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 					.authorizeHttpRequests(auth -> auth
+							// Public
 							.requestMatchers("/", "/favicon.ico", "*.xhtml", "/test/**").permitAll()
-							// Swagger & OpenAPI
 							.requestMatchers(
 									"/swagger-ui.html",
 									"/swagger-ui/**",
 									"/v3/api-docs/**",
+									"/api-docs/**",
 									"/swagger-resources/**",
-									"/webjars/**",
-									"/gimpay/**"
-							).permitAll()
-							// tes propres endpoints
-
-							.requestMatchers("/api/v1/auth/**").permitAll()
-							.requestMatchers("/api/v1/usagers/**").permitAll()
-							.requestMatchers("/content/starter.xhtml").permitAll()
+									"/webjars/**").permitAll()
+							.requestMatchers("/api/v1/auth/register").permitAll() // Inscription
+							.requestMatchers("api/v1/otp/generate").permitAll()
+							.requestMatchers("/api/v1/auth/login").permitAll()    // Login (si tu gardes cette route)
+							.requestMatchers("/api/v1/auth/users/login").permitAll() // Login actuel
+							.requestMatchers("/api/v1/usagers/usager").permitAll() // Création utilisateur
 							.requestMatchers("/health/**").permitAll()
 							.requestMatchers(HttpMethod.GET, "/error").permitAll()
-							// tout le reste doit être authentifié
+
+							// Tout le reste doit être authentifié
 							.anyRequest().authenticated()
 					)
 					.exceptionHandling(exception -> exception

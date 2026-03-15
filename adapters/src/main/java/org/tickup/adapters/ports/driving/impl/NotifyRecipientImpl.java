@@ -1,5 +1,8 @@
 package org.tickup.adapters.ports.driving.impl;
 
+import org.springframework.http.*;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.HttpServerErrorException;
 import org.tickup.domain.apiRequest.MailRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.primefaces.util.IOUtils;
@@ -13,6 +16,7 @@ import org.tickup.domain.ports.driving.recipients.NotifyRecipient;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
 import java.util.Map;
 
 
@@ -30,7 +34,50 @@ public class NotifyRecipientImpl implements NotifyRecipient {
 
     @Override
     public Boolean envoyerMail(MailRequest mRequest) {
-        return null;
+
+        try {
+
+            String notifyUrl = "http://localhost:9002/api/v1/email/send";
+
+            log.info("Appel API Notification : {}", notifyUrl);
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+
+            HttpEntity<MailRequest> entity = new HttpEntity<>(mRequest, headers);
+
+            ResponseEntity<String> response = restTemplate.exchange(
+                    notifyUrl,
+                    HttpMethod.POST,
+                    entity,
+                    String.class
+            );
+
+            log.info("Réponse API Notification : {}", response.getBody());
+
+            if (response.getStatusCode().is2xxSuccessful()) {
+                log.info("Mail envoyé avec succès");
+                return true;
+            }
+
+            log.error("Erreur lors de l'envoi du mail : {}", response.getBody());
+            return false;
+
+        } catch (HttpClientErrorException e) {
+
+            log.error("Erreur HTTP Client : {}", e.getResponseBodyAsString());
+            return false;
+
+        } catch (HttpServerErrorException e) {
+
+            log.error("Erreur HTTP Server : {}", e.getResponseBodyAsString());
+            return false;
+
+        } catch (Exception e) {
+
+            log.error("Erreur appel API notification", e);
+            return false;
+        }
     }
 
     @Override
@@ -69,6 +116,7 @@ public class NotifyRecipientImpl implements NotifyRecipient {
         }
 
     }
+
 
 
 }

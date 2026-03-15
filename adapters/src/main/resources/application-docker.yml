@@ -1,0 +1,86 @@
+spring:
+  datasource:
+    url: jdbc:mariadb://${MARIADB_HOST:mariadb}:3306/${MARIADB_DATABASE:tickupDB}
+    username: ${MARIADB_USERNAME:root}
+    password: ${MARIADB_PASSWORD:root}
+    driver-class-name: org.mariadb.jdbc.Driver
+  
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MariaDBDialect
+        format_sql: true
+
+  # Configuration pour l'envoi d'emails avec MailHog
+  mail:
+    host: ${MAIL_HOST:mailhog}
+    port: ${MAIL_PORT:1025}
+    username: ${MAIL_USERNAME:}
+    password: ${MAIL_PASSWORD:}
+    properties:
+      mail:
+        smtp:
+          auth: false
+          starttls:
+            enable: false
+        debug: false
+
+# Configuration de logging pour l'environnement Docker
+logging:
+  level:
+    org.tickup: INFO
+    org.springframework.web: INFO
+    org.hibernate: WARN
+    org.hibernate.SQL: WARN
+    org.hibernate.type.descriptor.sql.BasicBinder: WARN
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+  file:
+    name: /app/logs/application.log
+
+# Configuration spécifique à l'application
+app:
+  notification:
+    email:
+      from: ${EMAIL_FROM:noreply@tickup.com}
+      base-url: ${APP_BASE_URL:http://localhost:9000}
+  
+  otp:
+    validity-minutes: ${OTP_VALIDITY_MINUTES:10}
+    length: ${OTP_LENGTH:6}
+
+# Configuration du serveur
+server:
+  port: 9000
+  servlet:
+    context-path: /
+    
+# Configuration SpringDoc
+springdoc:
+  api-docs:
+    path: /api-docs
+    enabled: true
+  swagger-ui:
+    path: /swagger-ui.html
+    enabled: true
+    try-it-out-enabled: true
+    operations-sorter: method
+    tags-sorter: alpha
+    doc-expansion: none
+    disable-swagger-default-url: true
+    display-request-duration: true
+    default-models-expand-depth: 1
+    default-model-expand-depth: 1
+    show-extensions: true
+    show-common-extensions: true
+  group-configs:
+    - group: public
+      display-name: Public API
+      paths-to-match: /api/**
+    - group: admin
+      display-name: Admin API
+      paths-to-match: /admin/**

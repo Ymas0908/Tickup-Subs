@@ -15,4 +15,10 @@ public class AppUtils {
         return prefix + date + randomNum;
     }
 
+    public static String generateOTP() {
+        SecureRandom random = new SecureRandom();
+        int otp = random.nextInt(999999);
+        return String.format("%06d", otp);
+    }
+
 }
