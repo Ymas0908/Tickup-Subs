@@ -1,5 +1,8 @@
 package org.tickup.adapters.ports.driver.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,7 +22,7 @@ import org.tickup.domain.requests.UsagersRequest;
 @RestController
 @Slf4j
 @RequestMapping("/api/v1/usagers")
-@Tag(name = "Gestion des usagers de l'application")
+@Tag(name = "Gestion des usagers", description = "API pour la gestion des utilisateurs de l'application")
 
 @AllArgsConstructor
 public class UsagerController {
@@ -29,6 +32,12 @@ public class UsagerController {
 
 
     @PostMapping("/usager")
+    @Operation(summary = "Créer un usager", description = "Crée un nouvel usager dans le système")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Usager créé avec succès"),
+        @ApiResponse(responseCode = "400", description = "Données invalides"),
+        @ApiResponse(responseCode = "500", description = "Erreur serveur")
+    })
     public ResponseEntity<ResponseApi> saveUsager(@RequestBody UsagerRequest request) {
         log.info("UsagerRequest : {}", request);
         UsagersRequest domain = UsagerRequest.toDomain(request);

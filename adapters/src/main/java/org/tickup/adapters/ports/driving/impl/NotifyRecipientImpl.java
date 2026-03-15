@@ -7,6 +7,7 @@ import org.tickup.domain.apiRequest.MailRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.primefaces.util.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Component;
@@ -26,8 +27,8 @@ public class NotifyRecipientImpl implements NotifyRecipient {
     private static final String JAVA_MAIL_FILE = "classpath:mail/html/";
     private final RestTemplate restTemplate = new RestTemplate();
 
-//    @Value("${GIM_NOTIFY_URL}")
-    private String GIM_NOTIFY_URL;
+    @Value("${app.notification.email.service-url}")
+    private String emailServiceUrl;
 
     @Autowired
     private ResourceLoader resourceLoader;
@@ -37,7 +38,7 @@ public class NotifyRecipientImpl implements NotifyRecipient {
 
         try {
 
-            String notifyUrl = "http://localhost:9002/api/v1/email/send";
+            String notifyUrl = emailServiceUrl ;
 
             log.info("Appel API Notification : {}", notifyUrl);
 

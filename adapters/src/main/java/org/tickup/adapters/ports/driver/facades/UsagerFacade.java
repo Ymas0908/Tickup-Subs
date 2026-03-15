@@ -32,7 +32,7 @@ public class UsagerFacade {
             SignUpRequest signUpRequest = new SignUpRequest();
             signUpRequest.setLogin(usagerRequest.getTelephone());
             signUpRequest.setPassword(password);
-            System.out.println("User created with login: " + signUpRequest.getLogin() + " and password: " + password);
+//            System.out.println("User created with login: " + signUpRequest.getLogin() + " and password: " + password);
             signUpRequest.setRefUsager(saveUsager);
             authService.singup(signUpRequest);
             envoyerAccesUsager(usagerRequest, password);

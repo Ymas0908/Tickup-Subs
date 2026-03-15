@@ -48,6 +48,7 @@ app:
     email:
       from: ${EMAIL_FROM:noreply@tickup.com}
       base-url: ${APP_BASE_URL:http://localhost:9000}
+      service-url: ${EMAIL_SERVICE_URL:http://host.docker.internal:9002/api/v1/email/send}
   
   otp:
     validity-minutes: ${OTP_VALIDITY_MINUTES:10}

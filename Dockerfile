@@ -8,12 +8,11 @@ COPY pom.xml .
 COPY domain/pom.xml ./domain/
 COPY adapters/pom.xml ./adapters/
 
-# Télécharger les dépendances (mise en cache)
-RUN mvn dependency:go-offline -B
-
-# Copier les fichiers sources
+# Copier les fichiers sources et JAR locaux
 COPY domain ./domain/
 COPY adapters ./adapters/
+COPY poseidon-theme-6.0.0-jakarta.jar ./
+COPY poseidon-theme-6.0.0.jar ./
 
 # Installer les JAR locaux du thème Poseidon dans le repository Maven local
 RUN mvn install:install-file \

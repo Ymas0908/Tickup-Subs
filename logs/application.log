@@ -1,0 +1,229 @@
+2026-03-15 19:30:33 [main] INFO  o.t.adapters.AdaptersApplication - Starting AdaptersApplication v1.0 using Java 17.0.18 with PID 1 (/app/app.jar started by spring in /app)
+2026-03-15 19:30:33 [main] INFO  o.t.adapters.AdaptersApplication - The following 1 profile is active: "docker"
+2026-03-15 19:30:38 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-03-15 19:30:38 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 217 ms. Found 2 JPA repository interfaces.
+2026-03-15 19:30:41 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 9000 (http)
+2026-03-15 19:30:42 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-03-15 19:30:42 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.30]
+2026-03-15 19:30:42 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-03-15 19:30:42 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 8736 ms
+2026-03-15 19:30:45 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-03-15 19:30:45 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-03-15 19:30:46 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.mariadb.jdbc.Connection@30c8c6ab
+2026-03-15 19:30:46 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-03-15 19:30:46 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-03-15 19:30:48 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-03-15 19:30:50 [main] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-03-15 19:30:57 [main] INFO  o.j.s.ServletContainerInitializerRegistrationBean - Resolving classes for com.sun.faces.config.FacesInitializer took 6.168694662s
+2026-03-15 19:31:01 [main] INFO  o.j.s.ServletContainerInitializerRegistrationBean - Resolving classes for com.sun.faces.config.FacesInitializer2 took 3.362193066s
+2026-03-15 19:31:01 [main] INFO  o.j.w.WeldServletContainerInitializerRegistrationBean - org.jboss.weld.environment.servlet.archive.isolation has already been set to false
+2026-03-15 19:31:01 [main] INFO  o.j.w.environment.servletWeldServlet - WELD-ENV-001008: Initialize Weld using ServletContainerInitializer
+2026-03-15 19:31:01 [main] INFO  org.jboss.weld.Version - WELD-000900: 5.1.2 (Final)
+2026-03-15 19:31:01 [main] INFO  o.s.d.j.r.cdi.JpaRepositoryExtension - Activating CDI extension for Spring Data JPA repositories
+2026-03-15 19:31:01 [main] INFO  org.jboss.weld.Bootstrap - WELD-ENV-000041: Using org.joinfaces.weld.ClassGraphDiscoveryStrategy@4d53dfb7 for bean discovery
+2026-03-15 19:31:04 [main] INFO  o.j.weld.ClassGraphDiscoveryStrategy - Weld bean discovery took 2049ms
+2026-03-15 19:31:04 [main] INFO  org.jboss.weld.Bootstrap - WELD-000101: Transactional services not available. Injection of @Inject UserTransaction not available. Transactional observers will be invoked synchronously.
+2026-03-15 19:31:04 [main] INFO  org.jboss.weld.Event - WELD-000411: Observer method [BackedAnnotatedMethod] protected org.springframework.data.repository.cdi.CdiRepositoryExtensionSupport.processAnnotatedType(@Observes ProcessAnnotatedType<X>) receives events for all annotated types. Consider restricting events using @WithAnnotations or a generic type with bounds.
+2026-03-15 19:31:05 [main] INFO  o.j.w.environment.servletWeldServlet - WELD-ENV-001002: Container detection skipped - custom container class loaded: org.joinfaces.weld.NoopContainer.
+2026-03-15 19:31:05 [main] INFO  j.e.r.webcontainer.faces.config - Initializing Mojarra 4.0.5 for context ''
+2026-03-15 19:31:06 [main] INFO  j.e.r.webcontainer.faces.application - JSF1048: PostConstruct/PreDestroy annotations present.  ManagedBeans methods marked with these annotations will have said annotations processed.
+2026-03-15 19:31:07 [main] INFO  j.e.r.webcontainer.faces.config - Monitoring jar:file:/app/app.jar!/META-INF/resources/WEB-INF/faces-config.xml for modifications
+2026-03-15 19:31:07 [main] INFO  o.p.w.PostConstructApplicationEventListener - Running on PrimeFaces 13.0.4
+2026-03-15 19:31:07 [main] INFO  o.p.e.a.PostConstructApplicationEventListener - Running on PrimeFaces Extensions 13.0.4
+2026-03-15 19:31:09 [main] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@5d354d8, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@1db9572, org.springframework.security.web.context.SecurityContextHolderFilter@35a6f370, org.springframework.security.web.header.HeaderWriterFilter@5de991a8, org.springframework.security.web.authentication.logout.LogoutFilter@579c15a7, org.tickup.adapters.config.JwtAuthFilter@3dfb1626, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7a8c01ef, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@465652a2, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@bc4419c, org.springframework.security.web.session.SessionManagementFilter@3b977a31, org.springframework.security.web.access.ExceptionTranslationFilter@2abb3056, org.springframework.security.web.access.intercept.AuthorizationFilter@611d6114]
+2026-03-15 19:31:10 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 9000 (http) with context path '/'
+2026-03-15 19:31:10 [main] INFO  o.t.adapters.AdaptersApplication - Started AdaptersApplication in 40.249 seconds (process running for 53.849)
+2026-03-15 19:31:22 [http-nio-9000-exec-1] INFO  o.a.tomcat.util.http.parser.Cookie - A cookie header was received [g_state={"i_l":0,"i_ll":1773507908046,"i_b":"olmSothHQfvSykOcSFM2isbmZT5k+4gTKtb79cjuvRc","i_e":{"enable_itp_optimization":0}}] that contained an invalid cookie. That cookie will be ignored.
+ Note: further occurrences of this error will be logged at DEBUG level.
+2026-03-15 19:31:22 [http-nio-9000-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-03-15 19:31:22 [http-nio-9000-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-03-15 19:31:22 [http-nio-9000-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 5 ms
+2026-03-15 19:31:22 [http-nio-9000-exec-1] INFO  o.t.adapters.config.JwtAuthFilter - ---------------------
+2026-03-15 19:31:22 [http-nio-9000-exec-1] INFO  o.t.adapters.config.JwtAuthFilter - AUTH HEADER null 
+2026-03-15 19:31:22 [http-nio-9000-exec-1] INFO  o.t.adapters.config.JwtAuthFilter - URL http://localhost:9000/swagger-ui.html 
+2026-03-15 19:31:22 [http-nio-9000-exec-1] INFO  o.t.adapters.config.JwtAuthFilter - ---------------------
+2026-03-15 19:31:22 [http-nio-9000-exec-2] INFO  o.t.adapters.config.JwtAuthFilter - ---------------------
+2026-03-15 19:31:23 [http-nio-9000-exec-2] INFO  o.t.adapters.config.JwtAuthFilter - AUTH HEADER null 
+2026-03-15 19:31:23 [http-nio-9000-exec-2] INFO  o.t.adapters.config.JwtAuthFilter - URL http://localhost:9000/swagger-ui/index.html 
+2026-03-15 19:31:23 [http-nio-9000-exec-2] INFO  o.t.adapters.config.JwtAuthFilter - ---------------------
+2026-03-15 19:31:23 [http-nio-9000-exec-3] INFO  o.t.adapters.config.JwtAuthFilter - ---------------------
+2026-03-15 19:31:23 [http-nio-9000-exec-3] INFO  o.t.adapters.config.JwtAuthFilter - AUTH HEADER null 
+2026-03-15 19:31:23 [http-nio-9000-exec-3] INFO  o.t.adapters.config.JwtAuthFilter - URL http://localhost:9000/swagger-ui/swagger-ui.css 
+2026-03-15 19:31:23 [http-nio-9000-exec-3] INFO  o.t.adapters.config.JwtAuthFilter - ---------------------
+2026-03-15 19:31:23 [http-nio-9000-exec-4] INFO  o.t.adapters.config.JwtAuthFilter - ---------------------
+2026-03-15 19:31:23 [http-nio-9000-exec-5] INFO  o.t.adapters.config.JwtAuthFilter - ---------------------
+2026-03-15 19:31:23 [http-nio-9000-exec-4] INFO  o.t.adapters.config.JwtAuthFilter - AUTH HEADER null 
+2026-03-15 19:31:23 [http-nio-9000-exec-5] INFO  o.t.adapters.config.JwtAuthFilter - AUTH HEADER null 
+2026-03-15 19:31:23 [http-nio-9000-exec-4] INFO  o.t.adapters.config.JwtAuthFilter - URL http://localhost:9000/swagger-ui/index.css 
+2026-03-15 19:31:23 [http-nio-9000-exec-5] INFO  o.t.adapters.config.JwtAuthFilter - URL http://localhost:9000/swagger-ui/swagger-ui-bundle.js 
+2026-03-15 19:31:23 [http-nio-9000-exec-4] INFO  o.t.adapters.config.JwtAuthFilter - ---------------------
+2026-03-15 19:31:23 [http-nio-9000-exec-5] INFO  o.t.adapters.config.JwtAuthFilter - ---------------------
+2026-03-15 19:31:23 [http-nio-9000-exec-6] INFO  o.t.adapters.config.JwtAuthFilter - ---------------------
+2026-03-15 19:31:23 [http-nio-9000-exec-6] INFO  o.t.adapters.config.JwtAuthFilter - AUTH HEADER null 
+2026-03-15 19:31:23 [http-nio-9000-exec-6] INFO  o.t.adapters.config.JwtAuthFilter - URL http://localhost:9000/swagger-ui/swagger-ui-standalone-preset.js 
+2026-03-15 19:31:23 [http-nio-9000-exec-7] INFO  o.t.adapters.config.JwtAuthFilter - ---------------------
+2026-03-15 19:31:23 [http-nio-9000-exec-6] INFO  o.t.adapters.config.JwtAuthFilter - ---------------------
+2026-03-15 19:31:23 [http-nio-9000-exec-7] INFO  o.t.adapters.config.JwtAuthFilter - AUTH HEADER null 
+2026-03-15 19:31:23 [http-nio-9000-exec-7] INFO  o.t.adapters.config.JwtAuthFilter - URL http://localhost:9000/swagger-ui/swagger-initializer.js 
+2026-03-15 19:31:23 [http-nio-9000-exec-7] INFO  o.t.adapters.config.JwtAuthFilter - ---------------------
+2026-03-15 19:31:26 [http-nio-9000-exec-8] INFO  o.t.adapters.config.JwtAuthFilter - ---------------------
+2026-03-15 19:31:26 [http-nio-9000-exec-8] INFO  o.t.adapters.config.JwtAuthFilter - AUTH HEADER null 
+2026-03-15 19:31:26 [http-nio-9000-exec-8] INFO  o.t.adapters.config.JwtAuthFilter - URL http://localhost:9000/api-docs/swagger-config 
+2026-03-15 19:31:26 [http-nio-9000-exec-8] INFO  o.t.adapters.config.JwtAuthFilter - ---------------------
+2026-03-15 19:31:26 [http-nio-9000-exec-9] INFO  o.t.adapters.config.JwtAuthFilter - ---------------------
+2026-03-15 19:31:26 [http-nio-9000-exec-9] INFO  o.t.adapters.config.JwtAuthFilter - AUTH HEADER null 
+2026-03-15 19:31:26 [http-nio-9000-exec-9] INFO  o.t.adapters.config.JwtAuthFilter - URL http://localhost:9000/swagger-ui/favicon-32x32.png 
+2026-03-15 19:31:26 [http-nio-9000-exec-9] INFO  o.t.adapters.config.JwtAuthFilter - ---------------------
+2026-03-15 19:31:26 [http-nio-9000-exec-10] INFO  o.t.adapters.config.JwtAuthFilter - ---------------------
+2026-03-15 19:31:26 [http-nio-9000-exec-10] INFO  o.t.adapters.config.JwtAuthFilter - AUTH HEADER null 
+2026-03-15 19:31:26 [http-nio-9000-exec-10] INFO  o.t.adapters.config.JwtAuthFilter - URL http://localhost:9000/api-docs/admin 
+2026-03-15 19:31:26 [http-nio-9000-exec-10] INFO  o.t.adapters.config.JwtAuthFilter - ---------------------
+2026-03-15 19:31:27 [http-nio-9000-exec-10] INFO  o.s.api.AbstractOpenApiResource - Init duration for springdoc-openapi is: 737 ms
+2026-03-15 19:31:39 [http-nio-9000-exec-1] INFO  o.t.adapters.config.JwtAuthFilter - ---------------------
+2026-03-15 19:31:39 [http-nio-9000-exec-1] INFO  o.t.adapters.config.JwtAuthFilter - AUTH HEADER null 
+2026-03-15 19:31:39 [http-nio-9000-exec-1] INFO  o.t.adapters.config.JwtAuthFilter - URL http://localhost:9000/api-docs/public 
+2026-03-15 19:31:39 [http-nio-9000-exec-1] INFO  o.t.adapters.config.JwtAuthFilter - ---------------------
+2026-03-15 19:31:40 [http-nio-9000-exec-1] INFO  o.s.api.AbstractOpenApiResource - Init duration for springdoc-openapi is: 804 ms
+2026-03-15 19:31:44 [http-nio-9000-exec-2] INFO  o.t.adapters.config.JwtAuthFilter - ---------------------
+2026-03-15 19:31:44 [http-nio-9000-exec-2] INFO  o.t.adapters.config.JwtAuthFilter - AUTH HEADER null 
+2026-03-15 19:31:44 [http-nio-9000-exec-2] INFO  o.t.adapters.config.JwtAuthFilter - URL http://localhost:9000/api-docs/admin 
+2026-03-15 19:31:44 [http-nio-9000-exec-2] INFO  o.t.adapters.config.JwtAuthFilter - ---------------------
+2026-03-15 19:31:46 [http-nio-9000-exec-3] INFO  o.t.adapters.config.JwtAuthFilter - ---------------------
+2026-03-15 19:31:46 [http-nio-9000-exec-3] INFO  o.t.adapters.config.JwtAuthFilter - AUTH HEADER null 
+2026-03-15 19:31:46 [http-nio-9000-exec-3] INFO  o.t.adapters.config.JwtAuthFilter - URL http://localhost:9000/api-docs/public 
+2026-03-15 19:31:46 [http-nio-9000-exec-3] INFO  o.t.adapters.config.JwtAuthFilter - ---------------------
+2026-03-15 19:32:31 [http-nio-9000-exec-7] INFO  o.t.a.p.d.c.UsagerController - UsagerRequest : UsagerRequest(nom=test, prenom=test, email=ymas0908777@gmail.com, telephone=010230, dateNaissance=string)
+2026-03-15 19:32:31 [http-nio-9000-exec-7] INFO  o.t.a.p.d.c.UsagerController - UsagerRequest domain : org.tickup.domain.requests.UsagersRequest@4c5fa391
+2026-03-15 19:32:32 [http-nio-9000-exec-7] INFO  o.t.a.p.d.impl.NotifyRecipientImpl - Appel API Notification : http://host.docker.internal:9002/api/v1/email/send
+2026-03-15 19:32:40 [http-nio-9000-exec-7] INFO  o.t.a.p.d.impl.NotifyRecipientImpl - Réponse API Notification : {"body":true,"message":"Email envoyé avec succès","status":200,"timestamp":"2026-03-15T18:32:40.022Z"}
+2026-03-15 19:32:40 [http-nio-9000-exec-7] INFO  o.t.a.p.d.impl.NotifyRecipientImpl - Mail envoyé avec succès
+2026-03-15 19:34:56 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-03-15 19:34:56 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-03-15 19:34:56 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-03-15 19:35:13 [main] INFO  o.t.adapters.AdaptersApplication - Starting AdaptersApplication v1.0 using Java 17.0.18 with PID 1 (/app/app.jar started by spring in /app)
+2026-03-15 19:35:13 [main] INFO  o.t.adapters.AdaptersApplication - The following 1 profile is active: "docker"
+2026-03-15 19:35:17 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-03-15 19:35:17 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 181 ms. Found 2 JPA repository interfaces.
+2026-03-15 19:35:19 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 9000 (http)
+2026-03-15 19:35:19 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-03-15 19:35:19 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.30]
+2026-03-15 19:35:19 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-03-15 19:35:19 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 5787 ms
+2026-03-15 19:35:22 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-03-15 19:35:22 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-03-15 19:35:22 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.mariadb.jdbc.Connection@30c8c6ab
+2026-03-15 19:35:23 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-03-15 19:35:23 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: MariaDBDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-03-15 19:35:24 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-03-15 19:35:25 [main] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-03-15 19:35:31 [main] INFO  o.j.s.ServletContainerInitializerRegistrationBean - Resolving classes for com.sun.faces.config.FacesInitializer took 4.199304596s
+2026-03-15 19:35:33 [main] INFO  o.j.s.ServletContainerInitializerRegistrationBean - Resolving classes for com.sun.faces.config.FacesInitializer2 took 2.028600203s
+2026-03-15 19:35:33 [main] INFO  o.j.w.WeldServletContainerInitializerRegistrationBean - org.jboss.weld.environment.servlet.archive.isolation has already been set to false
+2026-03-15 19:35:33 [main] INFO  o.j.w.environment.servletWeldServlet - WELD-ENV-001008: Initialize Weld using ServletContainerInitializer
+2026-03-15 19:35:33 [main] INFO  org.jboss.weld.Version - WELD-000900: 5.1.2 (Final)
+2026-03-15 19:35:33 [main] INFO  o.s.d.j.r.cdi.JpaRepositoryExtension - Activating CDI extension for Spring Data JPA repositories
+2026-03-15 19:35:33 [main] INFO  org.jboss.weld.Bootstrap - WELD-ENV-000041: Using org.joinfaces.weld.ClassGraphDiscoveryStrategy@4d53dfb7 for bean discovery
+2026-03-15 19:35:35 [main] INFO  o.j.weld.ClassGraphDiscoveryStrategy - Weld bean discovery took 1255ms
+2026-03-15 19:35:35 [main] INFO  org.jboss.weld.Bootstrap - WELD-000101: Transactional services not available. Injection of @Inject UserTransaction not available. Transactional observers will be invoked synchronously.
+2026-03-15 19:35:35 [main] INFO  org.jboss.weld.Event - WELD-000411: Observer method [BackedAnnotatedMethod] protected org.springframework.data.repository.cdi.CdiRepositoryExtensionSupport.processAnnotatedType(@Observes ProcessAnnotatedType<X>) receives events for all annotated types. Consider restricting events using @WithAnnotations or a generic type with bounds.
+2026-03-15 19:35:35 [main] INFO  o.j.w.environment.servletWeldServlet - WELD-ENV-001002: Container detection skipped - custom container class loaded: org.joinfaces.weld.NoopContainer.
+2026-03-15 19:35:36 [main] INFO  j.e.r.webcontainer.faces.config - Initializing Mojarra 4.0.5 for context ''
+2026-03-15 19:35:36 [main] INFO  j.e.r.webcontainer.faces.application - JSF1048: PostConstruct/PreDestroy annotations present.  ManagedBeans methods marked with these annotations will have said annotations processed.
+2026-03-15 19:35:37 [main] INFO  j.e.r.webcontainer.faces.config - Monitoring jar:file:/app/app.jar!/META-INF/resources/WEB-INF/faces-config.xml for modifications
+2026-03-15 19:35:37 [main] INFO  o.p.w.PostConstructApplicationEventListener - Running on PrimeFaces 13.0.4
+2026-03-15 19:35:37 [main] INFO  o.p.e.a.PostConstructApplicationEventListener - Running on PrimeFaces Extensions 13.0.4
+2026-03-15 19:35:39 [main] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@5d354d8, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@1db9572, org.springframework.security.web.context.SecurityContextHolderFilter@35a6f370, org.springframework.security.web.header.HeaderWriterFilter@5de991a8, org.springframework.security.web.authentication.logout.LogoutFilter@579c15a7, org.tickup.adapters.config.JwtAuthFilter@3dfb1626, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7a8c01ef, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@465652a2, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@bc4419c, org.springframework.security.web.session.SessionManagementFilter@3b977a31, org.springframework.security.web.access.ExceptionTranslationFilter@2abb3056, org.springframework.security.web.access.intercept.AuthorizationFilter@611d6114]
+2026-03-15 19:35:39 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 9000 (http) with context path '/'
+2026-03-15 19:35:40 [main] INFO  o.t.adapters.AdaptersApplication - Started AdaptersApplication in 28.149 seconds (process running for 30.528)
+2026-03-15 19:35:56 [http-nio-9000-exec-1] INFO  o.a.tomcat.util.http.parser.Cookie - A cookie header was received [g_state={"i_l":0,"i_ll":1773507908046,"i_b":"olmSothHQfvSykOcSFM2isbmZT5k+4gTKtb79cjuvRc","i_e":{"enable_itp_optimization":0}}] that contained an invalid cookie. That cookie will be ignored.
+ Note: further occurrences of this error will be logged at DEBUG level.
+2026-03-15 19:35:56 [http-nio-9000-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-03-15 19:35:56 [http-nio-9000-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-03-15 19:35:56 [http-nio-9000-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 4 ms
+2026-03-15 19:35:56 [http-nio-9000-exec-1] INFO  o.t.adapters.config.JwtAuthFilter - ---------------------
+2026-03-15 19:35:56 [http-nio-9000-exec-1] INFO  o.t.adapters.config.JwtAuthFilter - AUTH HEADER null 
+2026-03-15 19:35:56 [http-nio-9000-exec-1] INFO  o.t.adapters.config.JwtAuthFilter - URL http://localhost:9000/swagger-ui/index.html 
+2026-03-15 19:35:56 [http-nio-9000-exec-1] INFO  o.t.adapters.config.JwtAuthFilter - ---------------------
+2026-03-15 19:35:57 [http-nio-9000-exec-2] INFO  o.t.adapters.config.JwtAuthFilter - ---------------------
+2026-03-15 19:35:57 [http-nio-9000-exec-3] INFO  o.t.adapters.config.JwtAuthFilter - ---------------------
+2026-03-15 19:35:57 [http-nio-9000-exec-2] INFO  o.t.adapters.config.JwtAuthFilter - AUTH HEADER null 
+2026-03-15 19:35:57 [http-nio-9000-exec-3] INFO  o.t.adapters.config.JwtAuthFilter - AUTH HEADER null 
+2026-03-15 19:35:57 [http-nio-9000-exec-2] INFO  o.t.adapters.config.JwtAuthFilter - URL http://localhost:9000/swagger-ui/swagger-ui.css 
+2026-03-15 19:35:57 [http-nio-9000-exec-3] INFO  o.t.adapters.config.JwtAuthFilter - URL http://localhost:9000/swagger-ui/index.css 
+2026-03-15 19:35:57 [http-nio-9000-exec-2] INFO  o.t.adapters.config.JwtAuthFilter - ---------------------
+2026-03-15 19:35:57 [http-nio-9000-exec-3] INFO  o.t.adapters.config.JwtAuthFilter - ---------------------
+2026-03-15 19:35:57 [http-nio-9000-exec-4] INFO  o.t.adapters.config.JwtAuthFilter - ---------------------
+2026-03-15 19:35:57 [http-nio-9000-exec-5] INFO  o.t.adapters.config.JwtAuthFilter - ---------------------
+2026-03-15 19:35:57 [http-nio-9000-exec-4] INFO  o.t.adapters.config.JwtAuthFilter - AUTH HEADER null 
+2026-03-15 19:35:57 [http-nio-9000-exec-5] INFO  o.t.adapters.config.JwtAuthFilter - AUTH HEADER null 
+2026-03-15 19:35:57 [http-nio-9000-exec-6] INFO  o.t.adapters.config.JwtAuthFilter - ---------------------
+2026-03-15 19:35:57 [http-nio-9000-exec-5] INFO  o.t.adapters.config.JwtAuthFilter - URL http://localhost:9000/swagger-ui/swagger-ui-standalone-preset.js 
+2026-03-15 19:35:57 [http-nio-9000-exec-4] INFO  o.t.adapters.config.JwtAuthFilter - URL http://localhost:9000/swagger-ui/swagger-ui-bundle.js 
+2026-03-15 19:35:57 [http-nio-9000-exec-6] INFO  o.t.adapters.config.JwtAuthFilter - AUTH HEADER null 
+2026-03-15 19:35:57 [http-nio-9000-exec-5] INFO  o.t.adapters.config.JwtAuthFilter - ---------------------
+2026-03-15 19:35:57 [http-nio-9000-exec-4] INFO  o.t.adapters.config.JwtAuthFilter - ---------------------
+2026-03-15 19:35:57 [http-nio-9000-exec-6] INFO  o.t.adapters.config.JwtAuthFilter - URL http://localhost:9000/swagger-ui/swagger-initializer.js 
+2026-03-15 19:35:57 [http-nio-9000-exec-6] INFO  o.t.adapters.config.JwtAuthFilter - ---------------------
+2026-03-15 19:35:58 [http-nio-9000-exec-7] INFO  o.t.adapters.config.JwtAuthFilter - ---------------------
+2026-03-15 19:35:58 [http-nio-9000-exec-7] INFO  o.t.adapters.config.JwtAuthFilter - AUTH HEADER null 
+2026-03-15 19:35:58 [http-nio-9000-exec-7] INFO  o.t.adapters.config.JwtAuthFilter - URL http://localhost:9000/api-docs/swagger-config 
+2026-03-15 19:35:58 [http-nio-9000-exec-8] INFO  o.t.adapters.config.JwtAuthFilter - ---------------------
+2026-03-15 19:35:58 [http-nio-9000-exec-7] INFO  o.t.adapters.config.JwtAuthFilter - ---------------------
+2026-03-15 19:35:58 [http-nio-9000-exec-8] INFO  o.t.adapters.config.JwtAuthFilter - AUTH HEADER null 
+2026-03-15 19:35:58 [http-nio-9000-exec-8] INFO  o.t.adapters.config.JwtAuthFilter - URL http://localhost:9000/swagger-ui/favicon-32x32.png 
+2026-03-15 19:35:58 [http-nio-9000-exec-8] INFO  o.t.adapters.config.JwtAuthFilter - ---------------------
+2026-03-15 19:35:59 [http-nio-9000-exec-9] INFO  o.t.adapters.config.JwtAuthFilter - ---------------------
+2026-03-15 19:35:59 [http-nio-9000-exec-9] INFO  o.t.adapters.config.JwtAuthFilter - AUTH HEADER null 
+2026-03-15 19:35:59 [http-nio-9000-exec-9] INFO  o.t.adapters.config.JwtAuthFilter - URL http://localhost:9000/api-docs/public 
+2026-03-15 19:35:59 [http-nio-9000-exec-9] INFO  o.t.adapters.config.JwtAuthFilter - ---------------------
+2026-03-15 19:36:00 [http-nio-9000-exec-9] INFO  o.s.api.AbstractOpenApiResource - Init duration for springdoc-openapi is: 1198 ms
+2026-03-15 19:36:09 [http-nio-9000-exec-4] INFO  o.t.adapters.config.JwtAuthFilter - ---------------------
+2026-03-15 19:36:09 [http-nio-9000-exec-4] INFO  o.t.adapters.config.JwtAuthFilter - AUTH HEADER null 
+2026-03-15 19:36:09 [http-nio-9000-exec-4] INFO  o.t.adapters.config.JwtAuthFilter - URL http://localhost:9000/ 
+2026-03-15 19:36:09 [http-nio-9000-exec-4] INFO  o.t.adapters.config.JwtAuthFilter - ---------------------
+2026-03-15 19:36:09 [http-nio-9000-exec-6] INFO  o.t.adapters.config.JwtAuthFilter - ---------------------
+2026-03-15 19:36:09 [http-nio-9000-exec-6] INFO  o.t.adapters.config.JwtAuthFilter - AUTH HEADER null 
+2026-03-15 19:36:09 [http-nio-9000-exec-6] INFO  o.t.adapters.config.JwtAuthFilter - URL http://localhost:9000/swagger-ui.html 
+2026-03-15 19:36:09 [http-nio-9000-exec-6] INFO  o.t.adapters.config.JwtAuthFilter - ---------------------
+2026-03-15 19:36:09 [http-nio-9000-exec-8] INFO  o.t.adapters.config.JwtAuthFilter - ---------------------
+2026-03-15 19:36:09 [http-nio-9000-exec-8] INFO  o.t.adapters.config.JwtAuthFilter - AUTH HEADER null 
+2026-03-15 19:36:09 [http-nio-9000-exec-8] INFO  o.t.adapters.config.JwtAuthFilter - URL http://localhost:9000/swagger-ui/index.html 
+2026-03-15 19:36:09 [http-nio-9000-exec-8] INFO  o.t.adapters.config.JwtAuthFilter - ---------------------
+2026-03-15 19:36:09 [http-nio-9000-exec-7] INFO  o.t.adapters.config.JwtAuthFilter - ---------------------
+2026-03-15 19:36:09 [http-nio-9000-exec-7] INFO  o.t.adapters.config.JwtAuthFilter - AUTH HEADER null 
+2026-03-15 19:36:09 [http-nio-9000-exec-9] INFO  o.t.adapters.config.JwtAuthFilter - ---------------------
+2026-03-15 19:36:09 [http-nio-9000-exec-7] INFO  o.t.adapters.config.JwtAuthFilter - URL http://localhost:9000/swagger-ui/swagger-ui.css 
+2026-03-15 19:36:09 [http-nio-9000-exec-5] INFO  o.t.adapters.config.JwtAuthFilter - ---------------------
+2026-03-15 19:36:09 [http-nio-9000-exec-9] INFO  o.t.adapters.config.JwtAuthFilter - AUTH HEADER null 
+2026-03-15 19:36:09 [http-nio-9000-exec-7] INFO  o.t.adapters.config.JwtAuthFilter - ---------------------
+2026-03-15 19:36:09 [http-nio-9000-exec-5] INFO  o.t.adapters.config.JwtAuthFilter - AUTH HEADER null 
+2026-03-15 19:36:09 [http-nio-9000-exec-10] INFO  o.t.adapters.config.JwtAuthFilter - ---------------------
+2026-03-15 19:36:09 [http-nio-9000-exec-9] INFO  o.t.adapters.config.JwtAuthFilter - URL http://localhost:9000/swagger-ui/index.css 
+2026-03-15 19:36:09 [http-nio-9000-exec-5] INFO  o.t.adapters.config.JwtAuthFilter - URL http://localhost:9000/swagger-ui/swagger-ui-bundle.js 
+2026-03-15 19:36:09 [http-nio-9000-exec-10] INFO  o.t.adapters.config.JwtAuthFilter - AUTH HEADER null 
+2026-03-15 19:36:09 [http-nio-9000-exec-9] INFO  o.t.adapters.config.JwtAuthFilter - ---------------------
+2026-03-15 19:36:09 [http-nio-9000-exec-10] INFO  o.t.adapters.config.JwtAuthFilter - URL http://localhost:9000/swagger-ui/swagger-ui-standalone-preset.js 
+2026-03-15 19:36:09 [http-nio-9000-exec-5] INFO  o.t.adapters.config.JwtAuthFilter - ---------------------
+2026-03-15 19:36:09 [http-nio-9000-exec-2] INFO  o.t.adapters.config.JwtAuthFilter - ---------------------
+2026-03-15 19:36:09 [http-nio-9000-exec-10] INFO  o.t.adapters.config.JwtAuthFilter - ---------------------
+2026-03-15 19:36:09 [http-nio-9000-exec-2] INFO  o.t.adapters.config.JwtAuthFilter - AUTH HEADER null 
+2026-03-15 19:36:09 [http-nio-9000-exec-2] INFO  o.t.adapters.config.JwtAuthFilter - URL http://localhost:9000/swagger-ui/swagger-initializer.js 
+2026-03-15 19:36:09 [http-nio-9000-exec-2] INFO  o.t.adapters.config.JwtAuthFilter - ---------------------
+2026-03-15 19:36:10 [http-nio-9000-exec-3] INFO  o.t.adapters.config.JwtAuthFilter - ---------------------
+2026-03-15 19:36:10 [http-nio-9000-exec-3] INFO  o.t.adapters.config.JwtAuthFilter - AUTH HEADER null 
+2026-03-15 19:36:10 [http-nio-9000-exec-3] INFO  o.t.adapters.config.JwtAuthFilter - URL http://localhost:9000/api-docs/swagger-config 
+2026-03-15 19:36:10 [http-nio-9000-exec-3] INFO  o.t.adapters.config.JwtAuthFilter - ---------------------
+2026-03-15 19:36:10 [http-nio-9000-exec-1] INFO  o.t.adapters.config.JwtAuthFilter - ---------------------
+2026-03-15 19:36:10 [http-nio-9000-exec-1] INFO  o.t.adapters.config.JwtAuthFilter - AUTH HEADER null 
+2026-03-15 19:36:10 [http-nio-9000-exec-1] INFO  o.t.adapters.config.JwtAuthFilter - URL http://localhost:9000/api-docs/admin 
+2026-03-15 19:36:10 [http-nio-9000-exec-1] INFO  o.t.adapters.config.JwtAuthFilter - ---------------------
+2026-03-15 19:36:10 [http-nio-9000-exec-1] INFO  o.s.api.AbstractOpenApiResource - Init duration for springdoc-openapi is: 121 ms
+2026-03-15 19:36:13 [http-nio-9000-exec-4] INFO  o.t.adapters.config.JwtAuthFilter - ---------------------
+2026-03-15 19:36:13 [http-nio-9000-exec-4] INFO  o.t.adapters.config.JwtAuthFilter - AUTH HEADER null 
+2026-03-15 19:36:13 [http-nio-9000-exec-4] INFO  o.t.adapters.config.JwtAuthFilter - URL http://localhost:9000/api-docs/public 
+2026-03-15 19:36:13 [http-nio-9000-exec-4] INFO  o.t.adapters.config.JwtAuthFilter - ---------------------
+2026-03-15 19:37:54 [http-nio-9000-exec-10] INFO  o.t.a.p.d.c.UsagerController - UsagerRequest : UsagerRequest(nom=test, prenom=test, email=xadoh31703@3dkai.com, telephone=0102, dateNaissance=string)
+2026-03-15 19:37:54 [http-nio-9000-exec-10] INFO  o.t.a.p.d.c.UsagerController - UsagerRequest domain : org.tickup.domain.requests.UsagersRequest@67ac10cd
+2026-03-15 19:37:56 [http-nio-9000-exec-10] INFO  o.t.a.p.d.impl.NotifyRecipientImpl - Appel API Notification : http://host.docker.internal:9002/api/v1/email/send
+2026-03-15 19:38:00 [http-nio-9000-exec-10] INFO  o.t.a.p.d.impl.NotifyRecipientImpl - Réponse API Notification : {"body":true,"message":"Email envoyé avec succès","status":200,"timestamp":"2026-03-15T18:38:00.442Z"}
+2026-03-15 19:38:00 [http-nio-9000-exec-10] INFO  o.t.a.p.d.impl.NotifyRecipientImpl - Mail envoyé avec succès

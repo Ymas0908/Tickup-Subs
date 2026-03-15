@@ -4,6 +4,9 @@ package org.tickup.adapters.ports.driver.controller;
 import org.tickup.adapters.config.AuthService;
 import org.tickup.adapters.requestModel.*;
 import org.tickup.adapters.responseModel.LoginResponse;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
@@ -17,7 +20,7 @@ import org.tickup.adapters.utils.AppUtils;
 
 @RestController
 @RequestMapping("/api/v1/auth")
-        @Tag(name = "Gestion d'authentification")
+@Tag(name = "Gestion d'authentification", description = "API pour l'authentification des utilisateurs")
 @Slf4j
 public class AuthController {
     private final AuthService authService;
@@ -27,12 +30,24 @@ public class AuthController {
     }
 
     @PostMapping("/users/signUp")
+    @Operation(summary = "Inscription d'un nouvel utilisateur", description = "Crée un nouveau compte utilisateur")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "201", description = "Utilisateur créé avec succès"),
+        @ApiResponse(responseCode = "400", description = "Données invalides"),
+        @ApiResponse(responseCode = "409", description = "Utilisateur existe déjà")
+    })
     public ResponseEntity<?> signup(@RequestBody @Valid SignUpRequest signUpRequest) {
         authService.singup(signUpRequest);
         return new ResponseEntity<>(null, HttpStatus.CREATED);
     }
 
     @PostMapping("/users/login")
+    @Operation(summary = "Connexion utilisateur", description = "Authentifie un utilisateur et retourne un token JWT")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Connexion réussie"),
+        @ApiResponse(responseCode = "401", description = "Identifiants invalides"),
+        @ApiResponse(responseCode = "403", description = "Accès refusé")
+    })
     public ResponseEntity<?> login(@RequestBody @Valid AuthRequest loginRequest, @RequestHeader(value = "X-Terminal-Id", required = false) String terminalId, @RequestHeader(value = "X-Terminal-Model", required = false) String terminalModel, @RequestHeader(value = "X-Terminal-Marque", required = false) String terminalMarque, HttpServletRequest request) throws AccessDeniedException {
         LoginResponse loginResponse = authService.login(loginRequest.getLogin(), loginRequest.getPassword(), terminalId, terminalModel, terminalMarque, AppUtils.getIpAddress(request));
         return new ResponseEntity<>(loginResponse, HttpStatus.OK);
