@@ -1,4 +1,4 @@
-package com.itcentrex.adapters.config;
+package org.tickup.adapters.config;
 
 import lombok.Getter;
 import lombok.Setter;

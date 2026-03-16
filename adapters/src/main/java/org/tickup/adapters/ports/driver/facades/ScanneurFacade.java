@@ -30,7 +30,7 @@ public class ScanneurFacade {
         if (saveScanneur != null) {
             String password = RandomPasswordGenerator.generateDefault(8);
             SignupScanneurRequest signupScanneurRequest = new SignupScanneurRequest();
-            signupScanneurRequest.setLogin(scanneursRequest.getTelephone());
+            signupScanneurRequest.setLogin(scanneursRequest.getEmail());
             signupScanneurRequest.setPassword(password);
 //            System.out.println("User created with login: " + signUpRequest.getLogin() + " and password: " + password);
             signupScanneurRequest.setRefScanneur(saveScanneur);

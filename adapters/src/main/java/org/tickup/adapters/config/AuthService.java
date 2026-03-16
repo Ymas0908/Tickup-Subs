@@ -109,7 +109,7 @@ public class AuthService {
             if (user.isEmpty()) throw new BadRequestException("Aucun utilisateur trouvé avec ce login");
             Authentication authenticate;
             authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(login, password));
-            com.itcentrex.adapters.config.ApplicationUtilisateur principal = (com.itcentrex.adapters.config.ApplicationUtilisateur) authenticate.getPrincipal();
+            ApplicationUtilisateur principal = (ApplicationUtilisateur) authenticate.getPrincipal();
             System.out.println("ApplicationUtilisateur:::::::" + principal);
             Map<String, Object> claims = new HashMap<>();
             claims.put("username", principal.getUsername());
@@ -141,13 +141,13 @@ public class AuthService {
     public LoginScanneurResponse loginScanneur(String login, String password, String terminalId, String terminalModel, String terminalMarque, String terminalIp) throws AccessDeniedException {
         try {
             Optional<UtlitisateurScanneurEntity> userscanneur = utilisateurScanneurReposiroty.findByLogin(login);
-            if (userscanneur.isEmpty()) throw new BadRequestException("Aucun utilisateur trouvé avec ce login");
+            if (userscanneur.isEmpty()) throw new BadRequestException("Aucun scanneur trouvé avec ce login");
             Authentication authenticate;
             authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(login, password));
-            com.itcentrex.adapters.config.ApplicationUtilisateur principal = (com.itcentrex.adapters.config.ApplicationUtilisateur) authenticate.getPrincipal();
+            ApplicationUtilisateur principal = (ApplicationUtilisateur) authenticate.getPrincipal();
             System.out.println("ApplicationUtilisateur:::::::" + principal);
             Map<String, Object> claims = new HashMap<>();
-            claims.put("username", principal.getUsername());
+            claims.put("scanneur", principal.getUsername());
             claims.put("userId", principal.getId());
 //            claims.put("roles", user.get().getRole());
             String accessToken = JwtHelper.generateAccessToken(login, claims);
@@ -325,7 +325,7 @@ public class AuthService {
             throw new AccessDeniedException("Utilisateur non connecté");
         }
 
-        com.itcentrex.adapters.config.ApplicationUtilisateur appUser = (com.itcentrex.adapters.config.ApplicationUtilisateur) authentication.getPrincipal();
+        ApplicationUtilisateur appUser = (ApplicationUtilisateur) authentication.getPrincipal();
 
         System.out.println(" user connected ***" + appUser.getUsername() + " *** with id: " + appUser.getId());
 
@@ -342,16 +342,16 @@ public class AuthService {
 
         if (authentication == null || !authentication.isAuthenticated()
                 || "anonymousUser".equals(authentication.getPrincipal())) {
-            throw new AccessDeniedException("Utilisateur non connecté");
+            throw new AccessDeniedException("scanneur non connecté");
         }
 
-        com.itcentrex.adapters.config.ApplicationUtilisateur appUser = (com.itcentrex.adapters.config.ApplicationUtilisateur) authentication.getPrincipal();
+        ApplicationUtilisateur appUser = (ApplicationUtilisateur) authentication.getPrincipal();
 
         System.out.println(" user connected ***" + appUser.getUsername() + " *** with id: " + appUser.getId());
 
         Optional<UtlitisateurScanneurEntity> utilisateurscanneur = utilisateurScanneurReposiroty.findByLogin(appUser.getUsername());
         System.out.println("Scanneur trouvé: " + utilisateurscanneur);
-        if (utilisateurscanneur.isEmpty()) throw new AccessDeniedException("Aucun utilisateur trouvé avec ce login");
+        if (utilisateurscanneur.isEmpty()) throw new AccessDeniedException("Aucun scanneur trouvé avec ce login");
         ScanneurEntity scanneur = scanneurRepository.findByRefScanneur(utilisateurscanneur.get().getRefScanneur()).orElseThrow(() -> new AccessDeniedException("Aucun scanneur trouvé pour cette référence"));
         return  ScanneursResponse.toResponse(scanneur);
     }

@@ -5,6 +5,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+import org.tickup.adapters.config.ApplicationUtilisateur;
 import org.tickup.adapters.entites.UtilisateurEntity;
 import org.tickup.adapters.entites.UtlitisateurScanneurEntity;
 import org.tickup.adapters.ports.driving.repositories.UtilisateurRepository;
@@ -138,7 +139,7 @@ public class UtilisateurScanneurDrivingImpl implements UtilisateurScanneurPortDr
             throw new AccessDeniedException("Utilisateur non connecté");
         }
 
-        com.itcentrex.adapters.config.ApplicationUtilisateur appUser = (com.itcentrex.adapters.config.ApplicationUtilisateur) authentication.getPrincipal();
+        ApplicationUtilisateur appUser = (ApplicationUtilisateur) authentication.getPrincipal();
         System.out.println("appUser " + appUser);
         UtilisateurScanneur utilisateurScanneur = utilisateurScanneurReposiroty.findById(appUser.getId()).map(UtlitisateurScanneurEntity::toDomain).orElse(null);
         if (utilisateurScanneur == null)

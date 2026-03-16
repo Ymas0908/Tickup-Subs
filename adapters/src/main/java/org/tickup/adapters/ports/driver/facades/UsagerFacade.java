@@ -30,7 +30,7 @@ public class UsagerFacade {
         if (saveUsager != null) {
             String password = RandomPasswordGenerator.generateDefault(8);
             SignUpRequest signUpRequest = new SignUpRequest();
-            signUpRequest.setLogin(usagerRequest.getTelephone());
+            signUpRequest.setLogin(usagerRequest.getEmail());
             signUpRequest.setPassword(password);
 //            System.out.println("User created with login: " + signUpRequest.getLogin() + " and password: " + password);
             signUpRequest.setRefUsager(saveUsager);

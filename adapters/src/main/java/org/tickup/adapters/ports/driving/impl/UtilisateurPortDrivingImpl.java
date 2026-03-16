@@ -1,6 +1,7 @@
 package org.tickup.adapters.ports.driving.impl;
 
 
+import org.tickup.adapters.config.ApplicationUtilisateur;
 import org.tickup.adapters.entites.UtilisateurEntity;
 import org.tickup.adapters.ports.driving.repositories.UtilisateurRepository;
 import org.tickup.domain.exceptions.EntityAlreadyExistsException;
@@ -197,7 +198,7 @@ public class UtilisateurPortDrivingImpl implements UtilisateurPortDriving {
             throw new AccessDeniedException("Utilisateur non connecté");
         }
 
-        com.itcentrex.adapters.config.ApplicationUtilisateur appUser = (com.itcentrex.adapters.config.ApplicationUtilisateur) authentication.getPrincipal();
+        ApplicationUtilisateur appUser = (ApplicationUtilisateur) authentication.getPrincipal();
         System.out.println("appUser " + appUser);
         Utilisateur utilisateur = utilisateurRepository.findById(appUser.getId()).map(UtilisateurEntity::toDomain).orElse(null);
         if (utilisateur == null)
