@@ -14,9 +14,15 @@ public class UsagerPortDrivingImpl implements UsagerDriving {
     private UsagerRepository usagerRepository;
 
 
-
     @Override
     public Usager saveUsager(Usager usager) {
-        return 	usagerRepository.save(UsagerEntity.toEntity(usager)).toDomain();
+        return usagerRepository.save(UsagerEntity.toEntity(usager)).toDomain();
+    }
+
+    @Override
+    public Usager findByEmail(String email) {
+        return usagerRepository.findByEmail(email).map(UsagerEntity::toDomain).orElse(null);
     }
 }
+
+
